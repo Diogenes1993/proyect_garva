@@ -1,4 +1,4 @@
-package pkg_frm_util;
+package pkg_Formulario_utilidades;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

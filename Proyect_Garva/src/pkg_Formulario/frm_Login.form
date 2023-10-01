@@ -35,7 +35,7 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Container class="pkg_frm_util.PanelRound" name="panelRound1">
+        <Container class="pkg_Formulario_utilidades.PanelRound" name="panelRound1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="f6" red="d7" type="rgb"/>
@@ -94,7 +94,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="pkg_frm_util.ButtonRound" name="buttonRound1">
+            <Component class="pkg_Formulario_utilidades.ButtonRound" name="buttonRound1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="51" red="3f" type="rgb"/>
@@ -168,6 +168,13 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="95" y="180" width="150" height="10"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="301" y="0" width="40" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>

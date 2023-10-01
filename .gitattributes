@@ -1,0 +1,5 @@
+# Configurar saltos de línea para archivos Java
+*.java text eol=lf
+
+# Configurar saltos de línea para archivos XML
+*.xml text eol=crlf

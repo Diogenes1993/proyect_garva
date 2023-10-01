@@ -1,11 +1,12 @@
 
-package pkg_frm;
+package pkg_Formulario;
 
 
 public class frm_Login extends javax.swing.JFrame {
 
     public frm_Login() {
         initComponents();
+        
     }
 
 
@@ -14,15 +15,16 @@ public class frm_Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        panelRound1 = new pkg_frm_util.PanelRound();
+        panelRound1 = new pkg_Formulario_utilidades.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        buttonRound1 = new pkg_frm_util.ButtonRound();
+        buttonRound1 = new pkg_Formulario_utilidades.ButtonRound();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,6 +72,7 @@ public class frm_Login extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         panelRound1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 180, 150, 10));
+        panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 0, 40, 40));
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 340, 530));
 
@@ -93,8 +96,9 @@ public class frm_Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pkg_frm_util.ButtonRound buttonRound1;
+    private pkg_Formulario_utilidades.ButtonRound buttonRound1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -103,6 +107,6 @@ public class frm_Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private pkg_frm_util.PanelRound panelRound1;
+    private pkg_Formulario_utilidades.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 }
