@@ -12,7 +12,7 @@ public class BD_Connection {
     private static String driver="com.mysql.jdbc.Driver";
     private static String user="Garva";
     private static String password="123456A_dmin";
-    private static String bd="GARVA_ALIMENTOS";
+    private static String bd="GARVA";
     private static String url="jdbc:mysql://192.168.0.109:3306/".concat(bd);
     
     static
