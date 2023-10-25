@@ -9,11 +9,11 @@ import pkg_utilidades.Utilidades;
 public class BD_Connection {
     private Connection connection;
     
-    private static String driver="com.mysql.jdbc.Driver";
-    private static String user="Garva";
-    private static String password="123456A_dmin";
+    private static String driver="com.mysql.cj.jdbc.Driver";
+    private static String user="Frank";
+    private static String password="admin123456";
     private static String bd="GARVA";
-    private static String url="jdbc:mysql://192.168.0.109:3306/".concat(bd);
+    private static String url="jdbc:mysql://localhost:3306/".concat(bd);
     
     static
             {
