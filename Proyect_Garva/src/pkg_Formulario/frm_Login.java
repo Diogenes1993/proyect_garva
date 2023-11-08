@@ -31,31 +31,34 @@ public class frm_Login extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel1.setBackground(new java.awt.Color(106, 151, 239));
+        jPanel1.setBackground(new java.awt.Color(255, 237, 222));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound1.setBackground(new java.awt.Color(215, 246, 248));
+        panelRound1.setBackground(new java.awt.Color(128, 116, 107));
         panelRound1.setRound_top_left(400);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Usuario");
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 102, 27));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Contraseña");
         panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 132, 27));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(50, 4, 248));
+        jLabel4.setForeground(new java.awt.Color(255, 153, 0));
         jLabel4.setText("¿Olvidaste tu Contraseña?");
         panelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 187, 36));
 
-        buttonRound1.setBackground(new java.awt.Color(63, 81, 244));
-        buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonRound1.setColor(new java.awt.Color(63, 81, 244));
-        buttonRound1.setColor_click(new java.awt.Color(63, 81, 244));
-        buttonRound1.setColor_hover(new java.awt.Color(63, 31, 242));
+        buttonRound1.setBackground(new java.awt.Color(204, 204, 204));
+        buttonRound1.setForeground(new java.awt.Color(51, 51, 255));
+        buttonRound1.setBorder_color(new java.awt.Color(204, 204, 204));
+        buttonRound1.setColor(new java.awt.Color(204, 204, 204));
+        buttonRound1.setColor_click(new java.awt.Color(204, 204, 204));
+        buttonRound1.setColor_hover(new java.awt.Color(204, 204, 204));
         buttonRound1.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
         buttonRound1.setLabel("Iniciar Sesión");
         buttonRound1.setRadius(15);
@@ -76,9 +79,8 @@ public class frm_Login extends javax.swing.JFrame {
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 340, 530));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo-removebg-preview_(1)-transformed_011.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 560, 330));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/GarvaMarron (3).png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 340, 300));
 
         getContentPane().add(jPanel1);
 
