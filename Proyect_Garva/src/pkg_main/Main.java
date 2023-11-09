@@ -13,6 +13,7 @@ public class Main {
         
         
         frm_Login login=new frm_Login();
+        login.setVisible(true);
         
         
       /*  String[] mesaje={"PRESTAME","DINERO","CAROLINA","MAZAMORRA","123456","QUETAL"};

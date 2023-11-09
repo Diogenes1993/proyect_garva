@@ -15,11 +15,11 @@ public class frm_Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        panelRound1 = new pkg_Formulario_utilidades.PanelRound();
+        panelRound1 = new pkg_Formulario.PanelRound();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        buttonRound1 = new pkg_Formulario_utilidades.ButtonRound();
+        buttonRound1 = new pkg_Formulario.ButtonRound();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -98,7 +98,7 @@ public class frm_Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pkg_Formulario_utilidades.ButtonRound buttonRound1;
+    private pkg_Formulario.ButtonRound buttonRound1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -109,6 +109,6 @@ public class frm_Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private pkg_Formulario_utilidades.PanelRound panelRound1;
+    private pkg_Formulario.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 }

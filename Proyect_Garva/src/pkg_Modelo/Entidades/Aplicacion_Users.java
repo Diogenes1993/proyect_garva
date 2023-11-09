@@ -1,5 +1,5 @@
 
-package pkg_Entidades;
+package pkg_Modelo.Entidades;
 
 
 public class Aplicacion_Users {

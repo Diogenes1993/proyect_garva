@@ -1,4 +1,4 @@
-package pkg_Formulario_utilidades;
+package pkg_Formulario;
 
 import java.awt.Color;
 import java.awt.Graphics;
