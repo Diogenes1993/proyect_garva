@@ -10,8 +10,8 @@ public class BD_Connection {
     private Connection connection;
     
     private static String driver="com.mysql.cj.jdbc.Driver";
-    private static String user="Frank";
-    private static String password="admin123456";
+    private static String user="garva";
+    private static String password="admin1_ADMIN";
     private static String bd="GARVA";
     private static String url="jdbc:mysql://localhost:3306/".concat(bd);
     
