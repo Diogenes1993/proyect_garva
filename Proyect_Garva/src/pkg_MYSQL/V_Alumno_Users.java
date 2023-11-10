@@ -1,5 +1,5 @@
 
-package Vista;
+package pkg_MYSQL;
 
 import java.util.Arrays;
 import java.util.List;
