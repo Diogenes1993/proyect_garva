@@ -2,7 +2,9 @@
 package pkg_Formulario.Menu;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
-import pkg_Formulario.Menu.subMenu.frmPrincipal;
+import pkg_Formulario.Menu.subMenu.Cliente.frmCliente;
+import pkg_Formulario.Menu.subMenu.Principal.frmPrincipal;
+import pkg_MYSQL.MYSQLMaster;
 
 public class frm_Menu extends javax.swing.JFrame {
 
@@ -21,7 +23,7 @@ public class frm_Menu extends javax.swing.JFrame {
         panel_Menu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btn_Principal = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_Cliente = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         panel_Titulo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -46,7 +48,7 @@ public class frm_Menu extends javax.swing.JFrame {
         btn_Principal.setText("Principal");
         btn_Principal.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_Principal.setBorderPainted(false);
-        btn_Principal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_Principal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_Principal.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btn_Principal.setIconTextGap(20);
         btn_Principal.addActionListener(new java.awt.event.ActionListener() {
@@ -55,16 +57,21 @@ public class frm_Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(142, 253, 213));
-        jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 102, 102));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/cliente.png"))); // NOI18N
-        jButton2.setText("Cliente");
-        jButton2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
-        jButton2.setBorderPainted(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        jButton2.setIconTextGap(20);
+        btn_Cliente.setBackground(new java.awt.Color(142, 253, 213));
+        btn_Cliente.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Cliente.setForeground(new java.awt.Color(0, 102, 102));
+        btn_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/cliente.png"))); // NOI18N
+        btn_Cliente.setText("Cliente");
+        btn_Cliente.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
+        btn_Cliente.setBorderPainted(false);
+        btn_Cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Cliente.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btn_Cliente.setIconTextGap(20);
+        btn_Cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClienteActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(142, 253, 213));
         jButton3.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
@@ -73,7 +80,7 @@ public class frm_Menu extends javax.swing.JFrame {
         jButton3.setText("Pedidos");
         jButton3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
         jButton3.setBorderPainted(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         jButton3.setIconTextGap(20);
 
@@ -84,7 +91,7 @@ public class frm_Menu extends javax.swing.JFrame {
             .addGroup(panel_MenuLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -97,7 +104,7 @@ public class frm_Menu extends javax.swing.JFrame {
                 .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_MenuLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_MenuLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
@@ -125,7 +132,7 @@ public class frm_Menu extends javax.swing.JFrame {
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 827, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,11 +190,17 @@ public class frm_Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_PrincipalActionPerformed
 
+    private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
+     MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GARVA");
+     frmCliente clientefrm=new frmCliente(master);
+     clientefrm.setVisible(true);
+     Desktop.add(clientefrm);
+    }//GEN-LAST:event_btn_ClienteActionPerformed
+
     public static void main(String args[]) {
         
         
         FlatMaterialLighterIJTheme.setup();    // no lo boressssssssssssssssssssssssssssssssssssssss
-        frm_Menu.setDefaultLookAndFeelDecorated( true );
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -198,8 +211,8 @@ public class frm_Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JButton btn_Cliente;
     private javax.swing.JButton btn_Principal;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

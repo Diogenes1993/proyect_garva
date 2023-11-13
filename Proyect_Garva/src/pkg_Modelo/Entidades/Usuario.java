@@ -9,12 +9,12 @@ public class Usuario {
     private String usuario;
     private String contrasenia;
     private boolean estado;
-    private boolean correo;
+    private String correo;
 
     public Usuario() {
     }
 
-    public Usuario(String usuario, String contrasenia, boolean estado, boolean correo) {
+    public Usuario(String usuario, String contrasenia, boolean estado, String correo) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.estado = estado;
@@ -53,11 +53,11 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public boolean isCorreo() {
+    public String getCorreo() {
         return correo;
     }
 
-    public void setCorreo(boolean correo) {
+    public void setCorreo(String correo) {
         this.correo = correo;
     }
 
@@ -68,7 +68,7 @@ public class Usuario {
         hash = 17 * hash + Objects.hashCode(this.usuario);
         hash = 17 * hash + Objects.hashCode(this.contrasenia);
         hash = 17 * hash + (this.estado ? 1 : 0);
-        hash = 17 * hash + (this.correo ? 1 : 0);
+        hash = 17 * hash +Objects.hashCode (this.correo);
         return hash;
     }
 
@@ -87,7 +87,7 @@ public class Usuario {
         if (this.estado != other.estado) {
             return false;
         }
-        if (this.correo != other.correo) {
+        if (!Objects.equals(this.correo,other.correo)) {
             return false;
         }
         if (!Objects.equals(this.usuario, other.usuario)) {
