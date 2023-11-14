@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_Modelo/BD_Connection.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_MYSQL/MYSQLPago_Guardado.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_MYSQL/MYSQLDetalle_Usuario.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_Formulario/frm_Login.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_Formulario/Menu/subMenu/Cliente/frmCliente.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_MYSQL/MYSQLUsuario.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_MYSQL/MYSQLMaster.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_MYSQL/MYSQLEmpleado.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_MYSQL/MYSQLCliente.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_Modelo/Entidades/Detalle_Usuario.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_Formulario/ImagenFrm.java</file>
-            <file>file:/C:/Users/alexz/Downloads/PROGRAMAS/GIT/proyect_garva/Proyect_Garva/src/pkg_Modelo/Entidades/Empleado.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
