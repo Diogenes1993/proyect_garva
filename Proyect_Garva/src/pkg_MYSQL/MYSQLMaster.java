@@ -23,7 +23,9 @@ import pkg_utilidades.Utilidades;
 
 public class MYSQLMaster implements IMaster {
 private Connection connection=null;
-private ICliente clienteI=null;
+private  ICliente clienteI=null;
+private  IPago_Guardado pago_guardadoI=null;
+private IUsuario usuarioI=null;
 
     public MYSQLMaster(String host,String username,String password,String database) {
     try {
@@ -45,7 +47,11 @@ private ICliente clienteI=null;
 
     @Override
     public IPago_Guardado getIPago_guardado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    if(pago_guardadoI == null)
+    {
+        pago_guardadoI =new MYSQLPago_Guardado(connection);
+    }
+    return pago_guardadoI;
     }
 
     @Override

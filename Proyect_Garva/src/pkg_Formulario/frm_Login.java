@@ -1,15 +1,11 @@
-
 package pkg_Formulario;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
-import java.awt.Color;
 
-
-public class frm_Login extends javax.swing.JFrame {
-
+public final class frm_Login extends javax.swing.JFrame {
+ImagenFrm fondo=new ImagenFrm();
     public frm_Login() {
-        initComponents();
-
+         initComponents();
     }
 
 

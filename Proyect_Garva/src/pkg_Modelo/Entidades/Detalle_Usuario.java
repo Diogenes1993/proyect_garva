@@ -1,6 +1,6 @@
 package pkg_Modelo.Entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Detalle_Usuario {
@@ -9,9 +9,9 @@ public class Id_Detalle_Usuario
 {
     private long id_empleado;
     private long id_usuario;
-    private Date fecha_entrada;
+    private LocalDate fecha_entrada;
 
-        public Id_Detalle_Usuario(long id_empleado, long id_usuario, Date fecha_entrada) {
+        public Id_Detalle_Usuario(long id_empleado, long id_usuario, LocalDate fecha_entrada) {
             this.id_empleado = id_empleado;
             this.id_usuario = id_usuario;
             this.fecha_entrada = fecha_entrada;
@@ -33,11 +33,11 @@ public class Id_Detalle_Usuario
             this.id_usuario = id_usuario;
         }
 
-        public Date getFecha_entrada() {
+        public LocalDate getFecha_entrada() {
             return fecha_entrada;
         }
 
-        public void setFecha_entrada(Date fecha_entrada) {
+        public void setFecha_entrada(LocalDate fecha_entrada) {
             this.fecha_entrada = fecha_entrada;
         }
 
@@ -77,13 +77,13 @@ public class Id_Detalle_Usuario
 }    
 
 private Id_Detalle_Usuario id;
-private Date fecha_salida;
+private LocalDate fecha_salida;
 
     public Detalle_Usuario(Id_Detalle_Usuario id) {
         this.id=id;
     }
     
-    public Detalle_Usuario(long id_empleado,long id_usuario,Date fecha_entrada) {
+    public Detalle_Usuario(long id_empleado,long id_usuario,LocalDate fecha_entrada) {
         this.id=new Id_Detalle_Usuario(id_empleado,id_usuario,fecha_entrada);
     }
 
@@ -95,11 +95,11 @@ private Date fecha_salida;
         this.id = id;
     }
 
-    public Date getFecha_salida() {
+    public LocalDate getFecha_salida() {
         return fecha_salida;
     }
 
-    public void setFecha_salida(Date fecha_salida) {
+    public void setFecha_salida(LocalDate fecha_salida) {
         this.fecha_salida = fecha_salida;
     }
 

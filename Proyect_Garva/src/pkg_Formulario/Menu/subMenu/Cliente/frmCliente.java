@@ -13,7 +13,6 @@ private ClienteTableModel model_table;
         this.model_table = new ClienteTableModel(masterI.getICliente());
         model_table.getUpdate();
         tbl_Cliente.setModel(model_table);
-        
     }
 
  
@@ -26,7 +25,10 @@ private ClienteTableModel model_table;
         tbl_Cliente = new javax.swing.JTable();
         detalleClientePanel1 = new pkg_Formulario.Menu.subMenu.Cliente.DetalleClientePanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -50,13 +52,13 @@ private ClienteTableModel model_table;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         pack();

@@ -1,7 +1,7 @@
 
 package pkg_Modelo.Entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Empleado {
@@ -11,12 +11,12 @@ public class Empleado {
     private String direccion;
     private String telefono;
     private Rol rol;
-    private Date fecha_contrato;
+    private LocalDate fecha_contrato;
 
     public Empleado() {
     }
 
-    public Empleado(String nombre, String apellido, String direccion, String telefono, Rol rol, Date fecha_contrato) {
+    public Empleado(String nombre, String apellido, String direccion, String telefono, Rol rol, LocalDate fecha_contrato) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -73,11 +73,11 @@ public class Empleado {
         this.rol = rol;
     }
 
-    public Date getFecha_contrato() {
+    public LocalDate getFecha_contrato() {
         return fecha_contrato;
     }
 
-    public void setFecha_contrato(Date fecha_contrato) {
+    public void setFecha_contrato(LocalDate fecha_contrato) {
         this.fecha_contrato = fecha_contrato;
     }
 
