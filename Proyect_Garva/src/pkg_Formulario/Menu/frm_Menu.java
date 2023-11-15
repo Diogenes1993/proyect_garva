@@ -1,7 +1,7 @@
 
 package pkg_Formulario.Menu;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubDarkIJTheme;
 import pkg_Formulario.Menu.subMenu.Cliente.frmCliente;
 import pkg_Formulario.Menu.subMenu.Principal.frmPrincipal;
 import pkg_MYSQL.MYSQLMaster;
@@ -89,11 +89,14 @@ public class frm_Menu extends javax.swing.JFrame {
         panel_MenuLayout.setHorizontalGroup(
             panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_MenuLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_MenuLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panel_MenuLayout.setVerticalGroup(
             panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +111,8 @@ public class frm_Menu extends javax.swing.JFrame {
                     .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_MenuLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(365, 365, 365))
         );
 
         panel_Titulo.setBackground(new java.awt.Color(204, 255, 204));
@@ -200,7 +204,7 @@ public class frm_Menu extends javax.swing.JFrame {
     public static void main(String args[]) {
         
         
-        FlatMaterialLighterIJTheme.setup();    // no lo boressssssssssssssssssssssssssssssssssssssss
+        FlatGitHubDarkIJTheme.setup();    // no lo boressssssssssssssssssssssssssssssssssssssss
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
