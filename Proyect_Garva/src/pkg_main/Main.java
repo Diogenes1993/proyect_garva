@@ -1,6 +1,7 @@
 
 package pkg_main;
 
+import pkg_Formulario.Menu.frm_Menu;
 import pkg_Formulario.frm_Login;
 import pkg_Modelo.Envio_Correo;
 
@@ -12,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         
         
-        frm_Login login=new frm_Login();
+        frm_Menu login=new frm_Menu();
         login.setVisible(true);
         
         

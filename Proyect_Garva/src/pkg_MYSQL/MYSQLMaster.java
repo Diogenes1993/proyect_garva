@@ -4,8 +4,6 @@ package pkg_MYSQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pkg_MYSQL.Interfaces.IBoleta;
 import pkg_MYSQL.Interfaces.ICliente;
 import pkg_MYSQL.Interfaces.IDetalle_Boleta_Menu;

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import pkg_MYSQL.Interfaces.IDetalle_Usuario;
@@ -19,7 +18,7 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
 
     private Connection connection=null;
 
-    private final String INSERT="INSERT INTO DETALLES_USUARIO(FK_ID_EMPLEADO,FK_ID_USUARIO,FECHA_ENTRADA) VALUES (?,?,?)";
+    private final String INSERT="INSERT INTO DETALLE_USUARIO(FK_ID_EMPLEADO,FK_ID_USUARIO,FECHA_ENTRADA) VALUES (?,?,?)";
     public MYSQLDetalle_Usuario(Connection connection) 
     {
         this.connection=connection;
