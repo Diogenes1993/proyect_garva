@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import pkg_MYSQL.Interfaces.IDetalle_Usuario;
+import pkg_MYSQL.Interfaces.IException;
 import pkg_Modelo.Entidades.Detalle_Usuario;
 import pkg_utilidades.Utilidades;
 
@@ -25,22 +26,22 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
     }
         
     @Override
-    public List<Detalle_Usuario> ObtenerPorEmpleado(long empleado) {
+    public List<Detalle_Usuario> ObtenerPorEmpleado(long empleado) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Detalle_Usuario> ObtenerPorUsuario(long usuario) {
+    public List<Detalle_Usuario> ObtenerPorUsuario(long usuario) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Detalle_Usuario> ObtenerPorFecha(Date fecha) {
+    public List<Detalle_Usuario> ObtenerPorFecha(Date fecha) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Insertar(Detalle_Usuario detalle_usuario) {
+    public void Insertar(Detalle_Usuario detalle_usuario) throws IException{
       PreparedStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
@@ -54,59 +55,40 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
          
             if(preparacion_insert.executeUpdate()==0)
                 {
-                    Utilidades.Mensaje("ERROR","Espera el Detalle_Usuario no se inserto",0);
+                    Utilidades.manejarError("Espera el Detalle_Usuario no se inserto",new SQLException(),"MENSAJE",1);
                 }
             result_clave=preparacion_insert.getGeneratedKeys();
      
     }catch (SQLException ex) 
     {
         
-        Utilidades.Mensaje("ERROR","Error en SQL INSERT DETALLE_USUARIO".concat(ex.toString()),0);
+        Utilidades.manejarError("Error en SQL INSERT DETALLE_USUARIO",ex,"ERROR",0);
         
     }finally
     {
-         if(result_clave != null)
-        {
-            try
-            {
-                result_clave.close();
-            }
-            catch(SQLException ex)
-            {
-                 Utilidades.Mensaje("ERROR","Error en Result INSERT DETALLE_USUARIO ".concat(ex.toString()),0);
-            }
-        }
-        if(preparacion_insert != null)
-        {
-            try
-            {
-                preparacion_insert.close();
-            }
-            catch(SQLException ex)
-            {
-                Utilidades.Mensaje("ERROR","Error en Prepared INSERT DETALLE_USUARIO ".concat(ex.toString()),0);
-            }
-        }
-    }  
+         
+         Utilidades.cerrarResul(result_clave, "INSERT DETALLE_USUARIO");
+         Utilidades.cerrarPrepare(preparacion_insert, "INSERT DETALLE_USUARIO");
+    }
     }
 
     @Override
-    public void Actualizar(Detalle_Usuario a) {
+    public void Actualizar(Detalle_Usuario a) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Eliminar(Detalle_Usuario a) {
+    public void Eliminar(Detalle_Usuario a) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Detalle_Usuario> ObtenerTodos() {
+    public List<Detalle_Usuario> ObtenerTodos() throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Detalle_Usuario ObtenerOne(Detalle_Usuario.Id_Detalle_Usuario id) {
+    public Detalle_Usuario ObtenerOne(Detalle_Usuario.Id_Detalle_Usuario id) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

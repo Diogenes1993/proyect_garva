@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import pkg_MYSQL.Interfaces.IEmpleado;
+import pkg_MYSQL.Interfaces.IException;
 import pkg_Modelo.Entidades.Empleado;
 import pkg_utilidades.Utilidades;
 
@@ -20,7 +21,7 @@ private String INSERT="INSERT INTO EMPLEADO(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,DI
     }
 
     @Override
-    public void Insertar(Empleado empleado) {
+    public void Insertar(Empleado empleado) throws IException{
      PreparedStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
@@ -37,55 +38,35 @@ private String INSERT="INSERT INTO EMPLEADO(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,DI
          
             if(preparacion_insert.executeUpdate()==0)
                 {
-                    Utilidades.Mensaje("ERROR","Espera el Detalle_Usuario no se inserto",0);
+                    Utilidades.manejarError("Espera el Detalle_Usuario no se inserto",new SQLException(),"MENSAJE",1);
                 }
             result_clave=preparacion_insert.getGeneratedKeys();
      
     }catch (SQLException ex) 
     {
         
-        Utilidades.Mensaje("ERROR","Error en SQL INSERT DETALLE_USUARIO".concat(ex.toString()),0);
+        Utilidades.manejarError("INSERT EMPLEADO",ex,"ERROR",0);
         
     }finally
     {
-         if(result_clave != null)
-        {
-            try
-            {
-                result_clave.close();
-            }
-            catch(SQLException ex)
-            {
-                 Utilidades.Mensaje("ERROR","Error en Result INSERT DETALLE_USUARIO ".concat(ex.toString()),0);
-            }
-        }
-        if(preparacion_insert != null)
-        {
-            try
-            {
-                preparacion_insert.close();
-            }
-            catch(SQLException ex)
-            {
-                Utilidades.Mensaje("ERROR","Error en Prepared INSERT DETALLE_USUARIO ".concat(ex.toString()),0);
-            }
-        }
+        Utilidades.cerrarResul(result_clave, "INSERT EMPLEADO");
+        Utilidades.cerrarPrepare(preparacion_insert, "INSERT EMPLEADO");
     }  
     }
 
     
     @Override
-    public void Actualizar(Empleado empleado) {
+    public void Actualizar(Empleado empleado) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Eliminar(Empleado empleado) {
+    public void Eliminar(Empleado empleado) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Empleado> ObtenerTodos() {
+    public List<Empleado> ObtenerTodos() throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

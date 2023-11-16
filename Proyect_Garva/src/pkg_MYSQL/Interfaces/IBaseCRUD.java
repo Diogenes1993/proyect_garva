@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface IBaseCRUD<T,K> {
     
-    void Insertar(T a);
-    void Actualizar(T a);
-    void Eliminar(T a);
-   List<T> ObtenerTodos();
-   T ObtenerOne(K id);
+    void Insertar(T a) throws IException;
+    void Actualizar(T a) throws IException;
+    void Eliminar(T a) throws IException;
+   List<T> ObtenerTodos() throws IException;
+   T ObtenerOne(K id) throws IException;
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IUsuario;
 import pkg_Modelo.Entidades.Usuario;
 import pkg_utilidades.Utilidades;
@@ -28,7 +29,7 @@ private  final  Connection connection;
 
     
     @Override
-    public void Insertar(Usuario usuario) {
+    public void Insertar(Usuario usuario) throws IException{
        PreparedStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
@@ -43,7 +44,7 @@ private  final  Connection connection;
          
             if(preparacion_insert.executeUpdate()==0)
                 {
-                    Utilidades.Mensaje("ERROR","Espera el Usuario no se inserto ",0);
+                    Utilidades.manejarError("Espera el Usuario no se inserto ", new SQLException(), "MENSAJE", 1);
                 }
             result_clave=preparacion_insert.getGeneratedKeys();
             if(result_clave.next())
@@ -52,85 +53,55 @@ private  final  Connection connection;
                 }
             else
             {
-                 Utilidades.Mensaje("ERROR","No se puede asignar Id a este Usuario",0);
+                 Utilidades.manejarError("No se puede asignar Id a este Usuario", new SQLException(), "MENSAJE", 1);
                  
             }
      
     }catch (SQLException ex) 
     {
         
-        Utilidades.Mensaje("ERROR","Error en SQL INSERT USUARIO".concat(ex.toString()),0);
+        Utilidades.manejarError("Error en SQL INSERT USUARIO", new SQLException(), "ERROR", 1);
         
     }finally
     {
-         if(result_clave != null)
-        {
-            try
-            {
-                result_clave.close();
-            }
-            catch(SQLException ex)
-            {
-                 Utilidades.Mensaje("ERROR","Error en Result INSERT USUARIO".concat(ex.toString()),0);
-            }
-        }
-        if(preparacion_insert != null)
-        {
-            try
-            {
-                preparacion_insert.close();
-            }
-            catch(SQLException ex)
-            {
-                Utilidades.Mensaje("ERROR","Error en Prepared INSERT USUARIO".concat(ex.toString()),0);
-            }
-        }
+        Utilidades.cerrarResul(result_clave, "INSERT USUARIO");
+        Utilidades.cerrarPrepare(preparacion_insert, "INSERT USUARIO");
     }    
     }
 
     @Override
-    public void Actualizar(Usuario usuario) {
-      PreparedStatement preparacion_insert=null;
+    public void Actualizar(Usuario usuario) throws IException{
+      PreparedStatement preparacion_update=null;
     
     try
     {
-         preparacion_insert=connection.prepareStatement(UPDATE);
+         preparacion_update=connection.prepareStatement(UPDATE);
          
-         preparacion_insert.setString(1,usuario.getUsuario());
-         preparacion_insert.setString(2,usuario.getContrasenia() );
-         preparacion_insert.setBoolean(3,usuario.isEstado() );
-         preparacion_insert.setString(4,usuario.getCorreo() );
-         preparacion_insert.setLong(5,usuario.getId());
+         preparacion_update.setString(1,usuario.getUsuario());
+         preparacion_update.setString(2,usuario.getContrasenia() );
+         preparacion_update.setBoolean(3,usuario.isEstado() );
+         preparacion_update.setString(4,usuario.getCorreo() );
+         preparacion_update.setLong(5,usuario.getId());
          
-                     if(preparacion_insert.executeUpdate()==0)
+                     if(preparacion_update.executeUpdate()==0)
                 {
-                    Utilidades.Mensaje("ERROR","Espera el Usuario no se actualizo",0);
+                    Utilidades.manejarError("Espera el Usuario no se actualizo",new SQLException(),"MENSAJE",1);
                 }
            
      
     }catch (SQLException ex) 
     {
         
-        Utilidades.Mensaje("ERROR","Error en SQL UPDATE USUARIO ".concat(ex.toString()),0);
+        Utilidades.manejarError("Error en SQL UPDATE USUARIO ",ex,"ERROR",0);
         
     }finally
     {
-        if(preparacion_insert != null)
-        {
-            try
-            {
-                preparacion_insert.close();
-            }
-            catch(SQLException ex)
-            {
-                Utilidades.Mensaje("ERROR","Error en Prepared UPDATE USUARIO ".concat(ex.toString()),0);
-            }
-        }
+         Utilidades.cerrarPrepare(preparacion_update, "UPDATE USUARIO");
     }
     }
 
     @Override
-    public void Eliminar(Usuario usuario) {
+    public void Eliminar(Usuario usuario) throws IException{
          PreparedStatement preparacion_delete=null;
         try
     {
@@ -141,33 +112,23 @@ private  final  Connection connection;
          
             if(preparacion_delete.executeUpdate()==0)
                 {
-             Utilidades.Mensaje("ERROR","Espera el Usuario no se Elimino",0);
+             Utilidades.manejarError("Espera el Usuario no se Elimino",new SQLException(),"MENSAJE",1);
                 }
     }catch (SQLException ex) 
     {
         
-        Utilidades.Mensaje("ERROR","Error en SQL DELETE USUARIO ".concat(ex.toString()),0);
+        Utilidades.manejarError("Error en SQL DELETE USUARIO ",ex,"ERROR",0);
 
         
     }finally
     {
-        if(preparacion_delete != null)
-        {
-            try
-            {
-                preparacion_delete.close();
-            }
-            catch(SQLException ex)
-            {
-              Utilidades.Mensaje("ERROR","Error en Prepared DELETE ".concat(ex.toString()),0);
-            }
-        }
+        Utilidades.cerrarPrepare(preparacion_delete, "DELETE USUARIO");
     }
     }
 
-       private Usuario Data(ResultSet resultado_data) 
+       private Usuario Data(ResultSet resultado_data) throws SQLException
     {
-      try {
+ 
           String nombre = resultado_data.getString("NOMBRE_USUARIO");
           String contrasenia = resultado_data.getString("CONTRASENIA");
           boolean estado = resultado_data.getBoolean("ESTADO");
@@ -176,15 +137,10 @@ private  final  Connection connection;
           Usuario usuario=new Usuario(nombre,contrasenia,estado,correo);
           usuario.setId(resultado_data.getLong("PK_ID_USUARIO"));
           return usuario;
-      } catch (SQLException ex) {
-          
-          Utilidades.Mensaje("ERROR","Usuarios  no llenados".concat(ex.toString()),0);
-      }
-      return null;
     }   
     
     @Override
-    public List<Usuario> ObtenerTodos() {
+    public List<Usuario> ObtenerTodos() throws IException{
           PreparedStatement preparacion_select = null;
         ResultSet resultado_data = null;
         
@@ -203,39 +159,18 @@ private  final  Connection connection;
         } 
          catch (SQLException ex) 
             {
-                 Utilidades.Mensaje("ERROR","No hay RESULTSET Usuarios ".concat(ex.toString()),0);
+                 Utilidades.manejarError("No hay GETALL Usuarios ",ex,"ERROR",0);
             }
         finally
         {
-            if(resultado_data != null)
-            {
-                try
-                    {
-                        resultado_data.close();
-                    }
-                catch(SQLException ex)
-                    {
-                          Utilidades.Mensaje("ERROR","Error cerrar ResultSet SELECT ".concat(ex.toString()),0);
-                    }
-            }
-            
-            if(preparacion_select != null)
-            {
-                try
-                    {
-                        preparacion_select.close();
-                    }
-                catch(SQLException ex)
-                    {
-                         Utilidades.Mensaje("ERROR","Error cerrar Prepared SELECT ".concat(ex.toString()),0);
-                    }
-            }
+            Utilidades.cerrarResul(resultado_data, "GETALL USUARIO");
+        Utilidades.cerrarPrepare(preparacion_select, "GETALL USUARIO");
         }
         return usuario_list;
     }
 
     @Override
-    public Usuario ObtenerOne(Long id) {
+    public Usuario ObtenerOne(Long id) throws IException{
      PreparedStatement preparacion_where = null;
         ResultSet resultado_data = null;
         
@@ -251,54 +186,34 @@ private  final  Connection connection;
                usuario_buscado=Data(resultado_data);
             }else
             {
-                Utilidades.Mensaje("MENSAJE","No existe el  Usuario  ",1);
+                Utilidades.manejarError("No existe el  Usuario  ",new SQLException(),"MENSAJE",1);
             }
             
         } 
          catch (SQLException ex) 
             {
-                Utilidades.Mensaje("ERROR","ResultSet Usuario: ".concat(ex.toString()),0);
+                       Utilidades.manejarError("Error en SQL GETONE USUARIO ",ex,"ERROR",0);
+
             }
         finally
         {
-            if(resultado_data != null)
-            {
-                try
-                    {
-                        resultado_data.close();
-                    }
-                catch(SQLException ex)
-                    {
-                        Utilidades.Mensaje("ERROR","Cerrar ResultSet WHERE Usuario".concat(ex.toString()),0);
-                    }
-            }
-            
-            if(preparacion_where != null)
-            {
-                try
-                    {
-                        preparacion_where.close();
-                    }
-                catch(SQLException ex)
-                    {
-                        Utilidades.Mensaje("ERROR","Cerrar Prepared WHERE Usuario".concat(ex.toString()),0);
-                    }
-            }
+        Utilidades.cerrarResul(resultado_data, "GETONE USUARIO");
+        Utilidades.cerrarPrepare(preparacion_where, "GETONE USUARIO");
         }
         return usuario_buscado;
     }
 
     @Override
-    public List<Usuario> getUsuariosActivos(boolean activo) {
-      PreparedStatement preparacion_select = null;
+    public List<Usuario> getUsuariosActivos(boolean activo) throws IException{
+      PreparedStatement preparacion_select_active = null;
         ResultSet resultado_data = null;
         
         List<Usuario> usuario_list_activos= new ArrayList<>();
         try
         {
-            preparacion_select=connection.prepareStatement(GETALLACTIVE);
+            preparacion_select_active=connection.prepareStatement(GETALLACTIVE);
            
-            resultado_data=preparacion_select.executeQuery();
+            resultado_data=preparacion_select_active.executeQuery();
             
             while(resultado_data.next())
             {
@@ -308,48 +223,28 @@ private  final  Connection connection;
         } 
          catch (SQLException ex) 
             {
-                 Utilidades.Mensaje("ERROR","No hay RESULTSET Activos Usuarios ".concat(ex.toString()),0);
+           Utilidades.manejarError("Error en SQL GETALLACTIVE USUARIO ",ex,"ERROR",0);
+
             }
         finally
         {
-            if(resultado_data != null)
-            {
-                try
-                    {
-                        resultado_data.close();
-                    }
-                catch(SQLException ex)
-                    {
-                          Utilidades.Mensaje("ERROR","Error cerrar ResultSet SELECT ".concat(ex.toString()),0);
-                    }
-            }
-            
-            if(preparacion_select != null)
-            {
-                try
-                    {
-                        preparacion_select.close();
-                    }
-                catch(SQLException ex)
-                    {
-                         Utilidades.Mensaje("ERROR","Error cerrar Prepared SELECT ".concat(ex.toString()),0);
-                    }
-            }
+           Utilidades.cerrarResul(resultado_data, "GETONE USUARIO");
+        Utilidades.cerrarPrepare(preparacion_select_active, "GETONE USUARIO");
         }
         return usuario_list_activos;
     }
 
     @Override
-    public List<Usuario> getUsuariosInactivos(boolean activo) {
-        PreparedStatement preparacion_select = null;
+    public List<Usuario> getUsuariosInactivos(boolean activo) throws IException{
+        PreparedStatement preparacion_select_inactive = null;
         ResultSet resultado_data = null;
         
         List<Usuario> usuario_list_inactivos= new ArrayList<>();
         try
         {
-            preparacion_select=connection.prepareStatement(GETALLINACTIVE);
+            preparacion_select_inactive=connection.prepareStatement(GETALLINACTIVE);
            
-            resultado_data=preparacion_select.executeQuery();
+            resultado_data=preparacion_select_inactive.executeQuery();
             
             while(resultado_data.next())
             {
@@ -359,33 +254,13 @@ private  final  Connection connection;
         } 
          catch (SQLException ex) 
             {
-                 Utilidades.Mensaje("ERROR","No hay RESULTSET Activos Usuarios ".concat(ex.toString()),0);
+            Utilidades.manejarError("Error en SQL GETALLINACTIVE USUARIO ",ex,"ERROR",0);
+
             }
         finally
         {
-            if(resultado_data != null)
-            {
-                try
-                    {
-                        resultado_data.close();
-                    }
-                catch(SQLException ex)
-                    {
-                          Utilidades.Mensaje("ERROR","Error cerrar ResultSet SELECT ".concat(ex.toString()),0);
-                    }
-            }
-            
-            if(preparacion_select != null)
-            {
-                try
-                    {
-                        preparacion_select.close();
-                    }
-                catch(SQLException ex)
-                    {
-                         Utilidades.Mensaje("ERROR","Error cerrar Prepared SELECT ".concat(ex.toString()),0);
-                    }
-            }
+         Utilidades.cerrarResul(resultado_data, "GETALLINACTIVE USUARIO");
+        Utilidades.cerrarPrepare(preparacion_select_inactive, "GETALLINACTIVE USUARIO");
         }
         return usuario_list_inactivos;
     }

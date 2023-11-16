@@ -1,7 +1,6 @@
 package pkg_MYSQL;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import pkg_MYSQL.Interfaces.ICliente;
+import pkg_MYSQL.Interfaces.IException;
 import pkg_Modelo.Entidades.Cliente;
 import pkg_utilidades.Utilidades;
 
@@ -27,7 +27,7 @@ public class MYSQLCliente implements ICliente {
     }
     
     @Override
-    public void Insertar(Cliente cliente) {
+    public void Insertar(Cliente cliente) throws IException  {
         PreparedStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
@@ -43,7 +43,7 @@ public class MYSQLCliente implements ICliente {
          
             if(preparacion_insert.executeUpdate()==0)
                 {
-                    Utilidades.Mensaje("ERROR","Espera el Cliente no se inserto",0);
+                    Utilidades.manejarError("Espera el Cliente no se inserto", new SQLException(),"MENSAJE",1);
                 }
             result_clave=preparacion_insert.getGeneratedKeys();
             if(result_clave.next())
@@ -52,44 +52,22 @@ public class MYSQLCliente implements ICliente {
                 }
             else
             {
-                 Utilidades.Mensaje("ERROR","No se puede asignar Id a este CLIENTE",0);
-                 
+                 Utilidades.manejarError("No se puede asignar Id a este CLIENTE", new SQLException(),"MENSAJE",1);
             }
      
     }catch (SQLException ex) 
     {
-        
-        Utilidades.Mensaje("ERROR","Error en SQL INSERT CLIENTE".concat(ex.toString()),0);
-        
+        Utilidades.manejarError("Error en SQL INSERT CLIENTE", ex,"ERROR",0);
+                
     }finally
     {
-         if(result_clave != null)
-        {
-            try
-            {
-                result_clave.close();
-            }
-            catch(SQLException ex)
-            {
-                 Utilidades.Mensaje("ERROR","Error en Result INSERT CLIENTE ".concat(ex.toString()),0);
-            }
-        }
-        if(preparacion_insert != null)
-        {
-            try
-            {
-                preparacion_insert.close();
-            }
-            catch(SQLException ex)
-            {
-                Utilidades.Mensaje("ERROR","Error en Prepared INSERT CLIENTE ".concat(ex.toString()),0);
-            }
-        }
+                  Utilidades.cerrarResul(result_clave,"CLIENTE INSERT");
+                  Utilidades.cerrarPrepare(preparacion_insert,"CLIENTE INSERT");
     }
     }
 
     @Override
-    public void Actualizar(Cliente cliente) {
+    public void Actualizar(Cliente cliente) throws IException{
           PreparedStatement preparacion_insert=null;
     
     try
@@ -105,33 +83,23 @@ public class MYSQLCliente implements ICliente {
          
             if(preparacion_insert.executeUpdate()==0)
                 {
-                    Utilidades.Mensaje("ERROR","Espera el CLIENTE no se actualizo",0);
+                     Utilidades.manejarError("Espera el Cliente no se actualizo", new SQLException(),"MENSAJE",1);
                 }
            
      
     }catch (SQLException ex) 
     {
-        
-        Utilidades.Mensaje("ERROR","Error en SQL UPDATE CLIENTE".concat(ex.toString()),0);
+        Utilidades.manejarError("Error en SQL UPDATE CLIENTE", ex,"ERROR",0);
         
     }finally
     {
-        if(preparacion_insert != null)
-        {
-            try
-            {
-                preparacion_insert.close();
-            }
-            catch(SQLException ex)
-            {
-                Utilidades.Mensaje("ERROR","Error en Prepared UPDATE CLIENTE ".concat(ex.toString()),0);
-            }
-        }
+        Utilidades.cerrarPrepare(preparacion_insert,"CLIENTE UPDATE");
     }
     }
 
+    
     @Override
-    public void Eliminar(Cliente cliente) {
+    public void Eliminar(Cliente cliente) throws IException{
           PreparedStatement preparacion_delete=null;
         try
     {
@@ -141,34 +109,21 @@ public class MYSQLCliente implements ICliente {
          
             if(preparacion_delete.executeUpdate()==0)
                 {
-             Utilidades.Mensaje("ERROR","Espera el Cliente no se Elimino",0);
+             Utilidades.manejarError("Espera el Cliente no se Elimino", new SQLException(),"MENSAJE",0);
                 }
             
     }catch (SQLException ex) 
     {
-        
-        Utilidades.Mensaje("ERROR","Error en SQL DELETE CLIENTE".concat(ex.toString()),0);
-
-        
+     Utilidades.manejarError("Error en SQL DELETE CLIENTE", ex,"ERROR",0);
+     
     }finally
     {
-        if(preparacion_delete != null)
-        {
-            try
-            {
-                preparacion_delete.close();
-            }
-            catch(SQLException ex)
-            {
-              Utilidades.Mensaje("ERROR","Error en Prepared DELETE CLIENTE ".concat(ex.toString()),0);
-            }
-        }
+        Utilidades.cerrarPrepare(preparacion_delete, "DELETE CLIENTE");
     }
     }
     
-       private Cliente Data(ResultSet resultado_data) 
+       private Cliente Data(ResultSet resultado_data) throws SQLException
     {
-      try {
           String nombre = resultado_data.getString("NOMBRE_CLIENTE");
           String apellido = resultado_data.getString("APELLIDO_CLIENTE");
           String direccion = resultado_data.getString("DIRECCION_CLIENTE");
@@ -179,14 +134,11 @@ public class MYSQLCliente implements ICliente {
           cliente.setId(resultado_data.getLong("PK_ID_CLIENTE"));
           
           return cliente;
-      } catch (SQLException ex) {
-          Utilidades.Mensaje("ERROR","CLIENTE no llenados".concat(ex.toString()),0);
-      }
-      return null;
     }
 
+       
     @Override
-    public List<Cliente> ObtenerTodos() {
+    public List<Cliente> ObtenerTodos() throws IException{
         PreparedStatement preparacion_select = null;
         ResultSet resultado_data = null;
         
@@ -205,39 +157,19 @@ public class MYSQLCliente implements ICliente {
         } 
          catch (SQLException ex) 
             {
-                 Utilidades.Mensaje("ERROR","No hay Registro: ".concat(ex.toString()),0);
+                 Utilidades.manejarError("GETALL CLIENTE", ex,"ERROR",0);
             }
         finally
         {
-            if(resultado_data != null)
-            {
-                try
-                    {
-                        resultado_data.close();
-                    }
-                catch(SQLException ex)
-                    {
-                          Utilidades.Mensaje("ERROR","Error cerrar ResultSet SELECT CLIENTE ".concat(ex.toString()),0);
-                    }
-            }
-            
-            if(preparacion_select != null)
-            {
-                try
-                    {
-                        preparacion_select.close();
-                    }
-                catch(SQLException ex)
-                    {
-                         Utilidades.Mensaje("ERROR","Error cerrar Prepared SELECT CLIENTE ".concat(ex.toString()),0);
-                    }
-            }
+                Utilidades.cerrarResul(resultado_data, "GETALL CLIENTE");
+                Utilidades.cerrarPrepare(preparacion_select, "GETALL CLIENTE");
         }
         return cliente_list;
     }
 
+    
     @Override
-    public Cliente ObtenerOne(Long id) {
+    public Cliente ObtenerOne(Long id) throws IException{
          PreparedStatement preparacion_where = null;
         ResultSet resultado_data = null;
         
@@ -253,39 +185,20 @@ public class MYSQLCliente implements ICliente {
                cliente_buscado=Data(resultado_data);
             }else
             {
-                Utilidades.Mensaje("MENSAJE","No existe el CLIENTE  buscado: ",1);
+                Utilidades.manejarError("No existe el CLIENTE  buscado: ", new SQLException(),"MENSAJE",1);
             }
             
         } 
          catch (SQLException ex) 
             {
-                Utilidades.Mensaje("ERROR","CLIENTE RESULTSET: ".concat(ex.toString()),0);
+                Utilidades.manejarError("RESULTSET GETONE ", ex,"MENSAJE",1);
             }
         finally
         {
-            if(resultado_data != null)
-            {
-                try
-                    {
-                        resultado_data.close();
-                    }
-                catch(SQLException ex)
-                    {
-                        Utilidades.Mensaje("ERROR","Cerrar ResultSet WHERE CLIENTE".concat(ex.toString()),0);
-                    }
-            }
-            
-            if(preparacion_where != null)
-            {
-                try
-                    {
-                        preparacion_where.close();
-                    }
-                catch(SQLException ex)
-                    {
-                        Utilidades.Mensaje("ERROR","Cerrar Prepared WHERE CLIENTE".concat(ex.toString()),0);
-                    }
-            }
+           
+            Utilidades.cerrarResul(resultado_data, "GETONE CLIENTE");
+            Utilidades.cerrarPrepare(preparacion_where, "GETONE CLIENTE");
+           
         }
         return cliente_buscado;
     }
