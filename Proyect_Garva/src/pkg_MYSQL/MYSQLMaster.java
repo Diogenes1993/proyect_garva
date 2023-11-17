@@ -84,7 +84,11 @@ private IUsuario usuarioI=null;
 
     @Override
     public IUsuario getIUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(usuarioI == null)
+    {
+        usuarioI =new MYSQLUsuario(connection);
+    }
+    return usuarioI;
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package pkg_MYSQL;
 
 import java.sql.Connection;
@@ -18,7 +17,7 @@ public class MYSQLUsuario implements IUsuario{
     private final String UPDATE="UPDATE USUARIO SET NOMBRE_USUARIO=?,CONTRASENIA=?,ESTADO=?,CORREO=?  WHERE PK_ID_USUARIO=?";
     private final String REMOVEONEUPDATE="UPDATE USUARIO SET ESTADO=?  WHERE PK_ID_USUARIO=?";
     private final String GETALL ="SELECT PK_ID_USUARIO,NOMBRE_USUARIO,CONTRASENIA,ESTADO,CORREO FROM USUARIO";
-    private final String GETONE= GETALL + " WHERE PK_ID_USUARIO=?";
+    private final String GETONE= GETALL + " WHERE NOMBRE_USUARIO=?";
     private final String GETALLACTIVE=GETALL + " WHERE ESTADO=TRUE" ;
     private final String GETALLINACTIVE=GETALL + " WHERE ESTADO=FALSE" ;
     
@@ -170,7 +169,7 @@ private  final  Connection connection;
     }
 
     @Override
-    public Usuario ObtenerOne(Long id) throws IException{
+    public Usuario ObtenerOne(String nombre_user) throws IException{
      PreparedStatement preparacion_where = null;
         ResultSet resultado_data = null;
         
@@ -178,7 +177,7 @@ private  final  Connection connection;
         try
         {
             preparacion_where=connection.prepareStatement(GETONE);
-            preparacion_where.setLong(1, id);
+            preparacion_where.setString(1, nombre_user);
             resultado_data=preparacion_where.executeQuery();
             
             if(resultado_data.next())

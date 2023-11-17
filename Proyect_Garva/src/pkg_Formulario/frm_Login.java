@@ -2,16 +2,39 @@ package pkg_Formulario;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubIJTheme;
 import javax.swing.UIManager;
+import pkg_Formulario.Menu.frm_Menu;
+import pkg_MYSQL.Interfaces.IException;
+import pkg_MYSQL.Interfaces.IMaster;
+import pkg_MYSQL.MYSQLMaster;
+import pkg_Modelo.Entidades.Usuario;
+import pkg_utilidades.Utilidades;
 
-public final class frm_Login extends javax.swing.JFrame {
+public  class frm_Login extends javax.swing.JFrame {
 ImagenFrm fondo=new ImagenFrm();
-    public frm_Login() {
-      FlatGitHubIJTheme.setup();
-      initComponents();
-      UIManager.put("Button.arc", 12);
-      UIManager.put( "Component.focusWidth" , 0 );
+
+    private IMaster masterI ;
+    MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
+
+
+    public frm_Login(IMaster masterI) {
+        FlatGitHubIJTheme.setup();
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.masterI=masterI;
+        UIManager.put("Button.arc", 12);
+        UIManager.put( "Component.focusWidth" , 0 );
+        
+    }
+     
+    private boolean aceptado;
+     
+    public boolean isAceptado() {
+        return aceptado;
     }
 
+    public void setAceptado(boolean aceptado) {
+        this.aceptado = aceptado;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,7 +50,7 @@ ImagenFrm fondo=new ImagenFrm();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        botonsito = new javax.swing.JButton();
+        btn_Iniciar_Session = new javax.swing.JButton();
         txp_contrasenia = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
@@ -39,43 +62,105 @@ ImagenFrm fondo=new ImagenFrm();
 
         panelRound1.setBackground(new java.awt.Color(128, 116, 107));
         panelRound1.setRound_top_left(400);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_usuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_usuario.setForeground(new java.awt.Color(255, 255, 255));
         lbl_usuario.setText("Usuario");
-        panelRound1.add(lbl_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 102, 27));
 
         lbl_contra.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbl_contra.setForeground(new java.awt.Color(255, 255, 255));
         lbl_contra.setText("Contraseña");
-        panelRound1.add(lbl_contra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 132, 27));
 
         lbl_recu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_recu.setForeground(new java.awt.Color(255, 153, 0));
         lbl_recu.setText("¿Olvidaste tu Contraseña?");
-        panelRound1.add(lbl_recu, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 416, -1, 36));
 
         txt_Usuario.setBorder(null);
-        panelRound1.add(txt_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 150, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        panelRound1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 376, 150, 10));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        panelRound1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 150, 10));
-        panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 0, 40, 40));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/seguridad-web.png"))); // NOI18N
         jLabel6.setText("jLabel6");
-        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 200, -1));
 
-        botonsito.setBackground(new java.awt.Color(102, 102, 255));
-        botonsito.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
-        botonsito.setForeground(new java.awt.Color(0, 0, 255));
-        botonsito.setText("Iniciar Sesión");
-        panelRound1.add(botonsito, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 482, 189, -1));
-        panelRound1.add(txp_contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 347, 150, 30));
+        btn_Iniciar_Session.setBackground(new java.awt.Color(102, 102, 255));
+        btn_Iniciar_Session.setFont(new java.awt.Font("Trebuchet MS", 1, 16)); // NOI18N
+        btn_Iniciar_Session.setForeground(new java.awt.Color(0, 0, 255));
+        btn_Iniciar_Session.setText("Iniciar Sesión");
+        btn_Iniciar_Session.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Iniciar_SessionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(31, 31, 31))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(189, 189, 189))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lbl_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(lbl_recu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(74, 74, 74))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(btn_Iniciar_Session, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(72, 72, 72))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_Usuario)
+                    .addComponent(txp_contrasenia)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel6))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(lbl_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(lbl_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txp_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14)
+                .addComponent(lbl_recu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(btn_Iniciar_Session, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(55, 55, 55))
+        );
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/GarvaMarron (3).png"))); // NOI18N
 
@@ -85,7 +170,7 @@ ImagenFrm fondo=new ImagenFrm();
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(104, 104, 104)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addGap(176, 176, 176)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, Short.MAX_VALUE))
         );
@@ -93,8 +178,8 @@ ImagenFrm fondo=new ImagenFrm();
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(150, 150, 150))
             .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -104,16 +189,39 @@ ImagenFrm fondo=new ImagenFrm();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-    java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_Login().setVisible(true);
-            }
-        });
+    private void ValidarUser(String nomusuario,String pass)throws IException
+    {
+       MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
+       Usuario usuario= masterI.getIUsuario().ObtenerOne(nomusuario);
+        if(usuario!=null && usuario.getContrasenia().equals(pass))
+        {
+            aceptado=true;
+            dispose();
+             frm_Menu menu=new frm_Menu(master);
+             menu.setLocationRelativeTo(null);
+             menu.setVisible(true);
+        }
+        else
+        {
+            aceptado=false;
+        }
     }
+     
+       
+    private void btn_Iniciar_SessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Iniciar_SessionActionPerformed
+    String nombreUsuario = txt_Usuario.getText();
+    String contrasenia = new String(txp_contrasenia.getPassword());
 
+    try {
+        ValidarUser(nombreUsuario, contrasenia);
+    } catch (IException ex) {
+        Utilidades.Mensaje("ERROR","USUARIO ",0);
+    }
+    }//GEN-LAST:event_btn_Iniciar_SessionActionPerformed
+
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonsito;
+    private javax.swing.JButton btn_Iniciar_Session;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

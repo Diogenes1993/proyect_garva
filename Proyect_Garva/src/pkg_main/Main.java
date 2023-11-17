@@ -3,7 +3,9 @@ package pkg_main;
 
 import pkg_Formulario.Menu.frm_Menu;
 import pkg_Formulario.frm_Login;
+import pkg_MYSQL.MYSQLMaster;
 import pkg_Modelo.Envio_Correo;
+import pkg_utilidades.Utilidades;
 
 
 
@@ -12,10 +14,11 @@ public class Main {
 
     public static void main(String[] args) {
         
+        //frm_Menu login=new frm_Menu();
         
-        frm_Menu login=new frm_Menu();
+        MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
+        frm_Login login=new frm_Login(master);
         login.setVisible(true);
-        
         
       /*  String[] mesaje={"PRESTAME","DINERO","CAROLINA","MAZAMORRA","123456","QUETAL"};
         String[] ruta_image={"images\\Model_Coceptual.jpeg","images/Modelo_Logico.png"};

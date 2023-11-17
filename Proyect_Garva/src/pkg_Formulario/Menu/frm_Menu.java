@@ -2,24 +2,30 @@ package pkg_Formulario.Menu;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubDarkIJTheme;
 import java.awt.BorderLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import pkg_Formulario.Menu.subMenu.Admin.frmAdmin;
 import pkg_Formulario.Menu.subMenu.Cliente.frmCliente_;
 import pkg_Formulario.Menu.subMenu.Principal.frmPrincipal_;
+import pkg_MYSQL.Interfaces.IException;
+import pkg_MYSQL.Interfaces.IMaster;
 import pkg_MYSQL.MYSQLMaster;
 
 public class frm_Menu extends javax.swing.JFrame {
 
-    public frm_Menu() {
+    public frm_Menu(MYSQLMaster master) throws IException {
         FlatGitHubDarkIJTheme.setup();
         initComponents();
+        this.master=master;
         InitContent();
+        
         // this.setExtendedState(frm_Menu.MAXIMIZED_BOTH);
-        this.setLocationRelativeTo(null);
+        
         
     }
-private MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GARVA");
-    private void InitContent()
+private IMaster master;
+    private void InitContent() throws IException
     {
         
         initSelection(new frmCliente_(master));
@@ -246,20 +252,17 @@ private MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GA
     }//GEN-LAST:event_btn_PrincipalActionPerformed
 
     private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
-     InitContent();
+        try {
+            InitContent();
+        } catch (IException ex) {
+            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_ClienteActionPerformed
 
     private void btn_AdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdminActionPerformed
     initSelection(new frmAdmin(master));
     }//GEN-LAST:event_btn_AdminActionPerformed
-
-    public static void main(String args[]) {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frm_Menu().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Admin;

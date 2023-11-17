@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import pkg_MYSQL.Interfaces.ICliente;
+import pkg_MYSQL.Interfaces.IException;
 import pkg_Modelo.Entidades.Cliente;
 
 public class ClienteTableModel  extends AbstractTableModel{
@@ -15,7 +16,7 @@ public class ClienteTableModel  extends AbstractTableModel{
         this.icliente=icliente;
     }
     
-    public void getUpdate()
+    public void getUpdate() throws IException
     {
         datos_cliente = icliente.ObtenerTodos();
     }
