@@ -14,6 +14,12 @@ import pkg_MYSQL.MYSQLMaster;
 
 public class frm_Menu extends javax.swing.JFrame {
 
+    
+    public void setNombreUsuario(String NombreUsuario)
+    {
+       this.lbl_NomUsuario.setText(NombreUsuario);
+    }
+    
     public frm_Menu(MYSQLMaster master) throws IException {
         FlatGitHubDarkIJTheme.setup();
         initComponents();
@@ -28,7 +34,7 @@ private IMaster master;
     private void InitContent() throws IException
     {
         
-        initSelection(new frmCliente_(master));
+        initSelection(new frmPrincipal_(master));
         
     }
    
@@ -53,7 +59,6 @@ private IMaster master;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1075, 622));
-        setPreferredSize(new java.awt.Dimension(1075, 622));
 
         panel_Background.setBackground(new java.awt.Color(255, 255, 255));
         panel_Background.setMinimumSize(new java.awt.Dimension(1075, 622));
@@ -172,11 +177,9 @@ private IMaster master;
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_NomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_TipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lbl_NomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(lbl_TipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,14 +192,14 @@ private IMaster master;
         panel_TituloLayout.setHorizontalGroup(
             panel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_TituloLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panel_TituloLayout.setVerticalGroup(
             panel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         panel_Container.setBackground(new java.awt.Color(153, 255, 255));
@@ -210,7 +213,7 @@ private IMaster master;
             .addGroup(panel_BackgroundLayout.createSequentialGroup()
                 .addComponent(panel_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panel_BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+                    .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panel_BackgroundLayout.setVerticalGroup(
@@ -247,13 +250,18 @@ private IMaster master;
         panel_Container.revalidate();
     }
     private void btn_PrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PrincipalActionPerformed
-        initSelection(new frmPrincipal_(master));
+        
+        try {
+            InitContent();
+        } catch (IException ex) {
+            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn_PrincipalActionPerformed
 
     private void btn_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClienteActionPerformed
         try {
-            InitContent();
+            initSelection(new frmCliente_(master));
         } catch (IException ex) {
             Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
         }

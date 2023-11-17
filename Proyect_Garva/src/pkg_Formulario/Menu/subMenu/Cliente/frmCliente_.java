@@ -2,6 +2,7 @@
 package pkg_Formulario.Menu.subMenu.Cliente;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_Modelo.Entidades.Cliente;
@@ -19,6 +20,7 @@ private ClienteTableModel model_table;
         this.masterI = masterI;
         model_table.getUpdate();
         panel_detalle_Cliente.setEditable(false);
+        
         panel_detalle_Cliente.setCliente(null);
         activarBotonesCRUD(false);
         activarBotonesGuardar(false);
@@ -28,6 +30,7 @@ private ClienteTableModel model_table;
         {
             activarBotonesCRUD(tbl_Cliente.getSelectedRow()!=-1);
         });
+         Init();
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +49,9 @@ private ClienteTableModel model_table;
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btn_Guardar = new javax.swing.JButton();
         btn_Cancelar = new javax.swing.JButton();
+        btn_Pagar_adelanto = new javax.swing.JButton();
+        panel_Container_pago = new javax.swing.JPanel();
+        btn_Cancelar_pago = new javax.swing.JButton();
         panel_Muestra = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Cliente = new javax.swing.JTable();
@@ -132,16 +138,47 @@ private ClienteTableModel model_table;
         });
         jToolBar1.add(btn_Cancelar);
 
+        btn_Pagar_adelanto.setText("Pagar Adelanto");
+        btn_Pagar_adelanto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Pagar_adelantoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_Container_pagoLayout = new javax.swing.GroupLayout(panel_Container_pago);
+        panel_Container_pago.setLayout(panel_Container_pagoLayout);
+        panel_Container_pagoLayout.setHorizontalGroup(
+            panel_Container_pagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 377, Short.MAX_VALUE)
+        );
+        panel_Container_pagoLayout.setVerticalGroup(
+            panel_Container_pagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 103, Short.MAX_VALUE)
+        );
+
+        btn_Cancelar_pago.setText("Cancelar");
+        btn_Cancelar_pago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Cancelar_pagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_RegistroLayout = new javax.swing.GroupLayout(panel_Registro);
         panel_Registro.setLayout(panel_RegistroLayout);
         panel_RegistroLayout.setHorizontalGroup(
             panel_RegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_RegistroLayout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 313, Short.MAX_VALUE))
             .addGroup(panel_RegistroLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(panel_detalle_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panel_detalle_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_RegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_Pagar_adelanto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Cancelar_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel_Container_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_RegistroLayout.setVerticalGroup(
@@ -149,8 +186,15 @@ private ClienteTableModel model_table;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_RegistroLayout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel_detalle_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGroup(panel_RegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_detalle_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_RegistroLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(btn_Pagar_adelanto)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Cancelar_pago))
+                    .addComponent(panel_Container_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registro", panel_Registro);
@@ -174,14 +218,14 @@ private ClienteTableModel model_table;
             panel_MuestraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_MuestraLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
                 .addGap(130, 130, 130))
         );
         panel_MuestraLayout.setVerticalGroup(
             panel_MuestraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_MuestraLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -191,11 +235,15 @@ private ClienteTableModel model_table;
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addGap(387, 387, 387))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -206,33 +254,52 @@ private ClienteTableModel model_table;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(125, 125, 125))
         );
     }// </editor-fold>//GEN-END:initComponents
-  
-    private Cliente getClienteSelection() throws IException
+ 
+    private void Init()
     {
+        panel_Container_pago.removeAll();
+        panel_Container_pago.repaint();
+        panel_Container_pago.revalidate();
+    }
+    private void initSelection(JPanel panel)
+    {
+        panel.setSize(558,175);
+        panel.setLocation(10,10);
+        
+        panel_Container_pago.removeAll();
+        panel_Container_pago.add(panel);
+        panel_Container_pago.repaint();
+        panel_Container_pago.revalidate();
+    }
+      
+    
+    private Cliente getClienteSelection() throws IException{
         long id=(long) tbl_Cliente.getValueAt(tbl_Cliente.getSelectedRow(),0);
         return masterI.getICliente().ObtenerOne(id);
     }
-    private void activarBotonesCRUD(boolean activo)
-       {
+    
+    private void activarBotonesCRUD(boolean activo){
         this.btn_Borrar.setEnabled(activo);
         this.btn_Editar.setEnabled(activo);
        
        } 
       
-     private  void activarBotonesGuardar(boolean activo)
-       {
+    private void activarBotonesGuardar(boolean activo){
         this.btn_Guardar.setEnabled(activo);
         this.btn_Cancelar.setEnabled(activo);
        }
       
-      private final void Update_table() throws IException
-    {
+    private void Update_table() throws IException{
         model_table.getUpdate();
         model_table.fireTableDataChanged();
     }
+      
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
         activarBotonesGuardar(true);
         panel_detalle_Cliente.setEditable(true);
@@ -261,6 +328,7 @@ private ClienteTableModel model_table;
                 masterI.getICliente().Eliminar(cliente_borra);
                 Update_table();
                 tbl_Cliente.clearSelection();
+                
                 activarBotonesCRUD(false);
                 activarBotonesGuardar(false);
 
@@ -294,26 +362,37 @@ private ClienteTableModel model_table;
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
         panel_detalle_Cliente.setCliente(null);
-        panel_detalle_Cliente.setEditable(false);
+        panel_detalle_Cliente.DataLoad();
         activarBotonesCRUD(false);
         activarBotonesGuardar(false);
         tbl_Cliente.clearSelection();
-        panel_detalle_Cliente.DataLoad();
+        panel_detalle_Cliente.setEditable(false);
     }//GEN-LAST:event_btn_CancelarActionPerformed
+
+    private void btn_Pagar_adelantoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Pagar_adelantoActionPerformed
+            initSelection(new DetallePagoGuardadoPanel());
+    }//GEN-LAST:event_btn_Pagar_adelantoActionPerformed
+
+    private void btn_Cancelar_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Cancelar_pagoActionPerformed
+     Init();
+    }//GEN-LAST:event_btn_Cancelar_pagoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Borrar;
     private javax.swing.JButton btn_Cancelar;
+    private javax.swing.JButton btn_Cancelar_pago;
     private javax.swing.JButton btn_Editar;
     private javax.swing.JButton btn_Guardar;
     private javax.swing.JButton btn_Nuevo;
+    private javax.swing.JButton btn_Pagar_adelanto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPanel panel_Container_pago;
     private javax.swing.JPanel panel_Muestra;
     private javax.swing.JPanel panel_Registro;
     private pkg_Formulario.Menu.subMenu.Cliente.DetalleClientePanel panel_detalle_Cliente;

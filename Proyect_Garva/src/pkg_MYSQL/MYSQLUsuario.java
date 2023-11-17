@@ -183,9 +183,6 @@ private  final  Connection connection;
             if(resultado_data.next())
             {
                usuario_buscado=Data(resultado_data);
-            }else
-            {
-                Utilidades.manejarError("No existe el  Usuario  ",new SQLException(),"MENSAJE",1);
             }
             
         } 

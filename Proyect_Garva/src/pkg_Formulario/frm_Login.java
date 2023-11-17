@@ -13,7 +13,6 @@ public  class frm_Login extends javax.swing.JFrame {
 ImagenFrm fondo=new ImagenFrm();
 
     private IMaster masterI ;
-    MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
 
 
     public frm_Login(IMaster masterI) {
@@ -48,7 +47,7 @@ ImagenFrm fondo=new ImagenFrm();
         txt_Usuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_Salir = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btn_Iniciar_Session = new javax.swing.JButton();
         txp_contrasenia = new javax.swing.JPasswordField();
@@ -73,13 +72,30 @@ ImagenFrm fondo=new ImagenFrm();
 
         lbl_recu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbl_recu.setForeground(new java.awt.Color(255, 153, 0));
+        lbl_recu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_recu.setText("¿Olvidaste tu Contraseña?");
+        lbl_recu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_recuMouseClicked(evt);
+            }
+        });
 
         txt_Usuario.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+
+        lbl_Salir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/Salir.png"))); // NOI18N
+        lbl_Salir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lbl_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lbl_Salir.setIconTextGap(-10);
+        lbl_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_SalirMouseClicked(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/seguridad-web.png"))); // NOI18N
         jLabel6.setText("jLabel6");
@@ -100,23 +116,12 @@ ImagenFrm fondo=new ImagenFrm();
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(31, 31, 31))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(31, 31, 31))
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(lbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(189, 189, 189))
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(lbl_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(lbl_recu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -132,15 +137,25 @@ ImagenFrm fondo=new ImagenFrm();
                     .addComponent(txp_contrasenia)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(81, 81, 81))
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lbl_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbl_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel6))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbl_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
                 .addGap(10, 10, 10)
                 .addComponent(lbl_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
@@ -155,11 +170,11 @@ ImagenFrm fondo=new ImagenFrm();
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14)
-                .addComponent(lbl_recu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addGap(22, 22, 22)
+                .addComponent(lbl_recu)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Iniciar_Session, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(55, 55, 55))
+                .addGap(43, 43, 43))
         );
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/GarvaMarron (3).png"))); // NOI18N
@@ -191,7 +206,7 @@ ImagenFrm fondo=new ImagenFrm();
 
     private void ValidarUser(String nomusuario,String pass)throws IException
     {
-       MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
+       MYSQLMaster master =new MYSQLMaster("localhost","root","","GARVA");
        Usuario usuario= masterI.getIUsuario().ObtenerOne(nomusuario);
         if(usuario!=null && usuario.getContrasenia().equals(pass))
         {
@@ -200,10 +215,12 @@ ImagenFrm fondo=new ImagenFrm();
              frm_Menu menu=new frm_Menu(master);
              menu.setLocationRelativeTo(null);
              menu.setVisible(true);
+             menu.setNombreUsuario(nomusuario);
         }
         else
         {
             aceptado=false;
+            Utilidades.Mensaje("MENSAJE", "CONTRASEÑA O USUARIO INCORRECTO", 1);
         }
     }
      
@@ -215,19 +232,29 @@ ImagenFrm fondo=new ImagenFrm();
     try {
         ValidarUser(nombreUsuario, contrasenia);
     } catch (IException ex) {
-        Utilidades.Mensaje("ERROR","USUARIO ",0);
     }
     }//GEN-LAST:event_btn_Iniciar_SessionActionPerformed
+
+    private void lbl_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_SalirMouseClicked
+      dispose();
+    }//GEN-LAST:event_lbl_SalirMouseClicked
+
+    private void lbl_recuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_recuMouseClicked
+      frmRenuevo_ nuevo_Contra=new frmRenuevo_();
+      nuevo_Contra.setVisible(true);
+      nuevo_Contra.setLocationRelativeTo(null);
+      dispose();
+    }//GEN-LAST:event_lbl_recuMouseClicked
 
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Iniciar_Session;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lbl_Salir;
     private javax.swing.JLabel lbl_contra;
     private javax.swing.JLabel lbl_recu;
     private javax.swing.JLabel lbl_usuario;
