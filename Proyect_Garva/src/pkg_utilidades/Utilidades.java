@@ -1,6 +1,8 @@
 
 package pkg_utilidades;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,15 +34,24 @@ public class Utilidades {
      
         }
     
-    public static void cerrarPrepare(PreparedStatement ps,String Message) throws IException{
+    public static void cerrarCall(CallableStatement ps,String Message) throws IException{
             if (ps != null) {
             try {
                 ps.close();
                 } catch (SQLException ex) {
                 manejarError("Error cerrar PreparedStatement ".concat(Message), ex,"ERROR",0);
                 }
-                          }
-
+                 }
+        }
+    
+      public static void cerrarConnec(Connection cn,String Message) throws IException{
+            if (cn != null) {
+            try {
+                cn.close();
+                } catch (SQLException ex) {
+                manejarError("Error cerrar Connection ".concat(Message), ex,"ERROR",0);
+                }
+                 }
         }
 
 }

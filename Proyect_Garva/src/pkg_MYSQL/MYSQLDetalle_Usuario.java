@@ -1,6 +1,7 @@
 
 package pkg_MYSQL;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,12 +43,12 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
 
     @Override
     public void Insertar(Detalle_Usuario detalle_usuario) throws IException{
-      PreparedStatement preparacion_insert=null;
+    CallableStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
     try
     {
-         preparacion_insert=connection.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
+         preparacion_insert=connection.prepareCall(INSERT);
          
          preparacion_insert.setLong(1,detalle_usuario.getId().getId_empleado() );
          preparacion_insert.setLong(2,detalle_usuario.getId().getId_usuario() );
@@ -57,8 +58,7 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
                 {
                     Utilidades.manejarError("Espera el Detalle_Usuario no se inserto",new SQLException(),"MENSAJE",1);
                 }
-            result_clave=preparacion_insert.getGeneratedKeys();
-     
+                 
     }catch (SQLException ex) 
     {
         
@@ -68,7 +68,7 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
     {
          
          Utilidades.cerrarResul(result_clave, "INSERT DETALLE_USUARIO");
-         Utilidades.cerrarPrepare(preparacion_insert, "INSERT DETALLE_USUARIO");
+         Utilidades.cerrarCall(preparacion_insert, "INSERT DETALLE_USUARIO");
     }
     }
 

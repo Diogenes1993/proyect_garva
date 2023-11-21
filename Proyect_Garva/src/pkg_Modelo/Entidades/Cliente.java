@@ -1,33 +1,30 @@
-
 package pkg_Modelo.Entidades;
 
-import java.util.Objects;
-
-
 public class Cliente {
-    private Long id=null;
+    private String id;
     private String nombre;
     private String apellido;
-    private String direccion;
+    private String distrito;
     private String telefono;
     private String correo;
 
-    public Cliente() {
-    }
-
-    public Cliente(String nombre, String apellido, String direccion, String telefono, String correo) {
+    public Cliente(String id, String nombre, String apellido, String distrito, String telefono, String correo) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.direccion = direccion;
+        this.distrito = distrito;
         this.telefono = telefono;
         this.correo = correo;
     }
 
-    public Long getId() {
+    public Cliente() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,12 +44,12 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getDistrito() {
+        return distrito;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
     }
 
     public String getTelefono() {
@@ -71,48 +68,8 @@ public class Cliente {
         this.correo = correo;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.nombre);
-        hash = 37 * hash + Objects.hashCode(this.apellido);
-        hash = 37 * hash + Objects.hashCode(this.direccion);
-        hash = 37 * hash + Objects.hashCode(this.telefono);
-        hash = 37 * hash + Objects.hashCode(this.correo);
-        return hash;
-    }
+    
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.apellido, other.apellido)) {
-            return false;
-        }
-        if (!Objects.equals(this.direccion, other.direccion)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefono, other.telefono)) {
-            return false;
-        }
-        if (!Objects.equals(this.correo, other.correo)) {
-            return false;
-        }
-        return Objects.equals(this.id, other.id);
-    }
-    
-    
+
     
 }

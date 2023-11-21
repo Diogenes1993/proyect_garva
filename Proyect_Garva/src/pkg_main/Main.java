@@ -1,8 +1,8 @@
-
 package pkg_main;
 
 import pkg_Formulario.Menu.frm_Menu;
 import pkg_Formulario.frm_Login;
+import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.MYSQLMaster;
 import pkg_Modelo.Envio_Correo;
 import pkg_utilidades.Utilidades;
@@ -12,12 +12,14 @@ import pkg_utilidades.Utilidades;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IException {
         
         //frm_Menu login=new frm_Menu();
         
-        MYSQLMaster master =new MYSQLMaster("localhost","root","","GARVA");
-        frm_Login login=new frm_Login(master);
+        MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GARVA");
+        //frm_Login login=new frm_Login(master);
+        //login.setVisible(true);
+        frm_Menu login=new frm_Menu(master);
         login.setVisible(true);
         
       /*  String[] mesaje={"PRESTAME","DINERO","CAROLINA","MAZAMORRA","123456","QUETAL"};

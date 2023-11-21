@@ -1,5 +1,6 @@
 package pkg_MYSQL;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,13 +28,12 @@ public class MYSQLPago_Guardado implements IPago_Guardado {
 
     @Override
     public void Insertar(Pago_Guardado pago_guardado) throws IException{
-        
-           PreparedStatement preparacion_insert=null;
+    CallableStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
     try
     {
-         preparacion_insert=connection.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
+         preparacion_insert=connection.prepareCall(INSERT);
          
          preparacion_insert.setDouble(1,pago_guardado.getMonto() );
          preparacion_insert.setLong(2,pago_guardado.getId_cliente());
@@ -59,7 +59,7 @@ public class MYSQLPago_Guardado implements IPago_Guardado {
     }finally
     {
                   Utilidades.cerrarResul(result_clave,"PAGO_GUARDADO INSERT");
-                  Utilidades.cerrarPrepare(preparacion_insert,"PAGO_GUARDADO INSERT");
+                  Utilidades.cerrarCall(preparacion_insert,"PAGO_GUARDADO INSERT");
     }
     }
 

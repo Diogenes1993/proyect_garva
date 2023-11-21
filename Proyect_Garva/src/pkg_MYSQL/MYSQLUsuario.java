@@ -1,5 +1,6 @@
 package pkg_MYSQL;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,12 +30,12 @@ private  final  Connection connection;
     
     @Override
     public void Insertar(Usuario usuario) throws IException{
-       PreparedStatement preparacion_insert=null;
+       CallableStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
     try
     {
-         preparacion_insert=connection.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
+         preparacion_insert=connection.prepareCall(INSERT);
          
          preparacion_insert.setString(1,usuario.getUsuario() );
          preparacion_insert.setString(2, usuario.getContrasenia());
@@ -64,17 +65,17 @@ private  final  Connection connection;
     }finally
     {
         Utilidades.cerrarResul(result_clave, "INSERT USUARIO");
-        Utilidades.cerrarPrepare(preparacion_insert, "INSERT USUARIO");
+        Utilidades.cerrarCall(preparacion_insert, "INSERT USUARIO");
     }    
     }
 
     @Override
     public void Actualizar(Usuario usuario) throws IException{
-      PreparedStatement preparacion_update=null;
+      CallableStatement preparacion_update=null;
     
     try
     {
-         preparacion_update=connection.prepareStatement(UPDATE);
+         preparacion_update=connection.prepareCall(UPDATE);
          
          preparacion_update.setString(1,usuario.getUsuario());
          preparacion_update.setString(2,usuario.getContrasenia() );
@@ -95,16 +96,16 @@ private  final  Connection connection;
         
     }finally
     {
-         Utilidades.cerrarPrepare(preparacion_update, "UPDATE USUARIO");
+         Utilidades.cerrarCall(preparacion_update, "UPDATE USUARIO");
     }
     }
 
     @Override
     public void Eliminar(Usuario usuario) throws IException{
-         PreparedStatement preparacion_delete=null;
+         CallableStatement preparacion_delete=null;
         try
     {
-         preparacion_delete=connection.prepareStatement(REMOVEONEUPDATE);
+         preparacion_delete=connection.prepareCall(REMOVEONEUPDATE);
          
          preparacion_delete.setBoolean(1,usuario.isEstado());
          preparacion_delete.setLong(2,usuario.getId() );
@@ -121,7 +122,7 @@ private  final  Connection connection;
         
     }finally
     {
-        Utilidades.cerrarPrepare(preparacion_delete, "DELETE USUARIO");
+        Utilidades.cerrarCall(preparacion_delete, "DELETE USUARIO");
     }
     }
 
@@ -140,13 +141,13 @@ private  final  Connection connection;
     
     @Override
     public List<Usuario> ObtenerTodos() throws IException{
-          PreparedStatement preparacion_select = null;
+        CallableStatement preparacion_select = null;
         ResultSet resultado_data = null;
         
         List<Usuario> usuario_list= new ArrayList<>();
         try
         {
-            preparacion_select=connection.prepareStatement(GETALL);
+            preparacion_select=connection.prepareCall(GETALL);
            
             resultado_data=preparacion_select.executeQuery();
             
@@ -163,20 +164,20 @@ private  final  Connection connection;
         finally
         {
             Utilidades.cerrarResul(resultado_data, "GETALL USUARIO");
-        Utilidades.cerrarPrepare(preparacion_select, "GETALL USUARIO");
+        Utilidades.cerrarCall(preparacion_select, "GETALL USUARIO");
         }
         return usuario_list;
     }
 
     @Override
     public Usuario ObtenerOne(String nombre_user) throws IException{
-     PreparedStatement preparacion_where = null;
+     CallableStatement preparacion_where = null;
         ResultSet resultado_data = null;
         
         Usuario usuario_buscado = null;
         try
         {
-            preparacion_where=connection.prepareStatement(GETONE);
+            preparacion_where=connection.prepareCall(GETONE);
             preparacion_where.setString(1, nombre_user);
             resultado_data=preparacion_where.executeQuery();
             
@@ -194,20 +195,20 @@ private  final  Connection connection;
         finally
         {
         Utilidades.cerrarResul(resultado_data, "GETONE USUARIO");
-        Utilidades.cerrarPrepare(preparacion_where, "GETONE USUARIO");
+        Utilidades.cerrarCall(preparacion_where, "GETONE USUARIO");
         }
         return usuario_buscado;
     }
 
     @Override
     public List<Usuario> getUsuariosActivos(boolean activo) throws IException{
-      PreparedStatement preparacion_select_active = null;
+      CallableStatement preparacion_select_active = null;
         ResultSet resultado_data = null;
         
         List<Usuario> usuario_list_activos= new ArrayList<>();
         try
         {
-            preparacion_select_active=connection.prepareStatement(GETALLACTIVE);
+            preparacion_select_active=connection.prepareCall(GETALLACTIVE);
            
             resultado_data=preparacion_select_active.executeQuery();
             
@@ -225,20 +226,20 @@ private  final  Connection connection;
         finally
         {
            Utilidades.cerrarResul(resultado_data, "GETONE USUARIO");
-        Utilidades.cerrarPrepare(preparacion_select_active, "GETONE USUARIO");
+        Utilidades.cerrarCall(preparacion_select_active, "GETONE USUARIO");
         }
         return usuario_list_activos;
     }
 
     @Override
     public List<Usuario> getUsuariosInactivos(boolean activo) throws IException{
-        PreparedStatement preparacion_select_inactive = null;
+        CallableStatement preparacion_select_inactive = null;
         ResultSet resultado_data = null;
         
         List<Usuario> usuario_list_inactivos= new ArrayList<>();
         try
         {
-            preparacion_select_inactive=connection.prepareStatement(GETALLINACTIVE);
+            preparacion_select_inactive=connection.prepareCall(GETALLINACTIVE);
            
             resultado_data=preparacion_select_inactive.executeQuery();
             
@@ -256,7 +257,7 @@ private  final  Connection connection;
         finally
         {
          Utilidades.cerrarResul(resultado_data, "GETALLINACTIVE USUARIO");
-        Utilidades.cerrarPrepare(preparacion_select_inactive, "GETALLINACTIVE USUARIO");
+        Utilidades.cerrarCall(preparacion_select_inactive, "GETALLINACTIVE USUARIO");
         }
         return usuario_list_inactivos;
     }

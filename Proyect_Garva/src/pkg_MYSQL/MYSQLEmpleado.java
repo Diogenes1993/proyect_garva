@@ -1,6 +1,7 @@
 
 package pkg_MYSQL;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,25 +23,24 @@ private String INSERT="INSERT INTO EMPLEADO(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,DI
 
     @Override
     public void Insertar(Empleado empleado) throws IException{
-     PreparedStatement preparacion_insert=null;
+    CallableStatement preparacion_insert=null;
     ResultSet result_clave=null;
     
     try
     {
-         preparacion_insert=connection.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
+         preparacion_insert=connection.prepareCall(INSERT);
          
          preparacion_insert.setString(1,empleado.getNombre() );
          preparacion_insert.setString(2,empleado.getApellido() );
          preparacion_insert.setString(3,empleado.getDireccion() );
          preparacion_insert.setString(4,empleado.getTelefono() );
          preparacion_insert.setString(5,empleado.getRol().name());
-         preparacion_insert.setDate(6, java.sql.Date.valueOf(empleado.getFecha_contrato()));
+         //preparacion_insert.setDate(6, java.sql.Date.valueOf(empleado.getFecha_contrato()));
          
             if(preparacion_insert.executeUpdate()==0)
                 {
                     Utilidades.manejarError("Espera el Detalle_Usuario no se inserto",new SQLException(),"MENSAJE",1);
                 }
-            result_clave=preparacion_insert.getGeneratedKeys();
      
     }catch (SQLException ex) 
     {
@@ -50,7 +50,7 @@ private String INSERT="INSERT INTO EMPLEADO(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,DI
     }finally
     {
         Utilidades.cerrarResul(result_clave, "INSERT EMPLEADO");
-        Utilidades.cerrarPrepare(preparacion_insert, "INSERT EMPLEADO");
+        Utilidades.cerrarCall(preparacion_insert, "INSERT EMPLEADO");
     }  
     }
 

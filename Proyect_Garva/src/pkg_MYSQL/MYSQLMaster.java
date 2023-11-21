@@ -9,6 +9,7 @@ import pkg_MYSQL.Interfaces.ICliente;
 import pkg_MYSQL.Interfaces.IDetalle_Boleta_Menu;
 import pkg_MYSQL.Interfaces.IDetalle_Pedido;
 import pkg_MYSQL.Interfaces.IDetalle_Usuario;
+import pkg_MYSQL.Interfaces.IDistrito;
 import pkg_MYSQL.Interfaces.IEmpleado;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_MYSQL.Interfaces.IMenu;
@@ -24,6 +25,7 @@ private Connection connection=null;
 private  ICliente clienteI=null;
 private  IPago_Guardado pago_guardadoI=null;
 private IUsuario usuarioI=null;
+private IDistrito distritoI=null;
 
     public MYSQLMaster(String host,String username,String password,String database) {
     try {
@@ -99,6 +101,15 @@ private IUsuario usuarioI=null;
     @Override
     public IDetalle_Usuario getIDetalle_usuario() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IDistrito getIDistrito() {
+        if(distritoI == null)
+    {
+        distritoI =new MYSQLDistrito(connection);
+    }
+    return distritoI;
     }
     
     

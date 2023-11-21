@@ -11,15 +11,29 @@ public class ClienteTableModel  extends AbstractTableModel{
 
     private ICliente icliente;
     private List<Cliente> datos_cliente = new ArrayList<>();
-
+    //private Cliente one_data;
     public ClienteTableModel(ICliente icliente) {
         this.icliente=icliente;
     }
     
-    public void getUpdate() throws IException
-    {
+    
+    public void getObtenerTodos() throws IException{
         datos_cliente = icliente.ObtenerTodos();
     }
+    
+    public void getObtenerOne(String id)  throws IException{
+        datos_cliente =  (List<Cliente>) icliente.ObtenerOne(id);
+    }
+    
+    public void getObtenerNombreApellido(String nomape) throws IException{
+        datos_cliente = icliente.BuscarNomApe(nomape);
+    }
+    
+    public void getObtenerDistrito(String distrito) throws IException{
+        datos_cliente = icliente.BuscarDistrito(distrito);
+    }
+    
+    
     
     @Override
     public String getColumnName(int colum)
@@ -29,7 +43,7 @@ public class ClienteTableModel  extends AbstractTableModel{
             case 0: return "ID";
             case 1: return "NOMBRE";
             case 2: return "APELLIDO";
-            case 3: return "DIRECCION";
+            case 3: return "DISTRITO";
             case 4: return "TELEFONO";
             case 5: return "CORREO";
             default: return "[no]";
@@ -54,7 +68,7 @@ public class ClienteTableModel  extends AbstractTableModel{
             case 0:return cliente_value.getId();
             case 1:return cliente_value.getNombre();
             case 2:return cliente_value.getApellido();
-            case 3:return cliente_value.getDireccion();
+            case 3:return cliente_value.getDistrito();
             case 4:return cliente_value.getTelefono();
             case 5:return cliente_value.getCorreo();
             default: return "";

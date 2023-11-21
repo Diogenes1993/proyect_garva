@@ -1,4 +1,4 @@
-package pkg_Formulario;
+ package pkg_Formulario;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubIJTheme;
 import javax.swing.UIManager;
@@ -34,6 +34,7 @@ ImagenFrm fondo=new ImagenFrm();
     public void setAceptado(boolean aceptado) {
         this.aceptado = aceptado;
     }
+       MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -206,7 +207,8 @@ ImagenFrm fondo=new ImagenFrm();
 
     private void ValidarUser(String nomusuario,String pass)throws IException
     {
-       MYSQLMaster master =new MYSQLMaster("localhost","root","","GARVA");
+        if(!nomusuario.equals("")||!pass.equals(""))
+        {
        Usuario usuario= masterI.getIUsuario().ObtenerOne(nomusuario);
         if(usuario!=null && usuario.getContrasenia().equals(pass))
         {
@@ -221,6 +223,10 @@ ImagenFrm fondo=new ImagenFrm();
         {
             aceptado=false;
             Utilidades.Mensaje("MENSAJE", "CONTRASEÑA O USUARIO INCORRECTO", 1);
+        }
+        }else
+        {
+          Utilidades.Mensaje("MENSAJE", "RELLENE CAMPOS", 1);
         }
     }
      
