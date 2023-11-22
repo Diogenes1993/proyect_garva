@@ -17,9 +17,9 @@ public class Main {
         //frm_Menu login=new frm_Menu();
         
         MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GARVA");
-        //frm_Login login=new frm_Login(master);
+       frm_Login login=new frm_Login(master);
         //login.setVisible(true);
-        frm_Menu login=new frm_Menu(master);
+       // frm_Menu login=new frm_Menu(master);
         login.setVisible(true);
         
       /*  String[] mesaje={"PRESTAME","DINERO","CAROLINA","MAZAMORRA","123456","QUETAL"};

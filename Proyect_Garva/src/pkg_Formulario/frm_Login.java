@@ -34,7 +34,6 @@ ImagenFrm fondo=new ImagenFrm();
     public void setAceptado(boolean aceptado) {
         this.aceptado = aceptado;
     }
-       MYSQLMaster master =new MYSQLMaster("localhost","garva","admin1_ADMIN","GARVA");
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -214,10 +213,12 @@ ImagenFrm fondo=new ImagenFrm();
         {
             aceptado=true;
             dispose();
-             frm_Menu menu=new frm_Menu(master);
+             frm_Menu menu=new frm_Menu(masterI);
              menu.setLocationRelativeTo(null);
              menu.setVisible(true);
-             menu.setNombreUsuario(nomusuario);
+             menu.setNombreUsuario(usuario.getUsuario());
+             menu.setCorreoUsuario(usuario.getCorreo());
+             
         }
         else
         {

@@ -18,7 +18,8 @@ public class MYSQLUsuario implements IUsuario{
     private final String UPDATE="UPDATE USUARIO SET NOMBRE_USUARIO=?,CONTRASENIA=?,ESTADO=?,CORREO=?  WHERE PK_ID_USUARIO=?";
     private final String REMOVEONEUPDATE="UPDATE USUARIO SET ESTADO=?  WHERE PK_ID_USUARIO=?";
     private final String GETALL ="SELECT PK_ID_USUARIO,NOMBRE_USUARIO,CONTRASENIA,ESTADO,CORREO FROM USUARIO";
-    private final String GETONE= GETALL + " WHERE NOMBRE_USUARIO=?";
+    private final String GETONE= "{CALL SP_BUSCAR_USUARIO(?)}";
+    private final String GETDATA= "{CALL SP_DATA_USUARIO(?)}";
     private final String GETALLACTIVE=GETALL + " WHERE ESTADO=TRUE" ;
     private final String GETALLINACTIVE=GETALL + " WHERE ESTADO=FALSE" ;
     
@@ -46,16 +47,6 @@ private  final  Connection connection;
                 {
                     Utilidades.manejarError("Espera el Usuario no se inserto ", new SQLException(), "MENSAJE", 1);
                 }
-            result_clave=preparacion_insert.getGeneratedKeys();
-            if(result_clave.next())
-                {
-                    usuario.setId(result_clave.getLong(1));
-                }
-            else
-            {
-                 Utilidades.manejarError("No se puede asignar Id a este Usuario", new SQLException(), "MENSAJE", 1);
-                 
-            }
      
     }catch (SQLException ex) 
     {
@@ -79,9 +70,9 @@ private  final  Connection connection;
          
          preparacion_update.setString(1,usuario.getUsuario());
          preparacion_update.setString(2,usuario.getContrasenia() );
-         preparacion_update.setBoolean(3,usuario.isEstado() );
+         preparacion_update.setInt(3,usuario.getEstado() );
          preparacion_update.setString(4,usuario.getCorreo() );
-         preparacion_update.setLong(5,usuario.getId());
+         preparacion_update.setString(5,usuario.getId());
          
                      if(preparacion_update.executeUpdate()==0)
                 {
@@ -107,8 +98,8 @@ private  final  Connection connection;
     {
          preparacion_delete=connection.prepareCall(REMOVEONEUPDATE);
          
-         preparacion_delete.setBoolean(1,usuario.isEstado());
-         preparacion_delete.setLong(2,usuario.getId() );
+         preparacion_delete.setInt(1,usuario.getEstado());
+         preparacion_delete.setString(2,usuario.getId() );
          
             if(preparacion_delete.executeUpdate()==0)
                 {
@@ -129,13 +120,14 @@ private  final  Connection connection;
        private Usuario Data(ResultSet resultado_data) throws SQLException
     {
  
-          String nombre = resultado_data.getString("NOMBRE_USUARIO");
-          String contrasenia = resultado_data.getString("CONTRASENIA");
-          boolean estado = resultado_data.getBoolean("ESTADO");
-          String correo = resultado_data.getString("CORREO");
+          String id = resultado_data.getString("pk_id_usuario");
+          String nombre = resultado_data.getString("nombre_usuario");
+          String contrasenia = resultado_data.getString("contrasenia");
+          int estado = resultado_data.getInt("fk_id_estado");
+          String correo = resultado_data.getString("email");
           
-          Usuario usuario=new Usuario(nombre,contrasenia,estado,correo);
-          usuario.setId(resultado_data.getLong("PK_ID_USUARIO"));
+          
+          Usuario usuario=new Usuario(id,nombre,contrasenia,estado,correo);
           return usuario;
     }   
     
@@ -262,7 +254,36 @@ private  final  Connection connection;
         return usuario_list_inactivos;
     }
     
-    
+    @Override
+    public Usuario getDataUsuario(String usuario) throws IException{
+    CallableStatement preparacion_where = null;
+        ResultSet resultado_data = null;
+        
+        Usuario usuario_buscado = null;
+        try
+        {
+            preparacion_where=connection.prepareCall(GETDATA);
+            preparacion_where.setString(1, usuario);
+            resultado_data=preparacion_where.executeQuery();
+            
+            if(resultado_data.next())
+            {
+               usuario_buscado=Data(resultado_data);
+            }
+            
+        } 
+         catch (SQLException ex) 
+            {
+                       Utilidades.manejarError("Error en SQL GETONE USUARIO ",ex,"ERROR",0);
+
+            }
+        finally
+        {
+        Utilidades.cerrarResul(resultado_data, "GETONE USUARIO");
+        Utilidades.cerrarCall(preparacion_where, "GETONE USUARIO");
+        }
+        return usuario_buscado;
+    }
     
     
 }
