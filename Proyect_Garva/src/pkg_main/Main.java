@@ -16,7 +16,7 @@ public class Main {
         
         //frm_Menu login=new frm_Menu();
         
-        MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GARVA");
+        MYSQLMaster master =new MYSQLMaster("localhost","root","","GARVA");
        frm_Login login=new frm_Login(master);
         //login.setVisible(true);
        // frm_Menu login=new frm_Menu(master);
