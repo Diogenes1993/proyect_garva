@@ -1,28 +1,36 @@
 
 package pkg_Modelo.Entidades;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class Empleado {
-    private Long id=null;
+    private Long   id=null;
     private String nombre;
     private String apellido;
-    private String direccion;
+    private String distrito;
     private String telefono;
-    private Rol rol;
-    private LocalDate fecha_contrato;
+    private String email;
+    private Date fecha_contrato;
+    private String usuario;
+    private String contra;
+    private int estado;
+    private String rol;
 
-    public Empleado() {
-    }
-
-    public Empleado(String nombre, String apellido, String direccion, String telefono, Rol rol, LocalDate fecha_contrato) {
+    public Empleado(String nombre, String apellido, String distrito, String telefono, String email, Date fecha_contrato, String usuario, String contra, int estado, String rol) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.direccion = direccion;
+        this.distrito = distrito;
         this.telefono = telefono;
-        this.rol = rol;
+        this.email = email;
         this.fecha_contrato = fecha_contrato;
+        this.usuario = usuario;
+        this.contra = contra;
+        this.estado = estado;
+        this.rol = rol;
+    }
+
+    public Empleado() {
     }
 
     public Long getId() {
@@ -49,12 +57,12 @@ public class Empleado {
         this.apellido = apellido;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getDistrito() {
+        return distrito;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
     }
 
     public String getTelefono() {
@@ -65,69 +73,52 @@ public class Empleado {
         this.telefono = telefono;
     }
 
-    public Rol getRol() {
-        return rol;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public LocalDate getFecha_contrato() {
+    public Date getFecha_contrato() {
         return fecha_contrato;
     }
 
-    public void setFecha_contrato(LocalDate fecha_contrato) {
+    public void setFecha_contrato(Date fecha_contrato) {
         this.fecha_contrato = fecha_contrato;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.id);
-        hash = 43 * hash + Objects.hashCode(this.nombre);
-        hash = 43 * hash + Objects.hashCode(this.apellido);
-        hash = 43 * hash + Objects.hashCode(this.direccion);
-        hash = 43 * hash + Objects.hashCode(this.telefono);
-        hash = 43 * hash + Objects.hashCode(this.rol);
-        hash = 43 * hash + Objects.hashCode(this.fecha_contrato);
-        return hash;
+    public String getUsuario() {
+        return usuario;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Empleado other = (Empleado) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.apellido, other.apellido)) {
-            return false;
-        }
-        if (!Objects.equals(this.direccion, other.direccion)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefono, other.telefono)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (this.rol != other.rol) {
-            return false;
-        }
-        return Objects.equals(this.fecha_contrato, other.fecha_contrato);
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
-    
-    
-    
-            
+
+    public String getContra() {
+        return contra;
+    }
+
+    public void setContra(String contra) {
+        this.contra = contra;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+      
 }

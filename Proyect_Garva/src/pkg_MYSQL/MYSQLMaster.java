@@ -16,7 +16,6 @@ import pkg_MYSQL.Interfaces.IMenu;
 import pkg_MYSQL.Interfaces.IPago_Guardado;
 import pkg_MYSQL.Interfaces.IPedido;
 import pkg_MYSQL.Interfaces.ITotal_Pedido;
-import pkg_MYSQL.Interfaces.IUsuario;
 import pkg_utilidades.Utilidades;
 
 
@@ -24,7 +23,7 @@ public class MYSQLMaster implements IMaster {
 private Connection connection=null;
 private  ICliente clienteI=null;
 private  IPago_Guardado pago_guardadoI=null;
-private IUsuario usuarioI=null;
+private IEmpleado empleadoI=null;
 private IDistrito distritoI=null;
 
     public MYSQLMaster(String host,String username,String password,String database) {
@@ -54,9 +53,14 @@ private IDistrito distritoI=null;
     return pago_guardadoI;
     }
 
+    
     @Override
     public IEmpleado getIEmpleado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+             if(empleadoI == null)
+    {
+        empleadoI =new MYSQLEmpleado(connection);
+    }
+    return empleadoI;
     }
 
     @Override
@@ -84,18 +88,13 @@ private IDistrito distritoI=null;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public IUsuario getIUsuario() {
-        if(usuarioI == null)
-    {
-        usuarioI =new MYSQLUsuario(connection);
-    }
-    return usuarioI;
-    }
+    
+  
+   
 
     @Override
     public IDetalle_Pedido getIDetalle_pedido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -4,6 +4,7 @@ import pkg_Formulario.Menu.frm_Menu;
 import pkg_Formulario.frm_Login;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.MYSQLMaster;
+import pkg_Modelo.BD_Connection;
 import pkg_Modelo.Envio_Correo;
 import pkg_utilidades.Utilidades;
 
@@ -16,7 +17,7 @@ public class Main {
         
         //frm_Menu login=new frm_Menu();
         
-        MYSQLMaster master =new MYSQLMaster("localhost","root","","GARVA");
+        MYSQLMaster master =new MYSQLMaster(BD_Connection.HOST,BD_Connection.USER,BD_Connection.PASSWORD,BD_Connection.BD);
        frm_Login login=new frm_Login(master);
         //login.setVisible(true);
        // frm_Menu login=new frm_Menu(master);
