@@ -101,10 +101,10 @@ private IMaster master;
         panel_Background.setMinimumSize(new java.awt.Dimension(1185, 650));
         panel_Background.setPreferredSize(new java.awt.Dimension(1185, 650));
 
-        panel_Menu.setBackground(new java.awt.Color(204, 204, 255));
+        panel_Menu.setBackground(new java.awt.Color(153, 255, 255));
 
-        btn_Principal.setBackground(new java.awt.Color(142, 253, 213));
-        btn_Principal.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Principal.setBackground(new java.awt.Color(204, 204, 204));
+        btn_Principal.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         btn_Principal.setForeground(new java.awt.Color(0, 102, 102));
         btn_Principal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/hogar.png"))); // NOI18N
         btn_Principal.setText("Inicio");
@@ -119,8 +119,8 @@ private IMaster master;
             }
         });
 
-        btn_Cliente.setBackground(new java.awt.Color(142, 253, 213));
-        btn_Cliente.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Cliente.setBackground(new java.awt.Color(204, 204, 204));
+        btn_Cliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         btn_Cliente.setForeground(new java.awt.Color(0, 102, 102));
         btn_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/cliente.png"))); // NOI18N
         btn_Cliente.setText("Cliente");
@@ -135,8 +135,8 @@ private IMaster master;
             }
         });
 
-        btn_Pedido.setBackground(new java.awt.Color(142, 253, 213));
-        btn_Pedido.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Pedido.setBackground(new java.awt.Color(204, 204, 204));
+        btn_Pedido.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         btn_Pedido.setForeground(new java.awt.Color(0, 102, 102));
         btn_Pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/entrega-de-pedidos.png"))); // NOI18N
         btn_Pedido.setText("Pedidos");
@@ -151,8 +151,8 @@ private IMaster master;
             }
         });
 
-        btn_Admin.setBackground(new java.awt.Color(142, 253, 213));
-        btn_Admin.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Admin.setBackground(new java.awt.Color(204, 204, 204));
+        btn_Admin.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         btn_Admin.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/admin.png"))); // NOI18N
         btn_Admin.setText("Admin");
@@ -167,8 +167,8 @@ private IMaster master;
             }
         });
 
-        btn_Admin1.setBackground(new java.awt.Color(142, 253, 213));
-        btn_Admin1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Admin1.setBackground(new java.awt.Color(204, 204, 204));
+        btn_Admin1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         btn_Admin1.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/reporte.png"))); // NOI18N
         btn_Admin1.setText("Reportes");
@@ -183,8 +183,8 @@ private IMaster master;
             }
         });
 
-        btn_Admin2.setBackground(new java.awt.Color(142, 253, 213));
-        btn_Admin2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_Admin2.setBackground(new java.awt.Color(204, 204, 204));
+        btn_Admin2.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         btn_Admin2.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/Cerrar_Sesion.png"))); // NOI18N
         btn_Admin2.setText("Cerrar Session");
@@ -199,13 +199,13 @@ private IMaster master;
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("GARVA SERVICIOS ALIMENTICIOS");
 
         lbl_Cargo.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
-        lbl_Cargo.setForeground(new java.awt.Color(0, 0, 153));
+        lbl_Cargo.setForeground(new java.awt.Color(51, 255, 0));
         lbl_Cargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Cargo.setText("Cargo");
 
@@ -214,7 +214,7 @@ private IMaster master;
         lbl_Image.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         lbl_Nombre.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        lbl_Nombre.setForeground(new java.awt.Color(0, 0, 204));
+        lbl_Nombre.setForeground(new java.awt.Color(0, 51, 204));
         lbl_Nombre.setText("Nombre");
 
         lbl_Apellido.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
@@ -225,25 +225,26 @@ private IMaster master;
         panel_Menu.setLayout(panel_MenuLayout);
         panel_MenuLayout.setHorizontalGroup(
             panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4)
-            .addComponent(lbl_Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Pedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Admin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panel_MenuLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lbl_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel_MenuLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lbl_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btn_Admin1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(panel_MenuLayout.createSequentialGroup()
-                .addComponent(btn_Admin2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
+                        .addGap(6, 6, 6)
+                        .addComponent(lbl_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel_MenuLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(lbl_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lbl_Cargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btn_Admin2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel_MenuLayout.setVerticalGroup(
             panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,59 +262,62 @@ private IMaster master;
                         .addComponent(lbl_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(7, 7, 7)
                 .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGap(0, 0, 0)
                 .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addGap(0, 0, 0)
                 .addComponent(btn_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(btn_Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(btn_Admin1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 570, Short.MAX_VALUE)
+                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_MenuLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(btn_Admin1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
                 .addComponent(btn_Admin2))
         );
 
-        panel_Titulo.setBackground(new java.awt.Color(204, 255, 204));
+        panel_Titulo.setBackground(new java.awt.Color(0, 0, 0));
 
         lbl_nom_Usuario.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        lbl_nom_Usuario.setForeground(new java.awt.Color(0, 0, 153));
+        lbl_nom_Usuario.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nom_Usuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_nom_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/admin.png"))); // NOI18N
         lbl_nom_Usuario.setText("Usuario");
         lbl_nom_Usuario.setAlignmentX(0.5F);
-        lbl_nom_Usuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 10, 0, 0, new java.awt.Color(204, 255, 204)));
+        lbl_nom_Usuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 10, 0, 0, new java.awt.Color(0, 0, 0)));
         lbl_nom_Usuario.setIconTextGap(20);
 
         lbl_hora.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        lbl_hora.setForeground(new java.awt.Color(0, 0, 153));
+        lbl_hora.setForeground(new java.awt.Color(255, 255, 255));
         lbl_hora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbl_hora.setText("Hora:");
+        lbl_hora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/reloj.png"))); // NOI18N
         lbl_hora.setAlignmentY(0.4F);
+        lbl_hora.setIconTextGap(5);
 
         lbl_Correo.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        lbl_Correo.setForeground(new java.awt.Color(0, 0, 153));
+        lbl_Correo.setForeground(new java.awt.Color(255, 255, 255));
         lbl_Correo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_Correo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/email.png"))); // NOI18N
         lbl_Correo.setText("Correo");
         lbl_Correo.setIconTextGap(20);
 
         lbl_fecha.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
-        lbl_fecha.setForeground(new java.awt.Color(0, 0, 153));
+        lbl_fecha.setForeground(new java.awt.Color(255, 255, 255));
         lbl_fecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbl_fecha.setText("Fecha:");
+        lbl_fecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/calendar.png"))); // NOI18N
+        lbl_fecha.setIconTextGap(10);
 
         javax.swing.GroupLayout panel_TituloLayout = new javax.swing.GroupLayout(panel_Titulo);
         panel_Titulo.setLayout(panel_TituloLayout);
         panel_TituloLayout.setHorizontalGroup(
             panel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_TituloLayout.createSequentialGroup()
-                .addComponent(lbl_nom_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_nom_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_Correo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(lbl_Correo, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbl_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panel_TituloLayout.setVerticalGroup(
             panel_TituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,9 +327,9 @@ private IMaster master;
             .addComponent(lbl_hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panel_Container.setBackground(new java.awt.Color(153, 255, 255));
+        panel_Container.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container.setPreferredSize(new java.awt.Dimension(815, 734));
-        panel_Container.setLayout(new javax.swing.BoxLayout(panel_Container, javax.swing.BoxLayout.LINE_AXIS));
+        panel_Container.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout panel_BackgroundLayout = new javax.swing.GroupLayout(panel_Background);
         panel_Background.setLayout(panel_BackgroundLayout);
@@ -335,27 +339,26 @@ private IMaster master;
                 .addComponent(panel_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panel_BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)))
         );
         panel_BackgroundLayout.setVerticalGroup(
             panel_BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panel_BackgroundLayout.createSequentialGroup()
                 .addComponent(panel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
+                .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(panel_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_Background, javax.swing.GroupLayout.DEFAULT_SIZE, 1220, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_Background, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(panel_Background, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
         );
 
         pack();
@@ -367,7 +370,7 @@ private IMaster master;
         panel.setLocation(0,0);
         
         panel_Container.removeAll();
-        panel_Container.setLayout(null);
+      
         panel_Container.add(panel);
         panel_Container.revalidate();
         panel_Container.repaint();
