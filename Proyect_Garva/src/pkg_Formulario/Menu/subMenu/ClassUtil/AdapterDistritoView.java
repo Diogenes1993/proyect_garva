@@ -1,5 +1,5 @@
 
-package pkg_Formulario.Menu.subMenu.Cliente;
+package pkg_Formulario.Menu.subMenu.ClassUtil;
 
 import java.util.Objects;
 import pkg_Modelo.Entidades.Distrito;
@@ -27,26 +27,23 @@ public class AdapterDistritoView {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AdapterDistritoView other = (AdapterDistritoView) obj;
-        return Objects.equals(this.distrito, other.distrito);
+  @Override
+public boolean equals(Object obj) {
+    if (this == obj) {
+        return true;
     }
+    if (obj == null || getClass() != obj.getClass()) {
+        return false;
+    }
+    AdapterDistritoView other = (AdapterDistritoView) obj;
+    return Objects.equals(distrito, other.distrito);
+}
 
     @Override
     public String toString() {
         return distrito.getNombre();
     }
     
-    
+  
     
 }

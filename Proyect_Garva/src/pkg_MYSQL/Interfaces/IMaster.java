@@ -15,6 +15,7 @@ IDetalle_Boleta_Menu getIDetalle_boleta_menu();
 IDetalle_Pedido getIDetalle_pedido();
 IDetalle_Usuario getIDetalle_usuario();
 IDistrito getIDistrito();
+IRol getIRol();
 
     
     

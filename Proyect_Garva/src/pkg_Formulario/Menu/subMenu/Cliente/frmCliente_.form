@@ -91,13 +91,13 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="panel_detalle_Cliente" pref="151" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="panel_detalle_Cliente" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="244" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="136" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

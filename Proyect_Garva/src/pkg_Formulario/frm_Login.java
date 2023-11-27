@@ -1,12 +1,10 @@
  package pkg_Formulario;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubIJTheme;
 import javax.swing.UIManager;
 import pkg_Formulario.Menu.frm_Menu;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
-import pkg_MYSQL.MYSQLMaster;
-import pkg_Modelo.Entidades.Usuario;
+import pkg_Modelo.Entidades.Empleado;
 import pkg_utilidades.Utilidades;
 
 public  class frm_Login extends javax.swing.JFrame {
@@ -16,7 +14,6 @@ ImagenFrm fondo=new ImagenFrm();
 
 
     public frm_Login(IMaster masterI) {
-        FlatGitHubIJTheme.setup();
         initComponents();
         this.setLocationRelativeTo(null);
         this.masterI=masterI;
@@ -208,16 +205,15 @@ ImagenFrm fondo=new ImagenFrm();
     {
         if(!nomusuario.equals("")||!pass.equals(""))
         {
-       Usuario usuario= masterI.getIUsuario().ObtenerOne(nomusuario);
-        if(usuario!=null && usuario.getContrasenia().equals(pass))
+       Empleado empleado= masterI.getIEmpleado().getDataUsuario(nomusuario);
+        if(empleado!=null && empleado.getContra().equals(pass))
         {
             aceptado=true;
-            dispose();
+         
              frm_Menu menu=new frm_Menu(masterI);
-             menu.setLocationRelativeTo(null);
              menu.setVisible(true);
-             menu.setNombreUsuario(usuario.getUsuario());
-             menu.setCorreoUsuario(usuario.getCorreo());
+             menu.setDatos(empleado.getUsuario(),empleado.getEmail(),empleado.getNombre(),empleado.getApellido(),empleado.getRol().getRol(),empleado.getRol().getRuta());
+                dispose();
              
         }
         else

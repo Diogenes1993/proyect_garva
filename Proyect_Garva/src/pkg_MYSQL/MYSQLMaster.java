@@ -15,6 +15,7 @@ import pkg_MYSQL.Interfaces.IMaster;
 import pkg_MYSQL.Interfaces.IMenu;
 import pkg_MYSQL.Interfaces.IPago_Guardado;
 import pkg_MYSQL.Interfaces.IPedido;
+import pkg_MYSQL.Interfaces.IRol;
 import pkg_MYSQL.Interfaces.ITotal_Pedido;
 import pkg_utilidades.Utilidades;
 
@@ -25,6 +26,7 @@ private  ICliente clienteI=null;
 private  IPago_Guardado pago_guardadoI=null;
 private IEmpleado empleadoI=null;
 private IDistrito distritoI=null;
+private IRol rolI=null;
 
     public MYSQLMaster(String host,String username,String password,String database) {
     try {
@@ -109,6 +111,15 @@ private IDistrito distritoI=null;
         distritoI =new MYSQLDistrito(connection);
     }
     return distritoI;
+    }
+
+    @Override
+    public IRol getIRol() {
+        if(rolI == null)
+    {
+        rolI =new MYSQLRol(connection);
+    }
+    return rolI;
     }
     
     

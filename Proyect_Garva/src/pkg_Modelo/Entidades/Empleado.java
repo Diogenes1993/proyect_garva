@@ -2,25 +2,27 @@
 package pkg_Modelo.Entidades;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Empleado {
-    private Long   id=null;
+    private String  id;
     private String nombre;
     private String apellido;
     private String distrito;
+    private String direccion;
     private String telefono;
     private String email;
     private Date fecha_contrato;
     private String usuario;
     private String contra;
-    private int estado;
-    private String rol;
+    private String estado;
+    private Rol rol;
 
-    public Empleado(String nombre, String apellido, String distrito, String telefono, String email, Date fecha_contrato, String usuario, String contra, int estado, String rol) {
+    public Empleado(String id, String nombre, String apellido, String distrito, String direccion, String telefono, String email, Date fecha_contrato, String usuario, String contra, String estado, Rol rol) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.distrito = distrito;
+        this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.fecha_contrato = fecha_contrato;
@@ -32,12 +34,13 @@ public class Empleado {
 
     public Empleado() {
     }
+    
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -63,6 +66,14 @@ public class Empleado {
 
     public void setDistrito(String distrito) {
         this.distrito = distrito;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getTelefono() {
@@ -105,20 +116,21 @@ public class Empleado {
         this.contra = contra;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
-      
+    
+    
 }

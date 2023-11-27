@@ -1,5 +1,7 @@
 package pkg_Formulario.Menu.subMenu.Cliente;
 
+import pkg_Formulario.Menu.subMenu.ClassUtil.DistritoComboModel;
+import pkg_Formulario.Menu.subMenu.ClassUtil.AdapterDistritoView;
 import pkg_MYSQL.Interfaces.IDistrito;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_Modelo.Entidades.Cliente;
@@ -80,6 +82,8 @@ public class DetalleClientePanel extends javax.swing.JPanel {
    }
     
     private DistritoComboModel model_combo_distrito;
+    
+    
     public DetalleClientePanel() {
         initComponents();
         model_combo_distrito=new DistritoComboModel(null);

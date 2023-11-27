@@ -1,5 +1,5 @@
 
-package pkg_Formulario.Menu.subMenu.Cliente;
+package pkg_Formulario.Menu.subMenu.ClassUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,4 +29,15 @@ public class DistritoComboModel extends DefaultComboBoxModel<AdapterDistritoView
         }
         }
     }
+    public List<AdapterDistritoView> getDistritos() {
+    List<AdapterDistritoView> distritos = new ArrayList<>();
+    int size = getSize();
+
+    for (int i = 0; i < size; i++) {
+        AdapterDistritoView distrito = getElementAt(i);
+        distritos.add(distrito);
+    }
+
+    return distritos;
+}
 }
