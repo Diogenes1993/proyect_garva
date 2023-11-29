@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import pkg_Formulario.Menu.subMenu.Cliente.frmCliente_;
 import pkg_Formulario.Menu.subMenu.Empleado.FrmEmpleado;
+import pkg_Formulario.Menu.subMenu.Empleado.Rol.FrmRol_Pa;
+import pkg_Formulario.Menu.subMenu.Empleado.Rol.frmRol;
 import pkg_Formulario.Menu.subMenu.Pedido.frmPedido;
 import pkg_Formulario.Menu.subMenu.Principal.frmPrincipal_;
 import pkg_Formulario.frm_Login;
@@ -95,6 +97,7 @@ private IMaster master;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1185, 650));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1185, 650));
 
         panel_Background.setBackground(new java.awt.Color(255, 255, 255));
@@ -104,7 +107,7 @@ private IMaster master;
         panel_Menu.setBackground(new java.awt.Color(153, 255, 255));
 
         btn_Principal.setBackground(new java.awt.Color(204, 204, 204));
-        btn_Principal.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        btn_Principal.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Principal.setForeground(new java.awt.Color(0, 102, 102));
         btn_Principal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/hogar.png"))); // NOI18N
         btn_Principal.setText("Inicio");
@@ -120,7 +123,7 @@ private IMaster master;
         });
 
         btn_Cliente.setBackground(new java.awt.Color(204, 204, 204));
-        btn_Cliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        btn_Cliente.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Cliente.setForeground(new java.awt.Color(0, 102, 102));
         btn_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/cliente.png"))); // NOI18N
         btn_Cliente.setText("Cliente");
@@ -136,7 +139,7 @@ private IMaster master;
         });
 
         btn_Pedido.setBackground(new java.awt.Color(204, 204, 204));
-        btn_Pedido.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        btn_Pedido.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Pedido.setForeground(new java.awt.Color(0, 102, 102));
         btn_Pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/entrega-de-pedidos.png"))); // NOI18N
         btn_Pedido.setText("Pedidos");
@@ -152,7 +155,7 @@ private IMaster master;
         });
 
         btn_Admin.setBackground(new java.awt.Color(204, 204, 204));
-        btn_Admin.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        btn_Admin.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Admin.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/admin.png"))); // NOI18N
         btn_Admin.setText("Admin");
@@ -168,7 +171,7 @@ private IMaster master;
         });
 
         btn_Admin1.setBackground(new java.awt.Color(204, 204, 204));
-        btn_Admin1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        btn_Admin1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Admin1.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/reporte.png"))); // NOI18N
         btn_Admin1.setText("Reportes");
@@ -184,7 +187,7 @@ private IMaster master;
         });
 
         btn_Admin2.setBackground(new java.awt.Color(204, 204, 204));
-        btn_Admin2.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        btn_Admin2.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Admin2.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/Cerrar_Sesion.png"))); // NOI18N
         btn_Admin2.setText("Cerrar Session");
@@ -329,7 +332,7 @@ private IMaster master;
 
         panel_Container.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container.setPreferredSize(new java.awt.Dimension(815, 734));
-        panel_Container.setLayout(new java.awt.GridBagLayout());
+        panel_Container.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panel_BackgroundLayout = new javax.swing.GroupLayout(panel_Background);
         panel_Background.setLayout(panel_BackgroundLayout);
@@ -407,12 +410,17 @@ private IMaster master;
     }//GEN-LAST:event_btn_Admin1ActionPerformed
 
     private void btn_PedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PedidoActionPerformed
-            initSelection(new frmPedido());
+        try {
+            initSelection(new FrmRol_Pa(master));
+        } catch (IException ex) {
+            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_PedidoActionPerformed
 
     private void btn_Admin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Admin2ActionPerformed
         frm_Login login=new frm_Login(master);
         login.setVisible(true);
+        
         dispose();
         
     }//GEN-LAST:event_btn_Admin2ActionPerformed

@@ -15,7 +15,7 @@ ImagenFrm fondo=new ImagenFrm();
 
     public frm_Login(IMaster masterI) {
         initComponents();
-        this.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         this.masterI=masterI;
         UIManager.put("Button.arc", 12);
         UIManager.put( "Component.focusWidth" , 0 );
@@ -239,11 +239,11 @@ ImagenFrm fondo=new ImagenFrm();
     }//GEN-LAST:event_btn_Iniciar_SessionActionPerformed
 
     private void lbl_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_SalirMouseClicked
-      dispose();
+     System.exit(0);
     }//GEN-LAST:event_lbl_SalirMouseClicked
 
     private void lbl_recuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_recuMouseClicked
-      frmRenuevo_ nuevo_Contra=new frmRenuevo_();
+      frmRenuevo_ nuevo_Contra=new frmRenuevo_(masterI);
       nuevo_Contra.setVisible(true);
       nuevo_Contra.setLocationRelativeTo(null);
       dispose();

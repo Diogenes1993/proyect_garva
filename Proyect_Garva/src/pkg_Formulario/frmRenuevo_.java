@@ -1,15 +1,14 @@
 
 package pkg_Formulario;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubDarkIJTheme;
-
+import pkg_MYSQL.Interfaces.IMaster;
 import pkg_MYSQL.MYSQLMaster;
 
 public class frmRenuevo_ extends javax.swing.JFrame {
-
-    public frmRenuevo_() {
-       FlatGitHubDarkIJTheme.setup();
-       initComponents();
+private IMaster masterI;
+    public frmRenuevo_(IMaster masterI) {
+         initComponents();
+         this.masterI=masterI;
 
     }
 
@@ -74,9 +73,7 @@ public class frmRenuevo_ extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
-        MYSQLMaster master =new MYSQLMaster("localhost","root","","GARVA");
-
-        new frm_Login(master).setVisible(true);
+        new frm_Login(masterI).setVisible(true);
         dispose();
    
     }//GEN-LAST:event_btn_CancelarActionPerformed

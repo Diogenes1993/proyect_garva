@@ -68,6 +68,7 @@ public class EmpleadoDataPanel extends javax.swing.JPanel {
         txt_Usuario.setEnabled(editable);
         txt_Contra.setEnabled(editable);
         txt_isEstado.setEnabled(false);
+        ch_estado.setEnabled(editable);
         cm_Cargo.setEnabled(editable);
          if(editable)txt_Nombre.requestFocus();
     }
