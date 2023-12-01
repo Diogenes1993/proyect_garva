@@ -192,7 +192,8 @@ private Calculos calculo=new Calculos();
 
         if (resultado == JFileChooser.APPROVE_OPTION) {
             File archivoSeleccionado = fileChooser.getSelectedFile();
-            ruta=calculo.copiarImagen(archivoSeleccionado,"src\\pkg_utilidades\\images\\icons\\");
+            ruta=calculo.copiarImagen(archivoSeleccionado,"src/pkg_utilidades/images/icons/");
+            lbl_Image.setIcon(new ImageIcon(ruta));
         }
     }
 

@@ -349,7 +349,7 @@ private IMaster master;
             .addGroup(panel_BackgroundLayout.createSequentialGroup()
                 .addComponent(panel_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(panel_Container, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
             .addComponent(panel_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -369,7 +369,7 @@ private IMaster master;
 
     private void initSelection(JPanel panel)
     {
-        panel.setSize(951,778);
+        panel.setSize(951, 592);
         panel.setLocation(0,0);
         
         panel_Container.removeAll();

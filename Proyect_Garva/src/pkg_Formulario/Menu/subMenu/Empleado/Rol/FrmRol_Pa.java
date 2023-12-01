@@ -28,7 +28,7 @@ public class FrmRol_Pa extends javax.swing.JPanel {
         
         this.tbl_Rol.getSelectionModel().addListSelectionListener(e ->{
                 
-            activarBotonesCRUD(tbl_Rol.getSelectedRow()!=1);
+            activarBotonesCRUD(tbl_Rol.getSelectedRow()!=-1);
         });
     }
 
@@ -243,8 +243,8 @@ public class FrmRol_Pa extends javax.swing.JPanel {
         panel_detalle_rol.DataLoad();
         activarBotonesCRUD(false);
         activarBotonesGuardar(false);
-        tbl_Rol.clearSelection();
         panel_detalle_rol.setEditable(false);
+        tbl_Rol.clearSelection();
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
@@ -254,6 +254,7 @@ public class FrmRol_Pa extends javax.swing.JPanel {
             panel_detalle_rol.setRol(null);
             panel_detalle_rol.DataLoad();
             panel_detalle_rol.setCod(masterI.getIRol().newCodigo());
+            tbl_Rol.clearSelection();
             activarBotonesCRUD(false);
         } catch (IException ex) {
             Utilidades.Mensaje("ERROR", "ROL NEW ".concat(ex.toString()), 0);

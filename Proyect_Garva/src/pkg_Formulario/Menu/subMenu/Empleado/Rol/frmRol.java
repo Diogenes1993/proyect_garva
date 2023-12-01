@@ -25,7 +25,8 @@ public class frmRol extends javax.swing.JFrame {
         
         this.tbl_Rol.getSelectionModel().addListSelectionListener(e ->{
                 
-            activarBotonesCRUD(tbl_Rol.getSelectedRow()!=1);
+            activarBotonesCRUD(tbl_Rol.getSelectedRow()!=-1);
+            System.out.println(tbl_Rol.getSelectedRow());
         });
         
     }
@@ -252,11 +253,12 @@ public class frmRol extends javax.swing.JFrame {
     
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
         panel_detalle_rol.setRol(null);
-        panel_detalle_rol.DataLoad();
+        panel_detalle_rol.setEditable(false);
         activarBotonesCRUD(false);
         activarBotonesGuardar(false);
         tbl_Rol.clearSelection();
-        panel_detalle_rol.setEditable(false);
+        panel_detalle_rol.DataLoad();
+
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
