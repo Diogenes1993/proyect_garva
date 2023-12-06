@@ -2,21 +2,53 @@
 package pkg_Modelo.Entidades;
 
 import java.util.Date;
-import java.util.Objects;
+
 
 public class Menu {
-    private Long id=null;
+    private String id;
+    private String nombre;
+    private String detalle;
     private Date fecha;
     private int stock;
     private double precio;
+    private String ruta;
 
     public Menu() {
     }
 
-    public Menu(Date fecha, int stock, double precio) {
+    public Menu(String id, String nombre, String detalle, Date fecha, int stock, double precio, String ruta) {
+        this.id = id;
+        this.nombre = nombre;
+        this.detalle = detalle;
         this.fecha = fecha;
         this.stock = stock;
         this.precio = precio;
+        this.ruta = ruta;
+    }
+    
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     public Date getFecha() {
@@ -25,14 +57,6 @@ public class Menu {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getStock() {
@@ -51,42 +75,13 @@ public class Menu {
         this.precio = precio;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.fecha);
-        hash = 29 * hash + this.stock;
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
-        return hash;
+    public String getRuta() {
+        return ruta;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Menu other = (Menu) obj;
-        if (this.stock != other.stock) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.precio) != Double.doubleToLongBits(other.precio)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return Objects.equals(this.fecha, other.fecha);
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
-    
-     
-     
     
     
 }

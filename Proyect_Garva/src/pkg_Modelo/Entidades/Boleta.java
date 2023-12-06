@@ -5,40 +5,35 @@ import java.util.Objects;
 
 public class Boleta {
     
-    private Long id=null;
-    private String boleta;
+    private String id;
     private Date fecha;
     private double igv;
-    private long id_cliente;
-    private long id_empleado;
-    private long id_pedido;
+    private String id_cliente;
+    private String id_empleado;
+    private String id_pedido;
+    private String id_menu;
+    private double consumo;
 
     public Boleta() {
     }
 
-    public Boleta(String boleta, Date fecha, double igv, long id_cliente, long id_empleado, long id_pedido) {
-        this.boleta = boleta;
+    public Boleta(String id, Date fecha, double igv, String id_cliente, String id_empleado, String id_pedido, String id_menu, double consumo) {
+        this.id = id;
         this.fecha = fecha;
         this.igv = igv;
         this.id_cliente = id_cliente;
         this.id_empleado = id_empleado;
         this.id_pedido = id_pedido;
+        this.id_menu = id_menu;
+        this.consumo = consumo;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getBoleta() {
-        return boleta;
-    }
-
-    public void setBoleta(String boleta) {
-        this.boleta = boleta;
     }
 
     public Date getFecha() {
@@ -57,76 +52,45 @@ public class Boleta {
         this.igv = igv;
     }
 
-    public long getId_cliente() {
+    public String getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(long id_cliente) {
+    public void setId_cliente(String id_cliente) {
         this.id_cliente = id_cliente;
     }
 
-    public long getId_empleado() {
+    public String getId_empleado() {
         return id_empleado;
     }
 
-    public void setId_empleado(long id_empleado) {
+    public void setId_empleado(String id_empleado) {
         this.id_empleado = id_empleado;
     }
 
-    public long getId_pedido() {
+    public String getId_pedido() {
         return id_pedido;
     }
 
-    public void setId_pedido(long id_pedido) {
+    public void setId_pedido(String id_pedido) {
         this.id_pedido = id_pedido;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.boleta);
-        hash = 17 * hash + Objects.hashCode(this.fecha);
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.igv) ^ (Double.doubleToLongBits(this.igv) >>> 32));
-        hash = 17 * hash + (int) (this.id_cliente ^ (this.id_cliente >>> 32));
-        hash = 17 * hash + (int) (this.id_empleado ^ (this.id_empleado >>> 32));
-        hash = 17 * hash + (int) (this.id_pedido ^ (this.id_pedido >>> 32));
-        return hash;
+    public String getId_menu() {
+        return id_menu;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Boleta other = (Boleta) obj;
-        if (Double.doubleToLongBits(this.igv) != Double.doubleToLongBits(other.igv)) {
-            return false;
-        }
-        if (this.id_cliente != other.id_cliente) {
-            return false;
-        }
-        if (this.id_empleado != other.id_empleado) {
-            return false;
-        }
-        if (this.id_pedido != other.id_pedido) {
-            return false;
-        }
-        if (!Objects.equals(this.boleta, other.boleta)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return Objects.equals(this.fecha, other.fecha);
+    public void setId_menu(String id_menu) {
+        this.id_menu = id_menu;
     }
-    
+
+    public double getConsumo() {
+        return consumo;
+    }
+
+    public void setConsumo(double consumo) {
+        this.consumo = consumo;
+    }
     
     
     

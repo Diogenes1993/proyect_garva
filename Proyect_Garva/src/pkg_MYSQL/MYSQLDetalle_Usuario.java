@@ -48,9 +48,8 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
     {
          preparacion_insert=connection.prepareCall(INSERT);
          
-         preparacion_insert.setLong(1,detalle_usuario.getId().getId_empleado() );
-         preparacion_insert.setLong(2,detalle_usuario.getId().getId_usuario() );
-         preparacion_insert.setDate(3, java.sql.Date.valueOf(detalle_usuario.getId().getFecha_entrada()));
+         preparacion_insert.setString(1,detalle_usuario.getId_detalle_usuario().getId_empleado() );
+         preparacion_insert.setDate(3, java.sql.Date.valueOf(detalle_usuario.getId_detalle_usuario().getFecha_entrada()));
          
             if(preparacion_insert.executeUpdate()==0)
                 {
@@ -86,7 +85,7 @@ public class MYSQLDetalle_Usuario implements IDetalle_Usuario{
     }
 
     @Override
-    public Detalle_Usuario ObtenerOne(Detalle_Usuario.Id_Detalle_Usuario id) throws IException{
+    public Detalle_Usuario ObtenerOne(Detalle_Usuario.IdDetalleUsuario id) throws IException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

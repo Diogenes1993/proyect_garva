@@ -5,86 +5,41 @@ import java.util.Objects;
 
 public class Detalle_Pedido {
 
-private Long id=null;
-private long  id_gasto;
-private long  id_pago;  
-private double cuenta;
+private Pedido id_pedido;
+private Menu id_menu;
+private int cantidad;
 
     public Detalle_Pedido() {
     }
 
-    public Detalle_Pedido(long id_gasto, long id_pago, double cuenta) {
-        this.id_gasto = id_gasto;
-        this.id_pago = id_pago;
-        this.cuenta = cuenta;
+    public Detalle_Pedido(Pedido id_pedido, Menu id_menu, int cantidad) {
+        this.id_pedido = id_pedido;
+        this.id_menu = id_menu;
+        this.cantidad = cantidad;
     }
 
-    public Long getId() {
-        return id;
+    public Pedido getId_pedido() {
+        return id_pedido;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_pedido(Pedido id_pedido) {
+        this.id_pedido = id_pedido;
     }
 
-    public long getId_gasto() {
-        return id_gasto;
+    public Menu getId_menu() {
+        return id_menu;
     }
 
-    public void setId_gasto(long id_gasto) {
-        this.id_gasto = id_gasto;
+    public void setId_menu(Menu id_menu) {
+        this.id_menu = id_menu;
     }
 
-    public long getId_pago() {
-        return id_pago;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setId_pago(long id_pago) {
-        this.id_pago = id_pago;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
-
-    public double getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(double cuenta) {
-        this.cuenta = cuenta;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + (int) (this.id_gasto ^ (this.id_gasto >>> 32));
-        hash = 67 * hash + (int) (this.id_pago ^ (this.id_pago >>> 32));
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.cuenta) ^ (Double.doubleToLongBits(this.cuenta) >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Detalle_Pedido other = (Detalle_Pedido) obj;
-        if (this.id_gasto != other.id_gasto) {
-            return false;
-        }
-        if (this.id_pago != other.id_pago) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.cuenta) != Double.doubleToLongBits(other.cuenta)) {
-            return false;
-        }
-        return Objects.equals(this.id, other.id);
-    }
-
     
-
 }

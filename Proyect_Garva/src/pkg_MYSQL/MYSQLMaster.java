@@ -6,27 +6,33 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import pkg_MYSQL.Interfaces.IBoleta;
 import pkg_MYSQL.Interfaces.ICliente;
-import pkg_MYSQL.Interfaces.IDetalle_Boleta_Menu;
 import pkg_MYSQL.Interfaces.IDetalle_Pedido;
 import pkg_MYSQL.Interfaces.IDetalle_Usuario;
 import pkg_MYSQL.Interfaces.IDistrito;
 import pkg_MYSQL.Interfaces.IEmpleado;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_MYSQL.Interfaces.IMenu;
-import pkg_MYSQL.Interfaces.IPago_Guardado;
 import pkg_MYSQL.Interfaces.IPedido;
 import pkg_MYSQL.Interfaces.IRol;
-import pkg_MYSQL.Interfaces.ITotal_Pedido;
 import pkg_utilidades.Utilidades;
+import pkg_MYSQL.Interfaces.IAdelanto;
+import pkg_MYSQL.Interfaces.IConsumo;
 
 
 public class MYSQLMaster implements IMaster {
 private Connection connection=null;
-private  ICliente clienteI=null;
-private  IPago_Guardado pago_guardadoI=null;
-private IEmpleado empleadoI=null;
+
 private IDistrito distritoI=null;
+private  ICliente clienteI=null;
 private IRol rolI=null;
+private IEmpleado empleadoI=null;
+private  IAdelanto adelantoI=null;
+private  IMenu menuI=null;
+private  IPedido pedidoI=null;
+private  IBoleta boletaI=null;
+private  IConsumo consumoI=null;
+private  IDetalle_Usuario detalleUsuarioI=null;
+private  IDetalle_Pedido detallePedidoI=null;
 
     public MYSQLMaster(String host,String username,String password,String database) {
     try {
@@ -35,8 +41,7 @@ private IRol rolI=null;
             Utilidades.Mensaje("Connection","Fallo la conexion", 0);
     }
     }
-    //MYSQLMaster master =new MYSQLMaster("localhost","root","123456admin","GARVA");
-
+    
     @Override
     public ICliente getICliente() {
     if(clienteI == null)
@@ -46,14 +51,7 @@ private IRol rolI=null;
     return clienteI;
     }
 
-    @Override
-    public IPago_Guardado getIPago_guardado() {
-    if(pago_guardadoI == null)
-    {
-        pago_guardadoI =new MYSQLPago_Guardado(connection);
-    }
-    return pago_guardadoI;
-    }
+   
 
     
     @Override
@@ -67,41 +65,47 @@ private IRol rolI=null;
 
     @Override
     public IMenu getIMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         if(menuI == null)
+    {
+         menuI =new MYSQLMenu(connection);
+    }
+        return menuI;
     }
 
     @Override
     public IPedido getIPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(pedidoI == null){
+            pedidoI = new MYSQLPedido(connection);
+        }
+        return pedidoI;
     }
 
     @Override
     public IBoleta getIBoleta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      if(boletaI == null)
+    {
+      //  boletaI = new MYSQLBoleta(connection);
+    }
+    return boletaI;
     }
 
-    @Override
-    public ITotal_Pedido getITotal_pedido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public IDetalle_Boleta_Menu getIDetalle_boleta_menu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-  
-   
 
     @Override
     public IDetalle_Pedido getIDetalle_pedido() {
-   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(detallePedidoI == null)
+    {
+    //    detallePedidoI =new MYSQLDetallePedido(connection);
+    }
+    return detallePedidoI;
     }
 
     @Override
     public IDetalle_Usuario getIDetalle_usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     if(detalleUsuarioI == null)
+    {
+      //  detalleUsuarioI =new MYSQLDetalleUsuario(connection);
+    }
+    return detalleUsuarioI;
     }
 
     @Override
@@ -120,6 +124,24 @@ private IRol rolI=null;
         rolI =new MYSQLRol(connection);
     }
     return rolI;
+    }
+
+    @Override
+    public IAdelanto getIAdelanto() {
+       if(adelantoI == null)
+    {
+        adelantoI =new MYSQLAdelanto(connection);
+    }
+    return adelantoI;   
+    }
+
+    @Override
+    public IConsumo getIConsumo() {
+        if(consumoI == null)
+    {
+      //  consumoI =new MYSQLConsumo(connection);
+    }
+    return consumoI;  
     }
     
     

@@ -35,6 +35,7 @@ public class FrmRol_Pa extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panel_bg_frm = new javax.swing.JPanel();
         panel_detalle_rol = new pkg_Formulario.Menu.subMenu.Empleado.Rol.PanelDetalleRol();
@@ -49,6 +50,17 @@ public class FrmRol_Pa extends javax.swing.JPanel {
         btn_Guardar = new javax.swing.JButton();
         btn_Editar = new javax.swing.JButton();
         btn_Borrar = new javax.swing.JButton();
+
+        setLayout(new java.awt.BorderLayout());
+
+        panel_bg_frm.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = -9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 0, 0);
+        panel_bg_frm.add(panel_detalle_rol, gridBagConstraints);
 
         tbl_Rol.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +92,16 @@ public class FrmRol_Pa extends javax.swing.JPanel {
                 .addGap(240, 240, 240))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipady = -226;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 10, 0, 0);
+        panel_bg_frm.add(panel_table, gridBagConstraints);
+
         panel_title.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
@@ -97,6 +119,16 @@ public class FrmRol_Pa extends javax.swing.JPanel {
             panel_titleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 371;
+        gridBagConstraints.ipady = 29;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 10, 0, 6);
+        panel_bg_frm.add(panel_title, gridBagConstraints);
 
         btn_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/crud/crud_tamaño/cancel.png"))); // NOI18N
         btn_Cancelar.setText("Cancelar");
@@ -192,50 +224,16 @@ public class FrmRol_Pa extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout panel_bg_frmLayout = new javax.swing.GroupLayout(panel_bg_frm);
-        panel_bg_frm.setLayout(panel_bg_frmLayout);
-        panel_bg_frmLayout.setHorizontalGroup(
-            panel_bg_frmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_bg_frmLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(panel_bg_frmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panel_bg_frmLayout.createSequentialGroup()
-                        .addGroup(panel_bg_frmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panel_detalle_rol, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel_table, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panel_bg_frmLayout.createSequentialGroup()
-                                .addGap(360, 360, 360)
-                                .addComponent(panel_crud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        panel_bg_frmLayout.setVerticalGroup(
-            panel_bg_frmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_bg_frmLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(panel_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addGroup(panel_bg_frmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_detalle_rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_bg_frmLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(panel_table, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_bg_frmLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(panel_crud, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = -10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(91, 6, 0, 6);
+        panel_bg_frm.add(panel_crud, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_bg_frm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_bg_frm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        add(panel_bg_frm, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
@@ -281,7 +279,7 @@ public class FrmRol_Pa extends javax.swing.JPanel {
             activarBotonesCRUD(false);
             activarBotonesGuardar(false);
         } catch (IException ex) {
-            Utilidades.Mensaje("ERROR", "EMPLEADO SAVE ".concat(ex.toString()), 0);
+            Utilidades.Mensaje("ERROR", "ROL SAVE ".concat(ex.toString()), 0);
         }
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
@@ -292,7 +290,7 @@ public class FrmRol_Pa extends javax.swing.JPanel {
             panel_detalle_rol.setRol(getRolSelection());
             panel_detalle_rol.DataLoad();
         } catch (IException ex) {
-            Utilidades.Mensaje("ERROR", "EMPLEADO EDIT ".concat(ex.toString()), 0);
+            Utilidades.Mensaje("ERROR", "ROL EDIT ".concat(ex.toString()), 0);
         }
     }//GEN-LAST:event_btn_EditarActionPerformed
 
@@ -309,7 +307,7 @@ public class FrmRol_Pa extends javax.swing.JPanel {
                 activarBotonesGuardar(false);
 
             } catch (IException ex) {
-                Utilidades.Mensaje("ERROR", "CLIENTE CLEAR ".concat(ex.toString()), 0);
+                Utilidades.Mensaje("ERROR", "ROL CLEAR ".concat(ex.toString()), 0);
             }
         }
     }//GEN-LAST:event_btn_BorrarActionPerformed

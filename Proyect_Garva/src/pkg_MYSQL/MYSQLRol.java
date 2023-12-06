@@ -31,9 +31,7 @@ public class MYSQLRol implements IRol {
    
     @Override
     public void Insertar(Rol rol) throws IException {
-        CallableStatement preparacion_insert=null;
-    ResultSet result_clave=null;
-    
+    CallableStatement preparacion_insert=null;
     try
     {
          preparacion_insert=connection.prepareCall(INSERT);
@@ -54,7 +52,6 @@ public class MYSQLRol implements IRol {
         
     }finally
     {
-        Utilidades.cerrarResul(result_clave, "INSERT ROL");
         Utilidades.cerrarCall(preparacion_insert, "INSERT ROL");
     }  
     
@@ -62,8 +59,7 @@ public class MYSQLRol implements IRol {
 
     @Override
     public void Actualizar(Rol rol) throws IException {
-         CallableStatement preparacion_insert=null;
-    ResultSet result_clave=null;
+    CallableStatement preparacion_insert=null;
     
     try
     {
@@ -85,7 +81,6 @@ public class MYSQLRol implements IRol {
         
     }finally
     {
-        Utilidades.cerrarResul(result_clave, "UPDATE ROL");
         Utilidades.cerrarCall(preparacion_insert, "UPDATE ROL");
     }  
     }
@@ -111,7 +106,6 @@ public class MYSQLRol implements IRol {
     }finally
     {
         Utilidades.cerrarCall(preparacion_delete, "DELETE ROL");
-      //  Utilidades.cerrarConnec(connection,"CLIENTE DELETE");
     }
     }
 
@@ -135,12 +129,12 @@ public class MYSQLRol implements IRol {
         } 
          catch (SQLException ex) 
             {
-                 Utilidades.manejarError("GETALL CLIENTE", ex,"ERROR",0);
+                 Utilidades.manejarError("GETALL ROL", ex,"ERROR",0);
             }
         finally
         {
-                Utilidades.cerrarResul(resultado_data, "GETALL CLIENTE");
-                Utilidades.cerrarCall(preparacion_select, "GETALL CLIENTE");
+                Utilidades.cerrarResul(resultado_data, "GETALL ROL");
+                Utilidades.cerrarCall(preparacion_select, "GETALL ROL");
         }
         return rol_list;
     }
@@ -164,21 +158,20 @@ public class MYSQLRol implements IRol {
             
         }catch (SQLException ex) 
             {
-                Utilidades.manejarError("RESULTSET GETONE DISTRITO ", ex,"MENSAJE",1);
+                Utilidades.manejarError("RESULTSET GETONE ROL ", ex,"MENSAJE",1);
             }
         finally
         {
            
-            Utilidades.cerrarResul(resultado_data, "GETONE DISTRITO");
-            Utilidades.cerrarCall(preparacion_where, "GETONE DISTRITO");
-        //    Utilidades.cerrarConnec(connection,"GETONE CLIENTE");
+            Utilidades.cerrarResul(resultado_data, "GETONE ROL");
+            Utilidades.cerrarCall(preparacion_where, "GETONE ROL");
         }
         return rol_buscado;
     }
     
     @Override
     public String newCodigo() throws IException {
-         String cod = "R001";
+        String cod = "R001";
 	CallableStatement prepare_new_code=null;
         ResultSet result_data=null;
 		try{
@@ -195,7 +188,6 @@ public class MYSQLRol implements IRol {
 		}finally {
 		    Utilidades.cerrarResul(result_data, "NEWCODE ROL");
                  Utilidades.cerrarCall(prepare_new_code, "NEWCODE ROL");
-              //      Utilidades.cerrarConnec(connection,"GETONE CLIENTE");
 		}
 		return cod;
     }
@@ -207,8 +199,8 @@ public class MYSQLRol implements IRol {
           String ruta = resultado_data.getString("ruta_image");
           
           
-          Rol distrito=new Rol(id,nombre,ruta);
+          Rol rol=new Rol(id,nombre,ruta);
                     
-          return distrito;
+          return rol;
     }
 }

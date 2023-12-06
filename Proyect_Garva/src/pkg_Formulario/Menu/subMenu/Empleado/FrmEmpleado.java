@@ -209,7 +209,7 @@ public class FrmEmpleado extends javax.swing.JPanel {
             .addGroup(panel_data_empleadoLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(panel_detalle_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -219,7 +219,7 @@ public class FrmEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = -913;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 15, 0, 0);
         panel_bg.add(panel_data_empleado, gridBagConstraints);
 
         panel_busqueda.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.black));
@@ -346,20 +346,20 @@ public class FrmEmpleado extends javax.swing.JPanel {
         panel_busqueda.setLayout(panel_busquedaLayout);
         panel_busquedaLayout.setHorizontalGroup(
             panel_busquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panel_busquedaLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 927, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panel_busquedaLayout.setVerticalGroup(
             panel_busquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_busquedaLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
         panel_bg.add(panel_busqueda, gridBagConstraints);
 
         panel_titulo.setBackground(new java.awt.Color(153, 153, 153));
@@ -377,7 +377,9 @@ public class FrmEmpleado extends javax.swing.JPanel {
         );
         panel_tituloLayout.setVerticalGroup(
             panel_tituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGroup(panel_tituloLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -385,7 +387,7 @@ public class FrmEmpleado extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = -6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 8, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 0);
         panel_bg.add(panel_titulo, gridBagConstraints);
 
         panel_tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.black));
@@ -407,28 +409,27 @@ public class FrmEmpleado extends javax.swing.JPanel {
         panel_tabla.setLayout(panel_tablaLayout);
         panel_tablaLayout.setHorizontalGroup(
             panel_tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_tablaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panel_tablaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_tablaLayout.setVerticalGroup(
             panel_tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_tablaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipady = 119;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 8, 0, 6);
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 38, 0);
         panel_bg.add(panel_tabla, gridBagConstraints);
 
-        add(panel_bg, java.awt.BorderLayout.CENTER);
+        add(panel_bg, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed

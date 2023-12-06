@@ -1,7 +1,7 @@
 
 package pkg_Formulario.Menu.subMenu.Cliente;
 
-import pkg_Modelo.Entidades.Pago_Guardado;
+import pkg_Modelo.Entidades.Adelanto;
 
 public class DetalleAdelantoPanel extends javax.swing.JPanel {
 
@@ -9,14 +9,14 @@ public class DetalleAdelantoPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    private Pago_Guardado pago_guardado;
+    private Adelanto pago_guardado;
     private boolean Editable;
 
-    public Pago_Guardado getPago_guardado() {
+    public Adelanto getPago_guardado() {
         return pago_guardado;
     }
 
-    public void setPago_guardado(Pago_Guardado pago_guardado) {
+    public void setPago_guardado(Adelanto pago_guardado) {
         this.pago_guardado = pago_guardado;
     }
 
@@ -42,7 +42,7 @@ public class DetalleAdelantoPanel extends javax.swing.JPanel {
    {
        if(pago_guardado==null)
        {
-           pago_guardado=new Pago_Guardado();
+           pago_guardado=new Adelanto();
        }
         pago_guardado.setMonto(Double.parseDouble(txt_Monto.getText()));
    }

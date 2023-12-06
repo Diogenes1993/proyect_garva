@@ -166,6 +166,7 @@ private final String NEWCOD="{ CALL SP_BUSCAR_NUEVO_CODIGO_E()}";
                     
           return empleado;
     }
+     
     @Override
     public List<Empleado> ObtenerTodos() throws IException{
         CallableStatement preparacion_where = null;
@@ -184,14 +185,14 @@ private final String NEWCOD="{ CALL SP_BUSCAR_NUEVO_CODIGO_E()}";
             
         }catch (SQLException ex) 
             {
-                Utilidades.manejarError("RESULTSET GETONE EMPLEADO ", ex,"MENSAJE",1);
+                Utilidades.manejarError("RESULTSET GETALL EMPLEADO ", ex,"MENSAJE",1);
             }
         finally
         {
            
-            Utilidades.cerrarResul(resultado_data, "GETONE EMPLEADO");
-            Utilidades.cerrarCall(preparacion_where, "GETONE EMPLEADO");
-        //    Utilidades.cerrarConnec(connection,"GETONE CLIENTE");
+            Utilidades.cerrarResul(resultado_data, "GETALL EMPLEADO");
+            Utilidades.cerrarCall(preparacion_where, "GETALL EMPLEADO");
+        //    Utilidades.cerrarConnec(connection,"GETONE ");
         }
         return empleado_data;
     }

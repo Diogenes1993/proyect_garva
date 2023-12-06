@@ -294,7 +294,7 @@ public class frmRol extends javax.swing.JFrame {
             activarBotonesCRUD(false);
             activarBotonesGuardar(false);
         } catch (IException ex) {
-            Utilidades.Mensaje("ERROR", "EMPLEADO SAVE ".concat(ex.toString()), 0);
+            Utilidades.Mensaje("ERROR", "ROL SAVE ".concat(ex.toString()), 0);
         }
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
@@ -305,7 +305,7 @@ public class frmRol extends javax.swing.JFrame {
             panel_detalle_rol.setRol(getRolSelection());
             panel_detalle_rol.DataLoad();
         } catch (IException ex) {
-            Utilidades.Mensaje("ERROR", "EMPLEADO EDIT ".concat(ex.toString()), 0);
+            Utilidades.Mensaje("ERROR", "ROL EDIT ".concat(ex.toString()), 0);
        }
     }//GEN-LAST:event_btn_EditarActionPerformed
 
@@ -322,7 +322,7 @@ public class frmRol extends javax.swing.JFrame {
                 activarBotonesGuardar(false);
 
             } catch (IException ex) {
-                Utilidades.Mensaje("ERROR", "CLIENTE CLEAR ".concat(ex.toString()), 0);
+                Utilidades.Mensaje("ERROR", "ROL CLEAR ".concat(ex.toString()), 0);
             }
         }
     }//GEN-LAST:event_btn_BorrarActionPerformed

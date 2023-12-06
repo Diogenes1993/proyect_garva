@@ -4,26 +4,24 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Pedido {
-   private Long id=null;
+   private String id;
    private Date fecha;
-   private int cantidad;
-   private long id_menu;
+   private String estado;
 
-    public Pedido(Date fecha) {
+    public Pedido(String id, Date fecha, String estado) {
+        this.id = id;
         this.fecha = fecha;
+        this.estado = estado;
     }
 
-    public Pedido(Date fecha, int cantidad, long id_menu) {
-        this.fecha = fecha;
-        this.cantidad = cantidad;
-        this.id_menu = id_menu;
+    public Pedido() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -35,55 +33,12 @@ public class Pedido {
         this.fecha = fecha;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setEstado(String id_estado) {
+        this.estado = id_estado;
     }
-
-    public long getId_menu() {
-        return id_menu;
-    }
-
-    public void setId_menu(long id_menu) {
-        this.id_menu = id_menu;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.fecha);
-        hash = 17 * hash + this.cantidad;
-        hash = 17 * hash + (int) (this.id_menu ^ (this.id_menu >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pedido other = (Pedido) obj;
-        if (this.cantidad != other.cantidad) {
-            return false;
-        }
-        if (this.id_menu != other.id_menu) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return Objects.equals(this.fecha, other.fecha);
-    }
-   
-   
+           
 }

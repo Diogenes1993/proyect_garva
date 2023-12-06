@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_Modelo.Entidades.Cliente;
@@ -19,7 +20,7 @@ private ClienteTableModel model_table;
     public frmCliente_(IMaster masterI) throws IException {
         initComponents();
         this.model_table = new ClienteTableModel(masterI.getICliente());
-        tbl_Cliente1.setModel(model_table);
+        tbl_Cliente.setModel(model_table);
         this.masterI = masterI;
         model_table.getObtenerTodos();
         panel_detalle_Cliente.setEditable(false);
@@ -30,11 +31,13 @@ private ClienteTableModel model_table;
         activarBotonesGuardar(false);
         
         
-         this.tbl_Cliente1.getSelectionModel().addListSelectionListener(e ->
+         this.tbl_Cliente.getSelectionModel().addListSelectionListener(e ->
         {
-            activarBotonesCRUD(tbl_Cliente1.getSelectedRow()!=-1);
+            activarBotonesCRUD(tbl_Cliente.getSelectedRow()!=-1);
         });
-         
+         valor=1;
+         cantidad=8;
+         rb_id.setSelected(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -42,12 +45,13 @@ private ClienteTableModel model_table;
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panel_bg = new javax.swing.JPanel();
         panel_title = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panel_table = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_Cliente1 = new javax.swing.JTable();
+        tbl_Cliente = new javax.swing.JTable();
         panel_registro_cliente = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
@@ -64,11 +68,11 @@ private ClienteTableModel model_table;
         btn_excel = new javax.swing.JButton();
         btn_txt = new javax.swing.JButton();
         txt_Buscado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_Buscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rb_id = new javax.swing.JRadioButton();
+        rb_NomApe = new javax.swing.JRadioButton();
+        rb_Distrito = new javax.swing.JRadioButton();
 
         setMinimumSize(new java.awt.Dimension(135, 61));
         setPreferredSize(new java.awt.Dimension(874, 694));
@@ -82,11 +86,11 @@ private ClienteTableModel model_table;
 
         panel_title.setBackground(new java.awt.Color(153, 153, 153));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("CLIENTE");
         jLabel1.setBackground(new java.awt.Color(0, 0, 102));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CLIENTE");
 
         javax.swing.GroupLayout panel_titleLayout = new javax.swing.GroupLayout(panel_title);
         panel_title.setLayout(panel_titleLayout);
@@ -113,8 +117,7 @@ private ClienteTableModel model_table;
         panel_table.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.black));
         panel_table.setPreferredSize(new java.awt.Dimension(480, 281));
 
-        tbl_Cliente1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        tbl_Cliente1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,8 +128,9 @@ private ClienteTableModel model_table;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_Cliente1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane2.setViewportView(tbl_Cliente1);
+        tbl_Cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbl_Cliente.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jScrollPane2.setViewportView(tbl_Cliente);
 
         javax.swing.GroupLayout panel_tableLayout = new javax.swing.GroupLayout(panel_table);
         panel_table.setLayout(panel_tableLayout);
@@ -326,15 +330,44 @@ private ClienteTableModel model_table;
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/buscar.png"))); // NOI18N
+        txt_Buscado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_BuscadoKeyTyped(evt);
+            }
+        });
+
+        btn_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/buscar.png"))); // NOI18N
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Buscar:");
 
-        jRadioButton1.setText("Codigo");
+        buttonGroup1.add(rb_id);
+        rb_id.setText("Codigo");
+        rb_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_idActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Nombre/Apellido");
+        buttonGroup1.add(rb_NomApe);
+        rb_NomApe.setText("Nombre/Apellido");
+        rb_NomApe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_NomApeActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setText("Distritro");
+        buttonGroup1.add(rb_Distrito);
+        rb_Distrito.setText("Distritro");
+        rb_Distrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_DistritoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -345,11 +378,11 @@ private ClienteTableModel model_table;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jRadioButton1)
+                        .addComponent(rb_id)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2)
+                        .addComponent(rb_NomApe)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton3)
+                        .addComponent(rb_Distrito)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                         .addComponent(btn_pdf)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,7 +395,7 @@ private ClienteTableModel model_table;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_Buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(207, 207, 207)
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -382,13 +415,13 @@ private ClienteTableModel model_table;
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2)
                         .addComponent(txt_Buscado, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(rb_id)
+                    .addComponent(rb_NomApe)
+                    .addComponent(rb_Distrito))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -418,7 +451,7 @@ private ClienteTableModel model_table;
         panel_detalle_Cliente.DataLoad();
         activarBotonesCRUD(false);
         activarBotonesGuardar(false);
-        tbl_Cliente1.clearSelection();
+        tbl_Cliente.clearSelection();
         panel_detalle_Cliente.setEditable(false);
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
@@ -452,7 +485,7 @@ private ClienteTableModel model_table;
                 Cliente cliente_borra = getClienteSelection();
                 masterI.getICliente().Eliminar(cliente_borra);
                 ObtenerTodos();
-                tbl_Cliente1.clearSelection();
+                tbl_Cliente.clearSelection();
 
                 activarBotonesCRUD(false);
                 activarBotonesGuardar(false);
@@ -464,7 +497,6 @@ private ClienteTableModel model_table;
     }//GEN-LAST:event_btn_BorrarActionPerformed
 
     private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
-
         try {
             activarBotonesGuardar(true);
             panel_detalle_Cliente.setEditable(true);
@@ -499,11 +531,71 @@ private ClienteTableModel model_table;
     private void btn_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_pdfActionPerformed
- 
-   
+
+    private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+ try {
+        String textoBuscado = txt_Buscado.getText();
+        ClienteTableModel tablita=new ClienteTableModel(masterI.getICliente());
+           switch (valor) {
+               case 1:
+                   tablita.getOntenerIds(textoBuscado);
+                   break;
+               case 2:
+                   tablita.getObtenerNombreApellido(textoBuscado);
+                   break;
+               case 3:
+                   tablita.getObtenerDistrito(textoBuscado);
+                   break;
+               default:
+                   break;
+           }
+            tbl_Cliente.setModel(tablita);
+        
+    } catch (IException ex) {
+        Logger.getLogger(frmCliente_.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    }//GEN-LAST:event_btn_BuscarActionPerformed
+
+    private void rb_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_idActionPerformed
+    valor=1;
+    cantidad=8;
+
+    }//GEN-LAST:event_rb_idActionPerformed
+
+    private void rb_NomApeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_NomApeActionPerformed
+    valor=2;
+    cantidad = 100;
+    }//GEN-LAST:event_rb_NomApeActionPerformed
+
+    private void rb_DistritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_DistritoActionPerformed
+    valor=3;
+    cantidad = 20;
+    }//GEN-LAST:event_rb_DistritoActionPerformed
+
+    private void txt_BuscadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_BuscadoKeyTyped
+      switch (valor) {
+               case 1:
+                    longitud(evt,txt_Buscado);
+                   break;
+               case 2:
+                   validated_de_txt(evt);
+                    longitud(evt,txt_Buscado);
+                   break;
+               case 3:
+                    validated_de_txt(evt);
+                    longitud(evt,txt_Buscado);
+                   break;
+               default:
+                   break;
+           }
+       
+    }//GEN-LAST:event_txt_BuscadoKeyTyped
+  private int valor;
+  private int cantidad;
       
     private Cliente getClienteSelection() throws IException{
-        String id= tbl_Cliente1.getValueAt(tbl_Cliente1.getSelectedRow(),0).toString();
+        String id= tbl_Cliente.getValueAt(tbl_Cliente.getSelectedRow(),0).toString();
         return masterI.getICliente().ObtenerOne(id);
     }
     
@@ -523,10 +615,32 @@ private ClienteTableModel model_table;
       model_table.getObtenerTodos();
       model_table.fireTableDataChanged();
     }
-      
+     private void validated_de_txt(java.awt.event.KeyEvent evt){
+         char c= evt.getKeyChar();
+         if(!((c>= 'a' && c<='z')|| (c>='A' && c<='Z')||c==' ')){
+         evt.consume();
+         }
+         
+         if(Character.isLowerCase(c)){
+         String cad =(""+c).toUpperCase();
+         c = cad.charAt(0);
+         evt.setKeyChar(c);
+         }
+       
+         
+         }
+     private void longitud(java.awt.event.KeyEvent evt,JTextField textbox){
+        char c= evt.getKeyChar();
+       
+         String cantidad_de_caracteres = textbox.getText();
+         if(cantidad_de_caracteres.length()>=cantidad && c!='\b'){
+         evt.consume();
+         }
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Borrar;
+    private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Cancelar;
     private javax.swing.JButton btn_Editar;
     private javax.swing.JButton btn_Guardar;
@@ -534,15 +648,12 @@ private ClienteTableModel model_table;
     private javax.swing.JButton btn_excel;
     private javax.swing.JButton btn_pdf;
     private javax.swing.JButton btn_txt;
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JPanel panel_bg;
@@ -551,7 +662,10 @@ private ClienteTableModel model_table;
     private javax.swing.JPanel panel_registro_cliente;
     private javax.swing.JPanel panel_table;
     private javax.swing.JPanel panel_title;
-    private javax.swing.JTable tbl_Cliente1;
+    private javax.swing.JRadioButton rb_Distrito;
+    private javax.swing.JRadioButton rb_NomApe;
+    private javax.swing.JRadioButton rb_id;
+    private javax.swing.JTable tbl_Cliente;
     private javax.swing.JTextField txt_Buscado;
     // End of variables declaration//GEN-END:variables
 }

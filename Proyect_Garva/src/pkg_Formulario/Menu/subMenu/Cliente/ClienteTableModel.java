@@ -11,7 +11,7 @@ public class ClienteTableModel  extends AbstractTableModel{
 
     private ICliente icliente;
     private List<Cliente> datos_cliente = new ArrayList<>();
-    //private Cliente one_data;
+    
     public ClienteTableModel(ICliente icliente) {
         this.icliente=icliente;
     }
@@ -23,6 +23,9 @@ public class ClienteTableModel  extends AbstractTableModel{
     
     public void getObtenerOne(String id)  throws IException{
         datos_cliente =  (List<Cliente>) icliente.ObtenerOne(id);
+    }
+    public void getOntenerIds(String id) throws IException{
+        datos_cliente = icliente.BuscarIds(id);
     }
     
     public void getObtenerNombreApellido(String nomape) throws IException{

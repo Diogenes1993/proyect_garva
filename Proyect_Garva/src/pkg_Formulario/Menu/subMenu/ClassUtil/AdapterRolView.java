@@ -16,7 +16,7 @@ public class AdapterRolView {
         return rol;
     }
 
-    public void setDistrito(Rol rol) {
+    public void setMenu(Rol rol) {
         this.rol = rol;
     }
 

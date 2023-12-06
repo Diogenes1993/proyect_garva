@@ -60,7 +60,6 @@ public class MYSQLCliente implements ICliente {
     }finally
     {
                   Utilidades.cerrarCall(preparacion_insert,"CLIENTE INSERT");
-               //   Utilidades.cerrarConnec(connection,"CLIENTE INSERT");
     }
     }
     
@@ -93,7 +92,6 @@ public class MYSQLCliente implements ICliente {
     }finally
     {
         Utilidades.cerrarCall(preparacion_update,"CLIENTE UPDATE");
-       // Utilidades.cerrarConnec(connection,"CLIENTE UPDATE");
     }
     }
 
@@ -118,7 +116,6 @@ public class MYSQLCliente implements ICliente {
     }finally
     {
         Utilidades.cerrarCall(preparacion_delete, "DELETE CLIENTE");
-      //  Utilidades.cerrarConnec(connection,"CLIENTE DELETE");
     }
     }
 
@@ -162,7 +159,6 @@ public class MYSQLCliente implements ICliente {
         {
                 Utilidades.cerrarResul(resultado_data, "GETALL CLIENTE");
                 Utilidades.cerrarCall(preparacion_select, "GETALL CLIENTE");
-             //   Utilidades.cerrarConnec(connection,"GETALL UPDATE");
         }
         return cliente_list;
     }
@@ -194,7 +190,6 @@ public class MYSQLCliente implements ICliente {
            
             Utilidades.cerrarResul(resultado_data, "GETONE CLIENTE");
             Utilidades.cerrarCall(preparacion_where, "GETONE CLIENTE");
-        //    Utilidades.cerrarConnec(connection,"GETONE CLIENTE");
         }
         return cliente_buscado;
     }
@@ -218,7 +213,6 @@ public class MYSQLCliente implements ICliente {
 		}finally {
 		    Utilidades.cerrarResul(result_data, "GETONE CLIENTE");
                  Utilidades.cerrarCall(prepare_new_code, "GETONE CLIENTE");
-              //      Utilidades.cerrarConnec(connection,"GETONE CLIENTE");
 		}
 		return codCliente;
     }
@@ -249,7 +243,6 @@ public class MYSQLCliente implements ICliente {
         {
                 Utilidades.cerrarResul(resultado_data, "GETIDS CLIENTE");
                 Utilidades.cerrarCall(preparacion_select_id, "GETIDS CLIENTE");
-    //            Utilidades.cerrarConnec(connection,"GETIDS UPDATE");
         }
         return cliente_list_ids;
     }
@@ -280,7 +273,6 @@ public class MYSQLCliente implements ICliente {
         {
                 Utilidades.cerrarResul(resultado_data, "GETNOMAPE CLIENTE");
                 Utilidades.cerrarCall(preparacion_select_nomape, "GETNOMAPE CLIENTE");
-          //      Utilidades.cerrarConnec(connection,"GETNOMAPE UPDATE");
         }
         return cliente_list_ids;
         
@@ -312,7 +304,6 @@ public class MYSQLCliente implements ICliente {
         {
                 Utilidades.cerrarResul(resultado_data, "GETDISTRITO CLIENTE");
                 Utilidades.cerrarCall(preparacion_select_distrito, "GETDISTRITO CLIENTE");
-      //          Utilidades.cerrarConnec(connection,"GETDISTRITO UPDATE");
         }
         return cliente_list_distri;
       }

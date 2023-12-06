@@ -12,7 +12,7 @@ import pkg_Formulario.Menu.subMenu.Cliente.frmCliente_;
 import pkg_Formulario.Menu.subMenu.Empleado.FrmEmpleado;
 import pkg_Formulario.Menu.subMenu.Empleado.Rol.FrmRol_Pa;
 import pkg_Formulario.Menu.subMenu.Empleado.Rol.frmRol;
-import pkg_Formulario.Menu.subMenu.Pedido.frmPedido;
+import pkg_Formulario.Menu.subMenu.Pedido.frmDetallePedido;
 import pkg_Formulario.Menu.subMenu.Principal.frmPrincipal_;
 import pkg_Formulario.frm_Login;
 import pkg_Hilos.HReloj;
