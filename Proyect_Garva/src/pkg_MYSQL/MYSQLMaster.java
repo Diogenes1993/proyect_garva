@@ -94,7 +94,7 @@ private  IDetalle_Pedido detallePedidoI=null;
     public IDetalle_Pedido getIDetalle_pedido() {
         if(detallePedidoI == null)
     {
-    //    detallePedidoI =new MYSQLDetallePedido(connection);
+    detallePedidoI =new MYSQLDetallePedido(connection);
     }
     return detallePedidoI;
     }

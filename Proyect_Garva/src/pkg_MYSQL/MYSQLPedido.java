@@ -179,8 +179,11 @@ public class MYSQLPedido implements IPedido{
 			result_data = prepare_new_code.executeQuery();
 			
 			if(result_data.next()){
+                                                                             if(result_data.getString(1)!=null){
 				DecimalFormat formato_decimal = new DecimalFormat("000000");
+                                                                            
 				cod = "PE" + formato_decimal.format(Integer.parseInt(result_data.getString(1)) + 1); 
+                                                                             }
 			}
 			
 		}catch (SQLException e) {
@@ -188,6 +191,31 @@ public class MYSQLPedido implements IPedido{
 		}finally {
 		    Utilidades.cerrarResul(result_data, "NEWCODE PEDIDO");
                  Utilidades.cerrarCall(prepare_new_code, "NEWCODE PEDIDO");
+		}
+		return cod;
+    }
+     @Override
+    public String Cod() throws IException {
+        String cod = "PE000001";
+	CallableStatement prepare_new_code=null;
+        ResultSet result_data=null;
+		try{
+			prepare_new_code = connection.prepareCall(NEWCOD);
+			result_data = prepare_new_code.executeQuery();
+			
+			if(result_data.next()){
+                                                                             if(result_data.getString(1)!=null){
+				DecimalFormat formato_decimal = new DecimalFormat("000000");
+                                                                            
+				cod = "PE" + formato_decimal.format(Integer.parseInt(result_data.getString(1))); 
+                                                                             }
+			}
+			
+		}catch (SQLException e) {
+			Utilidades.manejarError("RESULTSET NEWCODE ", e,"MENSAJE",1);
+		}finally {
+		    Utilidades.cerrarResul(result_data, "COD PEDIDO");
+                 Utilidades.cerrarCall(prepare_new_code, "COD PEDIDO");
 		}
 		return cod;
     }

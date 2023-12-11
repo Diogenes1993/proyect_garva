@@ -9,6 +9,7 @@ import pkg_Formulario.Menu.subMenu.ClassUtil.DistritoComboModel;
 import pkg_Formulario.Menu.subMenu.ClassUtil.RolComboModel;
 import pkg_MYSQL.Interfaces.IDistrito;
 import pkg_MYSQL.Interfaces.IException;
+import pkg_MYSQL.Interfaces.IRol;
 import pkg_Modelo.Entidades.Distrito;
 import pkg_Modelo.Entidades.Empleado;
 import pkg_Modelo.Entidades.Rol;
@@ -186,9 +187,11 @@ public class EmpleadoDataPanel extends javax.swing.JPanel {
         combo_distrito=new DistritoComboModel(null);
         combo_rol=new RolComboModel(null);
         }
-    public EmpleadoDataPanel(IDistrito Idistrito) {
+    public EmpleadoDataPanel(IDistrito Idistrito,IRol Irol) {
         initComponents();
         combo_distrito=new DistritoComboModel(Idistrito);
+        combo_rol=new RolComboModel(Irol);
+        cm_Distrito.setModel(combo_distrito);
         cm_Cargo.setModel(combo_rol);
         }
     

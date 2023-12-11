@@ -1,8 +1,11 @@
 package pkg_Formulario.Menu.subMenu.Menu;
 
+import java.awt.Image;
 import java.io.File;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import pkg_Modelo.Entidades.Menu;
 import pkg_utilidades.Calculos;
 
@@ -50,9 +53,10 @@ private boolean editable;
             txt_Nombre.setText(menu.getNombre());
             txt_Detalle.setText(menu.getDetalle());
             txt_Stock.setText(String.valueOf(menu.getStock()));
-            txt_Precio.setText(String.valueOf((char) menu.getPrecio()));
+            txt_Precio.setText(String.valueOf(menu.getPrecio()));
             lblFechaMenu.setText("Fecha Menu: "+menu.getFecha().toString());
-            lbl_Image.setIcon(new ImageIcon(menu.getRuta()));
+           calculo.SetImageLabel(lbl_Image, menu.getRuta());
+           repaint();
             }
             else{
                 txt_Cod.setText("-----------");
@@ -253,7 +257,7 @@ private boolean editable;
     }//GEN-LAST:event_btn_cargar_imageActionPerformed
 private Calculos calculo=new Calculos();
      
-   public void seleccionarImagen() {
+   private void seleccionarImagen() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -261,11 +265,16 @@ private Calculos calculo=new Calculos();
 
         if (resultado == JFileChooser.APPROVE_OPTION) {
             File archivoSeleccionado = fileChooser.getSelectedFile();
-            ruta=calculo.copiarImagen(archivoSeleccionado,"src/pkg_utilidades/images/icons/menu/");
+          
+                ruta=calculo.copiarImagen(archivoSeleccionado,"src/pkg_utilidades/images/icons/menu/");
+            
             lbl_Image.setIcon(new ImageIcon(ruta));
+            calculo.SetImageLabel(lbl_Image,ruta);
+             this.repaint();
         }
-    }
+       }
 
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cargar_image;
     private javax.swing.JLabel jLabel1;

@@ -200,19 +200,19 @@ ImagenFrm fondo=new ImagenFrm();
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     private void ValidarUser(String nomusuario,String pass)throws IException
     {
         if(!nomusuario.equals("")||!pass.equals(""))
         {
        Empleado empleado= masterI.getIEmpleado().getDataUsuario(nomusuario);
+        frm_Menu menu=new frm_Menu(masterI);
         if(empleado!=null && empleado.getContra().equals(pass))
         {
             aceptado=true;
-         
-             frm_Menu menu=new frm_Menu(masterI);
-             menu.setVisible(true);
-             menu.setDatos(empleado.getUsuario(),empleado.getEmail(),empleado.getNombre(),empleado.getApellido(),empleado.getRol().getRol(),empleado.getRol().getRuta());
+           menu.setVisible(true);
+           menu.setDatos(empleado.getId(),empleado.getUsuario(),empleado.getEmail(),empleado.getNombre(),empleado.getApellido(),empleado.getRol().getRol(),empleado.getRol().getRuta());
+           menu.InitContent();
                 dispose();
              
         }

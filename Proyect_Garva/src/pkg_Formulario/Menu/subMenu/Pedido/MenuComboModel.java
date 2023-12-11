@@ -6,9 +6,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMenu;
-import pkg_MYSQL.Interfaces.IRol;
 import pkg_Modelo.Entidades.Menu;
-import pkg_Modelo.Entidades.Rol;
 
 public class MenuComboModel extends DefaultComboBoxModel<AdapterMenuView>{
     

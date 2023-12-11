@@ -456,7 +456,6 @@ private ClienteTableModel model_table;
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
-
         try {
             panel_detalle_Cliente.DataSave();
             Cliente cliente_existe = masterI.getICliente().ObtenerOne(panel_detalle_Cliente.getCod());
@@ -535,7 +534,7 @@ private ClienteTableModel model_table;
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
  try {
         String textoBuscado = txt_Buscado.getText();
-        ClienteTableModel tablita=new ClienteTableModel(masterI.getICliente());
+                ClienteTableModel tablita=new ClienteTableModel(masterI.getICliente());
            switch (valor) {
                case 1:
                    tablita.getOntenerIds(textoBuscado);
@@ -625,10 +624,9 @@ private ClienteTableModel model_table;
          String cad =(""+c).toUpperCase();
          c = cad.charAt(0);
          evt.setKeyChar(c);
+         }         
          }
-       
-         
-         }
+     
      private void longitud(java.awt.event.KeyEvent evt,JTextField textbox){
         char c= evt.getKeyChar();
        

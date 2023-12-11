@@ -21,6 +21,9 @@ public class MenuTableModel extends AbstractTableModel{
     public void getObtenerTodos() throws IException{
         datos_menu = menuI.ObtenerTodos();
     }
+     public void getObtenerIds(String id) throws IException{
+        datos_menu = menuI.getObtenerIds(id);
+    }
     
          
     

@@ -400,15 +400,18 @@ public class MYSQLMenu implements IMenu{
     @Override
     public String NewCod() throws IException {
          String cod = "ME000001";
-	CallableStatement prepare_new_code=null;
+        CallableStatement prepare_new_code=null;
         ResultSet result_data=null;
 		try{
 			prepare_new_code = connection.prepareCall(NEWCOD);
 			result_data = prepare_new_code.executeQuery();
 			
 			if(result_data.next()){
+                                                                              
 				DecimalFormat formato_decimal = new DecimalFormat("000000");
-				cod = "ME" + formato_decimal.format(Integer.parseInt(result_data.getString(1)) + 1); 
+                                                                              System.out.println(formato_decimal);
+                                                                              if(result_data.getString(1)!=null){
+				cod = "ME" + formato_decimal.format(Integer.parseInt(result_data.getString(1)) + 1); }
 			}
 			
 		}catch (SQLException e) {

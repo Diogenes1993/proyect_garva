@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_Modelo.Entidades.Menu;
-import pkg_Modelo.Entidades.Rol;
 import pkg_utilidades.Utilidades;
 
 
@@ -15,7 +14,6 @@ public class FrmMenu_Pa extends javax.swing.JPanel {
     private final MenuTableModel menu_model;
     
     public FrmMenu_Pa(IMaster masterI) throws IException {
-        initComponents();
          initComponents();
         menu_model =new MenuTableModel(masterI.getIMenu());
         tbl_Menu.setModel(menu_model);
@@ -248,7 +246,7 @@ public class FrmMenu_Pa extends javax.swing.JPanel {
             panel_detalle_menu.setEditable(true);
             panel_detalle_menu.setMenu(null);
             panel_detalle_menu.DataLoad();
-            panel_detalle_menu.setCod(masterI.getIRol().newCodigo());
+            panel_detalle_menu.setCod(masterI.getIMenu().NewCod());
             tbl_Menu.clearSelection();
             activarBotonesCRUD(false);
         } catch (IException ex) {
