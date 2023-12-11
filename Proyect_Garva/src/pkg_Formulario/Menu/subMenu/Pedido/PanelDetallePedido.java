@@ -1,8 +1,6 @@
 package pkg_Formulario.Menu.subMenu.Pedido;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SpinnerNumberModel;
 import pkg_MYSQL.Interfaces.ICliente;
@@ -114,9 +112,10 @@ private ClienteComboModel model_combo_cli;
               
         // MENU
         txt_Cod.setEnabled(false);
+        txtPrecio.setEditable(false);
         cm_Menu.setEnabled(editable);
         txt_empleado.setEnabled(false);
-        
+        sp_Cantidad.setEnabled(editable);
         //CLIENTE
         cm_Cliente.setEnabled(editable);
         btn_NuevoCli.setEnabled(editable);
@@ -128,7 +127,7 @@ private ClienteComboModel model_combo_cli;
         txt_Cod.setEnabled(false);
         cm_Menu.setEnabled(!editable);
         txt_empleado.setEnabled(false);
-        
+        sp_Cantidad.setEnabled(editable);
         //CLIENTE
         cm_Cliente.setEnabled(editable);
         btn_NuevoCli.setEnabled(editable);
@@ -163,17 +162,18 @@ private ClienteComboModel model_combo_cli;
                 txt_Cod.setText("-----------");
                 cm_Menu.setSelectedIndex(0);
                 cm_Cliente.setSelectedIndex(0);
-                lbl_Detalle.setText("--------");
+                lblFechaMenu.setText("--/--/--");
                 lbl_Stock.setText("-----");
-                lbl_Precio.setText("S/. 0,00");
+                lbl_Precio.setText("S/. 0.00");
                 lblFechaPedido.setText("");
                 lbl_Image.setIcon(new ImageIcon());
                 lbl_Apellido.setText("----------");
                 lblTelefono.setText("----------");
                 lblDistrito.setText("----------");
+                txtPrecio.setText("S/. 0.00");
             }
     }
-    private int canti;
+    private int canti=1;
     public void setCantidad(int cantidad){
     this.canti=cantidad;
     }
@@ -188,7 +188,6 @@ private ClienteComboModel model_combo_cli;
             if(clienteSeleccionado !=null)
             {
                 cm_Cliente.setSelectedItem(clienteSeleccionado);
-                System.out.println(cm_Cliente.getSelectedItem()+"------------------------");
                 lbl_Apellido.setText(clienteSeleccionado.getCliente().getApellido());
                 lblTelefono.setText(clienteSeleccionado.getCliente().getTelefono());
                 lblDistrito.setText(clienteSeleccionado.getCliente().getDistrito());
@@ -217,15 +216,15 @@ private ClienteComboModel model_combo_cli;
                 txt_Cod.setText("-----------");
                 cm_Menu.setSelectedIndex(0);
                 cm_Cliente.setSelectedIndex(0);
-                lbl_Detalle.setText("--------");
                 lbl_Stock.setText("-----");
-                lbl_Precio.setText("S/. 0,00");
+                lbl_Precio.setText("S/. 0.00");
                 lblFechaPedido.setText("");
                 lbl_Image.setIcon(new ImageIcon());
                 lbl_Apellido.setText("----------");
                 lblTelefono.setText("----------");
                 lblDistrito.setText("----------");
                 lblFechaMenu.setText("--/--/--");
+                txtPrecio.setText("S/. 0.00");
             }
     }
     
@@ -294,9 +293,7 @@ private ClienteComboModel model_combo_cli;
        model_combo_cli = new ClienteComboModel(Icliente);
        cm_Cliente.setModel(model_combo_cli);
        cm_Menu.setModel(model_combo);
-         
-   
-        
+       sp_Cantidad.setValue(1);          
         }
 
 
@@ -544,6 +541,8 @@ private ClienteComboModel model_combo_cli;
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel4.setText("Cantidad:");
 
+        sp_Cantidad.setValue(1);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -622,12 +621,12 @@ private ClienteComboModel model_combo_cli;
                     .addGroup(panel_bgLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_bgLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(lblFechaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

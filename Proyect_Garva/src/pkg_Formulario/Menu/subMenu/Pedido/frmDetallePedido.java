@@ -36,6 +36,8 @@ public class frmDetallePedido extends javax.swing.JPanel {
    //pedido_model.getObtenerTable("PE000017");
        formatTable();
        BtnBuscar(false);
+       txt_total.setEditable(false);
+       txtTotal.setEditable(false);
        
     }
     
@@ -47,6 +49,7 @@ public class frmDetallePedido extends javax.swing.JPanel {
       private void BtnBuscar(boolean active){
       btn_Buscar.setEnabled(active);
       btn_Buscar_Men.setEnabled(active);
+      btn_Agregar.setEnabled(active);
       }
     
     private void formatTable() throws IException
@@ -83,13 +86,14 @@ public class frmDetallePedido extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         bg = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Detalle = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         txt_total = new javax.swing.JTextField();
         btnRealizarVenta = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -99,6 +103,10 @@ public class frmDetallePedido extends javax.swing.JPanel {
         btn_Nuevo = new javax.swing.JButton();
         btn_Cancelar = new javax.swing.JButton();
         panel_Detalle_Pedido = new pkg_Formulario.Menu.subMenu.Pedido.PanelDetallePedido();
+
+        setLayout(new java.awt.BorderLayout());
+
+        bg.setLayout(new java.awt.GridBagLayout());
 
         tbl_Detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +128,7 @@ public class frmDetallePedido extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jTextField1.setText("TOTAL:");
+        txtTotal.setText("TOTAL:");
 
         txt_total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -128,52 +136,57 @@ public class frmDetallePedido extends javax.swing.JPanel {
         btnRealizarVenta.setText("Realizar Venta");
         btnRealizarVenta.setIconTextGap(20);
 
-        jButton3.setText("Ver");
+        jButton3.setText("Ver Anterior");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(391, 391, 391)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnRealizarVenta))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jButton3)
+                .addGap(285, 285, 285)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnRealizarVenta)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRealizarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator1))
-                        .addContainerGap(50, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton3)
-                        .addGap(33, 33, 33))))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(btnRealizarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))))
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 8, 0);
+        bg.add(jPanel1, gridBagConstraints);
 
         btn_Agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/cocinar.png"))); // NOI18N
         btn_Agregar.setText("Agregar");
@@ -182,6 +195,15 @@ public class frmDetallePedido extends javax.swing.JPanel {
                 btn_AgregarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.ipadx = 13;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 140, 0, 0);
+        bg.add(btn_Agregar, gridBagConstraints);
 
         btn_Buscar.setText(">>");
         btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +211,13 @@ public class frmDetallePedido extends javax.swing.JPanel {
                 btn_BuscarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = -12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(38, 60, 0, 0);
+        bg.add(btn_Buscar, gridBagConstraints);
 
         btn_Buscar_Men.setText(">>");
         btn_Buscar_Men.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +225,15 @@ public class frmDetallePedido extends javax.swing.JPanel {
                 btn_Buscar_MenActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = -22;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(94, 9, 0, 0);
+        bg.add(btn_Buscar_Men, gridBagConstraints);
 
         btn_Nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/crud/new.png"))); // NOI18N
-        btn_Nuevo.setText("Nuevo");
         btn_Nuevo.setBorderPainted(false);
         btn_Nuevo.setContentAreaFilled(false);
         btn_Nuevo.setFocusable(false);
@@ -209,9 +244,17 @@ public class frmDetallePedido extends javax.swing.JPanel {
                 btn_NuevoActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 12;
+        gridBagConstraints.ipady = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 230, 0, 0);
+        bg.add(btn_Nuevo, gridBagConstraints);
 
         btn_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/crud/cancel.png"))); // NOI18N
-        btn_Cancelar.setText("Cancelar");
         btn_Cancelar.setBorderPainted(false);
         btn_Cancelar.setContentAreaFilled(false);
         btn_Cancelar.setEnabled(false);
@@ -223,63 +266,24 @@ public class frmDetallePedido extends javax.swing.JPanel {
                 btn_CancelarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        bg.add(btn_Cancelar, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipady = -43;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 0, 18);
+        bg.add(panel_Detalle_Pedido, gridBagConstraints);
 
-        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-        bg.setLayout(bgLayout);
-        bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(btn_Nuevo)
-                        .addGap(3, 3, 3)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_Cancelar)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(btn_Buscar_Men, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(22, 22, 22)
-                        .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panel_Detalle_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(340, 340, 340)
-                        .addComponent(btn_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_Nuevo)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(btn_Cancelar)
-                        .addGap(189, 189, 189)
-                        .addComponent(btn_Buscar_Men))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(btn_Buscar))
-                    .addComponent(panel_Detalle_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        add(bg, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 private int cantidad;
  private int fila ;
@@ -469,9 +473,9 @@ private int cantidad;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private pkg_Formulario.Menu.subMenu.Pedido.PanelDetallePedido panel_Detalle_Pedido;
     private javax.swing.JTable tbl_Detalle;
+    private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txt_total;
     // End of variables declaration//GEN-END:variables
 
