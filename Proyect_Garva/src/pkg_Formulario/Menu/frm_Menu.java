@@ -306,7 +306,7 @@ private IMaster master;
                     .addGroup(panel_MenuLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(btn_Admin1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
                 .addComponent(btn_CerrarSession))
         );
 

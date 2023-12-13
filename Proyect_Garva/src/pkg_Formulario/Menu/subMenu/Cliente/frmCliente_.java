@@ -1,6 +1,7 @@
 
 package pkg_Formulario.Menu.subMenu.Cliente;
 
+import java.io.IOException;
 import pkg_Formulario.Menu.subMenu.ClassUtil.DistritoComboModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import javax.swing.JTextField;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_Modelo.Entidades.Cliente;
+import pkg_utilidades.Calculos;
 import pkg_utilidades.Utilidades;
 
 public class frmCliente_ extends javax.swing.JPanel {
@@ -518,13 +520,24 @@ private ClienteTableModel model_table;
 
         }
     }//GEN-LAST:event_btn_NuevoActionPerformed
-
+ Calculos calculo;
     private void btn_excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excelActionPerformed
-        // TODO add your handling code here:
+    
+        try {
+           calculo=new Calculos();
+           calculo.exportarExcel(tbl_Cliente,"Reporte_Cliente");
+       } catch (IOException ex) {
+           Utilidades.Mensaje("ERROR","No se creo el excel",0);
+       }
     }//GEN-LAST:event_btn_excelActionPerformed
 
     private void btn_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_txtActionPerformed
-        // TODO add your handling code here:
+       try {
+           calculo=new Calculos();
+           calculo.exportarTxt(tbl_Cliente);
+       } catch (IOException ex) {
+           Utilidades.Mensaje("ERROR","Errorl",0);
+       }
     }//GEN-LAST:event_btn_txtActionPerformed
 
     private void btn_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdfActionPerformed

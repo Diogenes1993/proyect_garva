@@ -1,6 +1,7 @@
 
 package pkg_Formulario.Menu.subMenu.Empleado;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -9,6 +10,7 @@ import pkg_Formulario.Menu.subMenu.ClassUtil.RolComboModel;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
 import pkg_Modelo.Entidades.Empleado;
+import pkg_utilidades.Calculos;
 import pkg_utilidades.Utilidades;
 
 
@@ -530,17 +532,27 @@ private int valor;
         Logger.getLogger(FrmEmpleado.class.getName()).log(Level.SEVERE, null, ex);
     }
     }//GEN-LAST:event_btn_BuscarActionPerformed
-
+ Calculos calculo;
     private void btn_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdfActionPerformed
 
     }//GEN-LAST:event_btn_pdfActionPerformed
 
     private void btn_excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excelActionPerformed
-
+ try {
+           calculo=new Calculos();
+           calculo.exportarExcel(tbl_Empleado,"Reporte_Cliente");
+       } catch (IOException ex) {
+           Utilidades.Mensaje("ERROR","No se creo el excel",0);
+       }
     }//GEN-LAST:event_btn_excelActionPerformed
 
     private void btn_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_txtActionPerformed
-
+ try {
+           calculo=new Calculos();
+           calculo.exportarTxt(tbl_Empleado);
+       } catch (IOException ex) {
+           Utilidades.Mensaje("ERROR","Errorl",0);
+       }
     }//GEN-LAST:event_btn_txtActionPerformed
 
     private void rb_CodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_CodActionPerformed
