@@ -4,6 +4,7 @@ import javax.swing.UIManager;
 import pkg_Formulario.Menu.frm_Menu;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
+import pkg_Modelo.Entidades.Detalle_Usuario;
 import pkg_Modelo.Entidades.Empleado;
 import pkg_utilidades.Utilidades;
 
@@ -206,12 +207,15 @@ ImagenFrm fondo=new ImagenFrm();
         if(!nomusuario.equals("")||!pass.equals(""))
         {
        Empleado empleado= masterI.getIEmpleado().getDataUsuario(nomusuario);
+      
+       
         frm_Menu menu=new frm_Menu(masterI);
         if(empleado!=null && empleado.getContra().equals(pass))
         {
             aceptado=true;
            menu.setVisible(true);
            menu.setDatos(empleado.getId(),empleado.getUsuario(),empleado.getEmail(),empleado.getNombre(),empleado.getApellido(),empleado.getRol().getRol(),empleado.getRol().getRuta());
+        
            menu.InitContent();
                 dispose();
              

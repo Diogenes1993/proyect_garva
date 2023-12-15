@@ -1,6 +1,8 @@
 
 package pkg_Formulario.Menu.subMenu.Pedido;
 
+import com.lowagie.text.DocumentException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pkg_MYSQL.Interfaces.IException;
@@ -9,6 +11,7 @@ import pkg_Modelo.Entidades.Cliente;
 import pkg_Modelo.Entidades.Detalle_Pedido;
 import pkg_Modelo.Entidades.Menu;
 import pkg_Modelo.Entidades.Pedido;
+import pkg_utilidades.Calculos;
 import pkg_utilidades.Utilidades;
 
 public class frmDetallePedido extends javax.swing.JPanel {
@@ -135,6 +138,11 @@ public class frmDetallePedido extends javax.swing.JPanel {
         btnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/ir (1).png"))); // NOI18N
         btnRealizarVenta.setText("Realizar Venta");
         btnRealizarVenta.setIconTextGap(20);
+        btnRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarVentaActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Ver Anterior");
 
@@ -456,6 +464,16 @@ private int cantidad;
         }
       
     }//GEN-LAST:event_btn_CancelarActionPerformed
+Calculos calculo;
+    private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
+        try {
+            calculo=new Calculos();
+            calculo.BoletaPdf( );
+        } catch (DocumentException | IOException ex) {
+            Logger.getLogger(frmDetallePedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+    }//GEN-LAST:event_btnRealizarVentaActionPerformed
  
     
     

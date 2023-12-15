@@ -1,11 +1,8 @@
 package pkg_Formulario.Menu;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubDarkIJTheme;
-import java.awt.BorderLayout;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import pkg_Formulario.Menu.subMenu.Cliente.frmCliente_;
@@ -19,6 +16,8 @@ import pkg_Formulario.frm_Login;
 import pkg_Hilos.HReloj;
 import pkg_MYSQL.Interfaces.IException;
 import pkg_MYSQL.Interfaces.IMaster;
+import pkg_Modelo.Entidades.Detalle_Usuario;
+import pkg_utilidades.Utilidades;
 
 public class frm_Menu extends javax.swing.JFrame {
 
@@ -29,7 +28,7 @@ public class frm_Menu extends javax.swing.JFrame {
     private String id;
     private String usuario;
     private String apellido;
-    public void setDatos(String id,String usuario,String correo,String nombre,String apellido,String rol,String ruta)
+    public void setDatos(String id,String usuario,String correo,String nombre,String apellido,String rol,String ruta) throws IException
     {
        this.id=id;
        lbl_nom_Usuario.setText(usuario);
@@ -39,7 +38,8 @@ public class frm_Menu extends javax.swing.JFrame {
       lbl_Cargo.setText(rol);
       lbl_Nombre.setText(nombre);
       lbl_Apellido.setText(apellido);
-       lbl_nom_Usuario.setIcon(new ImageIcon(ruta));
+      lbl_nom_Usuario.setIcon(new ImageIcon(ruta));
+
     }
         
     
@@ -54,6 +54,7 @@ public class frm_Menu extends javax.swing.JFrame {
     Date fecha=new Date();
     DateFormat date= DateFormat.getDateInstance(DateFormat.FULL);
     lbl_fecha.setText(date.format(fecha));
+        System.out.println(fecha);
 }
 
     
@@ -99,6 +100,7 @@ private IMaster master;
         lbl_Nombre = new javax.swing.JLabel();
         lbl_Apellido = new javax.swing.JLabel();
         btn_Menu = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         panel_Titulo = new javax.swing.JPanel();
         lbl_nom_Usuario = new javax.swing.JLabel();
         lbl_hora = new javax.swing.JLabel();
@@ -152,8 +154,8 @@ private IMaster master;
         btn_Pedido.setBackground(new java.awt.Color(204, 204, 204));
         btn_Pedido.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Pedido.setForeground(new java.awt.Color(0, 102, 102));
-        btn_Pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/entrega-de-pedidos.png"))); // NOI18N
-        btn_Pedido.setText("Pedidos");
+        btn_Pedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/coordinar.png"))); // NOI18N
+        btn_Pedido.setText("Cargo");
         btn_Pedido.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_Pedido.setBorderPainted(false);
         btn_Pedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -169,7 +171,7 @@ private IMaster master;
         btn_Admin.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Admin.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/admin.png"))); // NOI18N
-        btn_Admin.setText("Admin");
+        btn_Admin.setText("Empleado");
         btn_Admin.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_Admin.setBorderPainted(false);
         btn_Admin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -185,7 +187,7 @@ private IMaster master;
         btn_Admin1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btn_Admin1.setForeground(new java.awt.Color(0, 102, 102));
         btn_Admin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/reporte.png"))); // NOI18N
-        btn_Admin1.setText("Reportes");
+        btn_Admin1.setText("Boletas");
         btn_Admin1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
         btn_Admin1.setBorderPainted(false);
         btn_Admin1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -251,31 +253,36 @@ private IMaster master;
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/mantenimiento.png"))); // NOI18N
+        jLabel1.setText("MANTENIMIENTO");
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(153, 255, 255)));
+        jLabel1.setIconTextGap(20);
+
         javax.swing.GroupLayout panel_MenuLayout = new javax.swing.GroupLayout(panel_Menu);
         panel_Menu.setLayout(panel_MenuLayout);
         panel_MenuLayout.setHorizontalGroup(
             panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4)
+            .addComponent(lbl_Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(panel_MenuLayout.createSequentialGroup()
-                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_Cargo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_MenuLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lbl_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panel_MenuLayout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(lbl_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(btn_CerrarSession, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(lbl_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_MenuLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lbl_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(btn_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Admin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btn_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Pedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_CerrarSession, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel_MenuLayout.setVerticalGroup(
             panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,18 +302,22 @@ private IMaster master;
                 .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_MenuLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(btn_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_MenuLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(btn_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_MenuLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(40, 40, 40)
                         .addComponent(btn_Admin1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(btn_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addGroup(panel_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_MenuLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btn_Admin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_MenuLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(btn_Pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(148, 148, 148)
                 .addComponent(btn_CerrarSession))
         );
 
@@ -416,7 +427,7 @@ private IMaster master;
         try {
             InitContent();
         } catch (IException ex) {
-            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            Utilidades.Mensaje("ERROR","Abrir Empleado",0);
         }
         
     }//GEN-LAST:event_btn_PrincipalActionPerformed
@@ -425,7 +436,7 @@ private IMaster master;
         try {
             initSelection(new frmCliente_(master));
         } catch (IException ex) {
-            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+         Utilidades.Mensaje("ERROR","Abrir Empleado",0);
         }
     }//GEN-LAST:event_btn_ClienteActionPerformed
 
@@ -433,7 +444,7 @@ private IMaster master;
         try {
             initSelection(new FrmEmpleado(master));
         } catch (IException ex) {
-            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+           Utilidades.Mensaje("ERROR","Abrir Empleado",0);
         }
     }//GEN-LAST:event_btn_AdminActionPerformed
 
@@ -445,7 +456,7 @@ private IMaster master;
         try {
             initSelection(new FrmRol_Pa(master));
         } catch (IException ex) {
-            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+           Utilidades.Mensaje("ERROR","Abrir Rol",0);
         }
     }//GEN-LAST:event_btn_PedidoActionPerformed
 
@@ -461,7 +472,7 @@ private IMaster master;
              try {
             initSelection(new FrmMenu_Pa(master));
         } catch (IException ex) {
-            Logger.getLogger(frm_Menu.class.getName()).log(Level.SEVERE, null, ex);
+           Utilidades.Mensaje("ERROR","Abrir Menu",0);
         }
     }//GEN-LAST:event_btn_MenuActionPerformed
     
@@ -474,6 +485,7 @@ private IMaster master;
     private javax.swing.JButton btn_Menu;
     private javax.swing.JButton btn_Pedido;
     private javax.swing.JButton btn_Principal;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lbl_Apellido;
     private javax.swing.JLabel lbl_Cargo;

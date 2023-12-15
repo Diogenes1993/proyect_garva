@@ -40,7 +40,7 @@ public class EmpleadoTableModel extends AbstractTableModel{
         {
             case 0: return "CODIGO";
             case 1: return "NOMBRE";
-            case 2: return "APELLIDOs";
+            case 2: return "APELLIDOS";
             case 3: return "TELEFONO";
             case 4: return "DISTRITO";
             case 5: return "CARGO";

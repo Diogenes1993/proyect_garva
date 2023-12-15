@@ -103,7 +103,7 @@ private  IDetalle_Pedido detallePedidoI=null;
     public IDetalle_Usuario getIDetalle_usuario() {
      if(detalleUsuarioI == null)
     {
-      //  detalleUsuarioI =new MYSQLDetalleUsuario(connection);
+      detalleUsuarioI =new MYSQLDetalle_Usuario(connection);
     }
     return detalleUsuarioI;
     }

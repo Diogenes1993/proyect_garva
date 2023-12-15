@@ -1,6 +1,8 @@
 
 package pkg_Formulario.Menu.subMenu.Empleado;
 
+import com.lowagie.text.DocumentException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,6 +88,7 @@ public class FrmEmpleado extends javax.swing.JPanel {
         btn_pdf = new javax.swing.JButton();
         btn_excel = new javax.swing.JButton();
         btn_txt = new javax.swing.JButton();
+        btn_Todos = new javax.swing.JRadioButton();
         panel_titulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panel_tabla = new javax.swing.JPanel();
@@ -292,6 +295,14 @@ public class FrmEmpleado extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(btn_Todos);
+        btn_Todos.setText("Todos");
+        btn_Todos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TodosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -299,26 +310,29 @@ public class FrmEmpleado extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_Buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addComponent(rb_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rb_NombreA, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rb_Distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_Buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
+                        .addComponent(rb_Distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Todos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(btn_pdf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_excel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(9, 9, 9))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +351,8 @@ public class FrmEmpleado extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rb_Cod)
                             .addComponent(rb_NombreA)
-                            .addComponent(rb_Distrito)))
+                            .addComponent(rb_Distrito)
+                            .addComponent(btn_Todos)))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btn_excel)
                         .addComponent(btn_txt)
@@ -348,9 +363,7 @@ public class FrmEmpleado extends javax.swing.JPanel {
         panel_busqueda.setLayout(panel_busquedaLayout);
         panel_busquedaLayout.setHorizontalGroup(
             panel_busquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_busquedaLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 927, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel_busquedaLayout.setVerticalGroup(
             panel_busquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,6 +527,9 @@ private int valor;
         String textoBuscado = txt_Buscado.getText();
         EmpleadoTableModel tablita=new EmpleadoTableModel(master.getIEmpleado());
            switch (valor) {
+               case 0:
+                   tablita.getObtenerTodos();
+                   break;
                case 1:
                    tablita.getObtenerIDS(textoBuscado);
                    break;
@@ -534,7 +550,13 @@ private int valor;
     }//GEN-LAST:event_btn_BuscarActionPerformed
  Calculos calculo;
     private void btn_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdfActionPerformed
-
+       try {
+           calculo = new Calculos();
+           
+           calculo.exportarPDF(tbl_Empleado,"EMPLEADO");
+       } catch (DocumentException | FileNotFoundException ex) {
+           Logger.getLogger(FrmEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }//GEN-LAST:event_btn_pdfActionPerformed
 
     private void btn_excelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excelActionPerformed
@@ -567,6 +589,15 @@ private int valor;
        valor=3;
     }//GEN-LAST:event_rb_DistritoActionPerformed
 
+    private void btn_TodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TodosActionPerformed
+       try {
+           valor=0;
+           ObtenerTodos();
+       } catch (IException ex) {
+Utilidades.Mensaje("Error","No hay Datos",0);
+       }
+    }//GEN-LAST:event_btn_TodosActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Borrar;
@@ -575,6 +606,7 @@ private int valor;
     private javax.swing.JButton btn_Editar;
     private javax.swing.JButton btn_Guardar;
     private javax.swing.JButton btn_Nuevo;
+    private javax.swing.JRadioButton btn_Todos;
     private javax.swing.JButton btn_excel;
     private javax.swing.JButton btn_pdf;
     private javax.swing.JButton btn_txt;

@@ -5,8 +5,7 @@ import java.util.List;
 import pkg_Modelo.Entidades.Detalle_Usuario;
 
 public interface IDetalle_Usuario extends IBaseCRUD<Detalle_Usuario,Detalle_Usuario.IdDetalleUsuario> {
-List<Detalle_Usuario> ObtenerPorEmpleado(long empleado) throws IException;
-List<Detalle_Usuario> ObtenerPorUsuario(long usuario) throws IException;
+List<Detalle_Usuario> ObtenerPorEmpleado(Detalle_Usuario.IdDetalleUsuario user) throws IException;
 List<Detalle_Usuario> ObtenerPorFecha(Date fecha) throws IException;
         
 }

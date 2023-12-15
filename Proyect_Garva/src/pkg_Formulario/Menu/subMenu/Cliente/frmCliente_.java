@@ -1,6 +1,8 @@
 
 package pkg_Formulario.Menu.subMenu.Cliente;
 
+import com.lowagie.text.DocumentException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import pkg_Formulario.Menu.subMenu.ClassUtil.DistritoComboModel;
 import java.util.logging.Level;
@@ -541,7 +543,13 @@ private ClienteTableModel model_table;
     }//GEN-LAST:event_btn_txtActionPerformed
 
     private void btn_pdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdfActionPerformed
-        // TODO add your handling code here:
+                 calculo=new Calculos();
+                 try {
+                     calculo.exportarPDF(tbl_Cliente,"CLIENTE");
+                 } catch (DocumentException | FileNotFoundException ex) {
+                        Utilidades.Mensaje("ERROR","No se creo el Pdf",0);
+                 }
+       
     }//GEN-LAST:event_btn_pdfActionPerformed
 
     private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
