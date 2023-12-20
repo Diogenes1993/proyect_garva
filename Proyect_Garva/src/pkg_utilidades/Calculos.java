@@ -8,9 +8,11 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
 
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -78,6 +80,14 @@ public class Calculos {
     Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(),labelName.getHeight(), java.awt.Image.SCALE_DEFAULT));
     labelName.setIcon(icon);
     }
+   public int getMensage(String ruta_image,String title,String content){
+   ImageIcon icono = new ImageIcon(ruta_image);
+   int respuesta=JOptionPane.showConfirmDialog(null, content,
+                title, JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,icono);
+   return respuesta;
+   }
+   
    
    public void exportarExcel(JTable t,String NombreHoja) throws IOException {
         JFileChooser chooser = new JFileChooser();
@@ -155,72 +165,7 @@ public class Calculos {
         }
     }
    }
-   
-  /* public void PDF() throws DocumentException
-   {
-       // step 1: creation of a document-object        
-        Document document = new Document();
-
-        try {
-            // step 2: creation of the writer
-            PdfWriter writer = PdfWriter.getInstance(document, 
-                    new FileOutputStream("Ejemplo_pdf_java.pdf"));
-
-            // step 3: we open the document
-            document.open();
-            
-            // step 4: we grab the ContentByte and do some stuff with it
-            PdfContentByte cb = writer.getDirectContent();
-            Graphics g = cb.createGraphicsShapes(PageSize.LETTER.getWidth(), PageSize.LETTER.getHeight());
-
-            //--------------------- pagina 1 --------------------------
-            g.setColor(Color.red);
-            g.drawRect(1, 1, 593, 7|90);    
-            
-            g.setColor(new Color(154, 171, 237));
-            g.fillOval(290, 90, 280, 100);
-                        
-            Font font1 = new Font("Tahoma", Font.BOLD + Font.ITALIC, 35);
-            g.setFont(font1);
-
-            g.setColor(Color.RED);
-            g.drawString("Ejemplo crear PDF desde Java", 40, 150);
-            
-            g.setColor(Color.WHITE);
-            g.drawString("PDF desde Java", 290, 150);
-            
-            ImageIcon img1 = new ImageIcon(getClass().getResource("imagenes/play_list_youtube-GUI_Java.jpg"));
-            g.drawImage(img1.getImage(), 200, 250, 200, 200, null);
-            
-            Font font2 = new Font("Tahoma", Font.PLAIN, 15);
-            g.setFont(font2);
-            g.setColor(Color.BLACK);
-            g.drawString("Escanea el código QR para visitar la lista de reproducción de YouTube", 60, 460);
-            g.drawString("del curso de GUI en Java", 210, 480);
-            
-            document.newPage();
-            //--------------------- pagina 2 --------------------------
-            
-            g.setColor(Color.GREEN);
-            g.drawLine(1, 1, 200, 200);
-
-            g.setColor(Color.BLUE);
-            g.drawRect(200, 200, 300, 300);
-            
-            ImageIcon img2 = new ImageIcon(getClass().getResource("imagenes/java-duke-guitar.png"));
-            g.drawImage(img2.getImage(), 230, 220, 250, 250, null);
-            
-        } catch (FileNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        // step 5: we close the document
-        document.close();
-
-        JOptionPane.showMessageDialog(null, 
-                "Se creo el archivo 'Ejemplo_pdf_java.pdf' en la carpeta del proyecto");
-    }
-   */
+  
    
       public void exportarPDF(JTable tbla,String hoja) throws DocumentException, FileNotFoundException
    {
@@ -281,11 +226,14 @@ public class Calculos {
     }
    }
       
-       public void BoletaPdf() throws DocumentException, FileNotFoundException, BadElementException, IOException
+       public void BoletaPdf(JTable table_form,String total) throws DocumentException, FileNotFoundException, BadElementException, IOException
    {
     String ruta="";    
    
         JFileChooser ventana=new JFileChooser();
+        
+        File directorioInicial= new File("C:/Users/ERROR4~1/Desktop/");
+        ventana.setCurrentDirectory(directorioInicial);
         ventana.setDialogTitle("Guardar Archivo");
         
         
@@ -293,42 +241,212 @@ public class Calculos {
         
     if(select== JFileChooser.APPROVE_OPTION){
        ruta = ventana.getSelectedFile().toString().concat(".pdf");
-       Document doc=new Document();
-            
-          PdfWriter.getInstance(doc,new FileOutputStream(ruta));
         
-            doc.open();
-            Image image= Image.getInstance("src/pkg_Reportes/Garva.png");
-          Paragraph fecha = new Paragraph();
-         Font negrita=new Font(Font.TIMES_ROMAN,12,Font.BOLD,Color.BLUE);
-         fecha.add(Chunk.NEWLINE);
-         Date date=new Date();
-         fecha.add("Boleta: "+"Fecha: "+new SimpleDateFormat("dd-mm-yyyy").format(date)+"\n\n");
+       Document doc=new Document(new Rectangle(5*72, 8*72));
+       
+        File rutita=new File(ruta);    
+        PdfWriter.getInstance(doc,new FileOutputStream(ruta));
+        Image image= Image.getInstance("src/pkg_Reportes/GARVA_FONDO.png");
+        doc.open();
+        Paragraph fecha = new Paragraph();
+        fecha.setSpacingBefore(10);
+        Font titles_=new Font(Font.TIMES_ROMAN,12,Font.BOLD,Color.BLACK);
+        Font titles2=new Font(Font.TIMES_ROMAN,10,Font.BOLD,Color.BLACK);
+        Font parrafos=new Font(Font.TIMES_ROMAN,10,Font.NORMAL,Color.BLACK);
+        Font negrita=new Font(Font.TIMES_ROMAN,10,Font.BOLD,Color.WHITE);
          
+        fecha.add(new Chunk("BOLETA DE VENTA",titles_));
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Chunk("ELECTRONICA",titles_));
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Chunk("NEGOCIOS ALIMENTICIOS",titles_));
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Chunk("GARVA S.A.C",titles_));
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Chunk("20161635899",parrafos));
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Chunk("Av. 15 de Enero 330 Nro 15047 Lima",parrafos));
+        fecha.add(Chunk.NEWLINE);
+        fecha.add(new Chunk("Lima,Lima",parrafos));
+        fecha.setAlignment(Element.ALIGN_CENTER);
+        Date date=new Date();
+       
+         String hoy= new SimpleDateFormat("dd-mm-yyyy").format(date)+"\n\n";
          
-            
-            PdfPTable Encabezados=new PdfPTable(4);
+            PdfPTable Encabezados=new PdfPTable(2);
             
             Encabezados.setWidthPercentage(110);
             Encabezados.getDefaultCell().setBorder(0);
-            float[] columnlocation = new float[]{20f,30f,70f,40f};
+            float[] columnlocation = new float[]{30f,50f};
             Encabezados.setWidths(columnlocation);
             Encabezados.setHorizontalAlignment(Element.ALIGN_CENTER);
             
             Encabezados.addCell(image);
+            PdfPCell cellImageFecha = new PdfPCell();
+            cellImageFecha.setBorder(0);
+            cellImageFecha.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cellImageFecha.addElement(fecha);
             
-            String ruc="1231434";
-            String nombre="Dante";
-            String tele="1231";
-            String direcc="asdasd1";
-            String domi="fgfgfg";
-            
-            Encabezados.addCell("");
-            Encabezados.addCell("Ruc: "+ruc+"\nNombre: "+nombre+"\nTelefono: "+tele+"\nDireccion: "+direcc+"\nDominicilo: "+domi);
-            Encabezados.addCell(fecha);
+            Encabezados.addCell(cellImageFecha);
+          //Encabezados.addCell("Ruc: "+ruc+"\nNombre: "+nombre+"\nTelefono: "+tele+"\nDireccion: "+direcc+"\nDominicilo: "+domi);
             doc.add(Encabezados);
            
+            
+            Paragraph Nro_Boleta=new Paragraph();
+            Nro_Boleta.add(new Chunk(" N° B001",titles_));
+            Nro_Boleta.setAlignment(Element.ALIGN_CENTER);
+            Nro_Boleta.add(Chunk.NEWLINE);
+            Nro_Boleta.add(Chunk.NEWLINE);
+            Nro_Boleta.add(Chunk.NEWLINE);
+            doc.add(Nro_Boleta);
+            
+            
+            Paragraph Datos=new Paragraph();
+            Datos.add(new Chunk("Cliente:   ",titles2));
+            Datos.add(Chunk.NEWLINE);
+            Datos.add(new Chunk("Fecha:     ",titles2));
+            Datos.add(Chunk.NEWLINE);
+            Datos.add(new Chunk("N° Pedido: ",titles2));
+            
+            PdfPTable tableDatos_=new PdfPTable(2);
+            tableDatos_.getDefaultCell().setBorder(0);
+            float[] columnDatos = new float[]{50f,50f};
+            tableDatos_.setWidths(columnDatos);
+            tableDatos_.setHorizontalAlignment(Element.ALIGN_CENTER);
+            
+            PdfPCell cellDato1 = new PdfPCell();
+            cellDato1.setBorder(0);
+            cellDato1.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cellDato1.addElement(Datos);
+            
+            tableDatos_.addCell(cellDato1);
+            
+            Paragraph Datos2=new Paragraph();
+            Datos2.add(new Chunk("Cliente:",parrafos));
+            Datos2.add(Chunk.NEWLINE);
+            Datos2.add(new Chunk("Fecha:",parrafos));
+            Datos2.add(Chunk.NEWLINE);
+            Datos2.add(new Chunk("N° Pedido:",parrafos));
+            
+            PdfPCell cellDato2 = new PdfPCell();
+            cellDato2.setBorder(0);
+            cellDato2.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cellDato2.addElement(Datos2);
+            
+            tableDatos_.addCell(cellDato2);
+            
+            doc.add(tableDatos_);
+            
+            
+           /*Paragraph cli=new Paragraph();
+            cli.add(Chunk.NEWLINE);
+            cli.add("Datos de los Clientes");
+            doc.add(cli);
+            
+            PdfPTable tabla_cliente=new PdfPTable(4);
+            tabla_cliente.setWidthPercentage(100);
+            tabla_cliente.getDefaultCell().setBorder(0);
+            float[] columnaCli = new float[]{20f,50f,30f,40f};
+            tabla_cliente.setWidths(columnaCli);
+            
+            tabla_cliente.setHorizontalAlignment(Element.ALIGN_LEFT);
+            
+            PdfPCell cliente_ce1=new PdfPCell(new Phrase("DNI",negrita));
+            PdfPCell cliente_ce2=new PdfPCell(new Phrase("Nombre",negrita));
+            PdfPCell cliente_ce3=new PdfPCell(new Phrase("Telefono",negrita));
+            PdfPCell cliente_ce4=new PdfPCell(new Phrase("Direccion",negrita));
+            
+            cliente_ce1.setBorder(0);
+            cliente_ce2.setBorder(0);
+            cliente_ce3.setBorder(0);
+            cliente_ce4.setBorder(0);
+            
+            cliente_ce1.setBackgroundColor(Color.blue);
+            cliente_ce2.setBackgroundColor(Color.blue);
+            cliente_ce3.setBackgroundColor(Color.blue);
+            cliente_ce4.setBackgroundColor(Color.blue);
+            
+            
+            tabla_cliente.addCell(cliente_ce1);
+            tabla_cliente.addCell(cliente_ce2);
+            tabla_cliente.addCell(cliente_ce3);
+            tabla_cliente.addCell(cliente_ce4);
+            
+            tabla_cliente.addCell("12345678");
+            tabla_cliente.addCell("Maria");
+            tabla_cliente.addCell("98765432");
+            tabla_cliente.addCell("Jesus Maria");
+            
+            
+            
+            doc.add(tabla_cliente);
+            */
+            // Productos
+            PdfPTable tabla_producto=new PdfPTable(4);
+            tabla_producto.setWidthPercentage(120);
+            tabla_producto.getDefaultCell().setBorder(0);
+            float[] columnaPro = new float[]{20f,30f,20f,20f};
+            tabla_producto.setWidths(columnaPro);
+            
+            tabla_producto.setHorizontalAlignment(Element.ALIGN_CENTER);
+            
+            PdfPCell pro_ce1=new PdfPCell(new Phrase("CANTIDAD",negrita));
+            PdfPCell pro_ce2=new PdfPCell(new Phrase("DESCRIPCION",negrita));
+            PdfPCell pro_ce3=new PdfPCell(new Phrase("PRECIO U",negrita));
+            PdfPCell pro_ce4=new PdfPCell(new Phrase("PRECIO F",negrita));
+            
+            
+            pro_ce1.setBorder(0);
+            pro_ce2.setBorder(0);
+            pro_ce3.setBorder(0);
+            pro_ce4.setBorder(0);
+            
+            pro_ce1.setBackgroundColor(Color.blue);
+            pro_ce2.setBackgroundColor(Color.blue);
+            pro_ce3.setBackgroundColor(Color.blue);
+            pro_ce4.setBackgroundColor(Color.blue);
+            
+            tabla_producto.addCell(pro_ce1);
+            tabla_producto.addCell(pro_ce2);
+            tabla_producto.addCell(pro_ce3);
+            tabla_producto.addCell(pro_ce4);
+            
+            for(int i=0;i< table_form.getRowCount();i++){
+            String cantidad=table_form.getValueAt(i,0).toString();
+            String descripcion=table_form.getValueAt(i,2).toString();
+            String precio=table_form.getValueAt(i,3).toString();
+            String preciof=table_form.getValueAt(i,4).toString();
+            
+            tabla_producto.addCell(cantidad);
+            tabla_producto.addCell(descripcion);
+            tabla_producto.addCell(precio);
+            tabla_producto.addCell(preciof);
+            
+            }
+            
+            doc.add(tabla_producto);
+            
+            Paragraph info=new  Paragraph();
+            info.add("Total a Pagar: "+total);
+            info.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(info);
+            
+            Paragraph firma=new  Paragraph();
+            firma.add("Cancelacion y Firma\n\n");
+            firma.add("____________________");
+            firma.setAlignment(Element.ALIGN_CENTER);
+            doc.add(firma);
+            
+            
+             Paragraph mensaje=new  Paragraph();
+            mensaje.add("Gracias por su Compra");
+            mensaje.setAlignment(Element.ALIGN_CENTER);
+            doc.add(mensaje);
+            
+       
             doc.close();
+            
+            Desktop.getDesktop().open(rutita);
             
     }
    }

@@ -127,7 +127,7 @@ private ClienteComboModel model_combo_cli;
         txt_Cod.setEnabled(false);
         cm_Menu.setEnabled(!editable);
         txt_empleado.setEnabled(false);
-        sp_Cantidad.setEnabled(editable);
+        sp_Cantidad.setEnabled(!editable);
         //CLIENTE
         cm_Cliente.setEnabled(editable);
         btn_NuevoCli.setEnabled(editable);

@@ -468,7 +468,7 @@ Calculos calculo;
     private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
         try {
             calculo=new Calculos();
-            calculo.BoletaPdf( );
+            calculo.BoletaPdf(tbl_Detalle,txt_total.getText());
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(frmDetallePedido.class.getName()).log(Level.SEVERE, null, ex);
         }
