@@ -74,7 +74,7 @@ public class frm_Menu extends javax.swing.JFrame {
         InitContent();
         btn_Empleado.setVisible(false);
         btn_Cargo.setVisible(false);
-        
+        setIconImage(new ImageIcon(getClass().getResource("/pkg_utilidades/images/Login/chef_1.png")).getImage());
         this.setExtendedState(frm_Menu.MAXIMIZED_BOTH);
         
         

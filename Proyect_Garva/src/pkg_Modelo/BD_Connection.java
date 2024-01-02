@@ -11,6 +11,5 @@ public class BD_Connection {
     public static String PASSWORD="";
     public static String BD="GARVA";
     public static String HOST="localhost";
-    
-    
+   
 }

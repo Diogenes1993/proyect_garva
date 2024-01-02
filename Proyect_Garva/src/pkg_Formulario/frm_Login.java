@@ -1,5 +1,6 @@
  package pkg_Formulario;
 
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import pkg_Formulario.Menu.frm_Menu;
 import pkg_MYSQL.Interfaces.IException;
@@ -18,8 +19,7 @@ ImagenFrm fondo=new ImagenFrm();
         initComponents();
         setLocationRelativeTo(null);
         this.masterI=masterI;
-        UIManager.put("Button.arc", 12);
-        UIManager.put( "Component.focusWidth" , 0 );
+       setIconImage(new ImageIcon(getClass().getResource("/pkg_utilidades/images/icons/seguridad-web_2.png")).getImage());
         
     }
      

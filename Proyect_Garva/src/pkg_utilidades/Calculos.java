@@ -226,26 +226,15 @@ public class Calculos {
     }
    }
       
-       public void BoletaPdf(JTable table_form,String total) throws DocumentException, FileNotFoundException, BadElementException, IOException
+       public void BoletaPdf(JTable table_form,String total,String nombre) throws DocumentException, FileNotFoundException, BadElementException, IOException
    {
-    String ruta="";    
+    
    
-        JFileChooser ventana=new JFileChooser();
-        
-        File directorioInicial= new File("C:/Users/ERROR4~1/Desktop/");
-        ventana.setCurrentDirectory(directorioInicial);
-        ventana.setDialogTitle("Guardar Archivo");
-        
-        
-        int select=ventana.showSaveDialog(null);
-        
-    if(select== JFileChooser.APPROVE_OPTION){
-       ruta = ventana.getSelectedFile().toString().concat(".pdf");
         
        Document doc=new Document(new Rectangle(5*72, 8*72));
        
-        File rutita=new File(ruta);    
-        PdfWriter.getInstance(doc,new FileOutputStream(ruta));
+        File rutita=new File("src/pkg_Reportes/"+nombre+".pdf");    
+        PdfWriter.getInstance(doc,new FileOutputStream(rutita));
         Image image= Image.getInstance("src/pkg_Reportes/GARVA_FONDO.png");
         doc.open();
         Paragraph fecha = new Paragraph();
@@ -449,6 +438,6 @@ public class Calculos {
             Desktop.getDesktop().open(rutita);
             
     }
-   }
+   
       
 }
