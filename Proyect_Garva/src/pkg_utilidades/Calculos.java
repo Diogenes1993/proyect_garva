@@ -226,7 +226,7 @@ public class Calculos {
     }
    }
       
-       public void BoletaPdf(JTable table_form,String total,String nombre) throws DocumentException, FileNotFoundException, BadElementException, IOException
+       public void BoletaPdf(JTable table_form,String total,String nombre,String cliente,String fechita,String NroPedido) throws DocumentException, FileNotFoundException, BadElementException, IOException
    {
     
    
@@ -311,11 +311,14 @@ public class Calculos {
             tableDatos_.addCell(cellDato1);
             
             Paragraph Datos2=new Paragraph();
-            Datos2.add(new Chunk("Cliente:",parrafos));
+            Datos2.add(new Chunk(cliente,parrafos));
             Datos2.add(Chunk.NEWLINE);
-            Datos2.add(new Chunk("Fecha:",parrafos));
+            Datos2.add(new Chunk(fechita,parrafos));
             Datos2.add(Chunk.NEWLINE);
-            Datos2.add(new Chunk("N° Pedido:",parrafos));
+            Datos2.add(new Chunk(NroPedido,parrafos));
+            Datos2.add(Chunk.NEWLINE);
+            Datos2.add(Chunk.NEWLINE);
+            Datos2.add(Chunk.NEWLINE);
             
             PdfPCell cellDato2 = new PdfPCell();
             cellDato2.setBorder(0);
@@ -326,51 +329,7 @@ public class Calculos {
             
             doc.add(tableDatos_);
             
-            
-           /*Paragraph cli=new Paragraph();
-            cli.add(Chunk.NEWLINE);
-            cli.add("Datos de los Clientes");
-            doc.add(cli);
-            
-            PdfPTable tabla_cliente=new PdfPTable(4);
-            tabla_cliente.setWidthPercentage(100);
-            tabla_cliente.getDefaultCell().setBorder(0);
-            float[] columnaCli = new float[]{20f,50f,30f,40f};
-            tabla_cliente.setWidths(columnaCli);
-            
-            tabla_cliente.setHorizontalAlignment(Element.ALIGN_LEFT);
-            
-            PdfPCell cliente_ce1=new PdfPCell(new Phrase("DNI",negrita));
-            PdfPCell cliente_ce2=new PdfPCell(new Phrase("Nombre",negrita));
-            PdfPCell cliente_ce3=new PdfPCell(new Phrase("Telefono",negrita));
-            PdfPCell cliente_ce4=new PdfPCell(new Phrase("Direccion",negrita));
-            
-            cliente_ce1.setBorder(0);
-            cliente_ce2.setBorder(0);
-            cliente_ce3.setBorder(0);
-            cliente_ce4.setBorder(0);
-            
-            cliente_ce1.setBackgroundColor(Color.blue);
-            cliente_ce2.setBackgroundColor(Color.blue);
-            cliente_ce3.setBackgroundColor(Color.blue);
-            cliente_ce4.setBackgroundColor(Color.blue);
-            
-            
-            tabla_cliente.addCell(cliente_ce1);
-            tabla_cliente.addCell(cliente_ce2);
-            tabla_cliente.addCell(cliente_ce3);
-            tabla_cliente.addCell(cliente_ce4);
-            
-            tabla_cliente.addCell("12345678");
-            tabla_cliente.addCell("Maria");
-            tabla_cliente.addCell("98765432");
-            tabla_cliente.addCell("Jesus Maria");
-            
-            
-            
-            doc.add(tabla_cliente);
-            */
-            // Productos
+          
             PdfPTable tabla_producto=new PdfPTable(4);
             tabla_producto.setWidthPercentage(120);
             tabla_producto.getDefaultCell().setBorder(0);
@@ -420,16 +379,16 @@ public class Calculos {
             info.setAlignment(Element.ALIGN_RIGHT);
             doc.add(info);
             
-            Paragraph firma=new  Paragraph();
-            firma.add("Cancelacion y Firma\n\n");
-            firma.add("____________________");
-            firma.setAlignment(Element.ALIGN_CENTER);
-            doc.add(firma);
+          
             
             
              Paragraph mensaje=new  Paragraph();
+             mensaje.add(Chunk.NEWLINE);
+             mensaje.add(Chunk.NEWLINE);
             mensaje.add("Gracias por su Compra");
             mensaje.setAlignment(Element.ALIGN_CENTER);
+            mensaje.add(Chunk.NEWLINE);
+            mensaje.add(Chunk.NEWLINE);
             doc.add(mensaje);
             
        

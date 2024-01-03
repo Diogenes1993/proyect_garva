@@ -1,0 +1,1301 @@
+############################## ELIMINANOS LA BD SI EXISTE #####################
+DROP DATABASE IF EXISTS GARVA2;
+DROP DATABASE IF EXISTS GARVA;
+############################ CREACION DE LA BD GARVA ##########################
+CREATE DATABASE  GARVA;
+USE GARVA;
+
+######################### ELIMINAMOS LAS TABLAS SI EXISTEN #######################
+DROP TABLE IF EXISTS DISTRITO;
+DROP TABLE IF EXISTS CLIENTE;
+DROP TABLE IF EXISTS ROL;
+DROP TABLE IF EXISTS ESTADO;
+DROP TABLE IF EXISTS EMPLEADO;
+DROP TABLE IF EXISTS ADELANTO;
+DROP TABLE IF EXISTS MENU;
+DROP TABLE IF EXISTS PEDIDO;
+DROP TABLE IF EXISTS BOLETA;
+DROP TABLE IF EXISTS CONSUMO;
+DROP TABLE IF EXISTS DETALLE_USUARIO;
+DROP TABLE IF EXISTS DETALLE_PEDIDO;
+
+
+############################# CREACION DE TABLAS ########################
+CREATE TABLE DISTRITO(
+	pk_id_distrito  CHAR(8),
+    nombre_distrito VARCHAR(50),
+					UNIQUE KEY`id_distrito_up`(pk_id_distrito)
+);
+
+CREATE TABLE CLIENTE(
+	pk_id_cliente		CHAR(8),
+    nombre_cliente 		VARCHAR(50) NOT NULL,
+    apellido_cliente 	VARCHAR(50) NOT NULL,
+    fk_id_distrito  	CHAR(8) NOT NULL,
+    telefono_cliente	VARCHAR(12) NOT NULL,
+    email_cliente 		VARCHAR(80) NOT NULL,
+						UNIQUE KEY `id_cliente_uq`(pk_id_cliente),
+                        FOREIGN KEY `cliente_distrito`(fk_id_distrito)REFERENCES DISTRITO(pk_id_distrito)
+);
+
+CREATE TABLE ROL(
+	pk_id_rol 	CHAR(4),
+    nombre_rol  VARCHAR(30),
+    ruta_image	VARCHAR(80),
+				UNIQUE KEY`id_rol_uq`(pk_id_rol)
+);
+
+CREATE TABLE ESTADO(
+	pk_id_estado   INT(1),
+    nombre_estado  VARCHAR(15),
+				   UNIQUE`id_estado_unique`(PK_ID_ESTADO)
+);
+
+CREATE TABLE EMPLEADO(
+	pk_id_empleado 				CHAR(6),
+    nombre_empleado				VARCHAR(50) NOT NULL,
+    apellido_empleado 			VARCHAR(50) NOT NULL,
+	fk_id_distrito 			    CHAR(8) NOT NULL,
+	direccion_empleado			VARCHAR(50) NOT NULL,
+    telefono_empleado 			VARCHAR(20) NOT NULL,
+    email_empleado				VARCHAR(150) NOT NULL,
+    fecha_ingreso				DATE NOT NULL,
+    usuario_empleado			VARCHAR(50) UNIQUE NOT NULL,
+    contrasenia					VARCHAR(150) NOT NULL,
+    fk_id_estado				INT(1) NOT NULL,
+    fk_id_rol	 				CHAR(4) NOT NULL,
+    							UNIQUE KEY `id_empleado_uq`(PK_ID_EMPLEADO),
+                                FOREIGN KEY`rol_empleado`(fk_id_rol)  REFERENCES ROL(pk_id_rol),
+                                FOREIGN KEY `empleado_distrito`(fk_id_distrito)REFERENCES DISTRITO(pk_id_distrito),
+                                FOREIGN KEY `empleado_estado`(fk_id_estado)REFERENCES ESTADO(pk_id_estado)
+);
+
+CREATE TABLE ADELANTO(
+	pk_id_adelanto    CHAR(8),
+    monto_adelanto 	  DOUBLE  NOT NULL,
+    fecha_adelanto	  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fk_id_cliente     CHAR(8) NOT NULL,
+    fk_id_empleado	  CHAR(6) NOT NULL,
+					  UNIQUE KEY`pk_id_adelanto_uq`(pk_id_adelanto),
+					  FOREIGN KEY`adelanto_cliente`(fk_id_cliente) REFERENCES CLIENTE(pk_id_cliente),
+                      FOREIGN KEY`adelanto_empleado`(fk_id_empleado) REFERENCES EMPLEADO(pk_id_empleado)
+);
+
+CREATE TABLE MENU(
+	pk_id_menu  	CHAR(8),
+    nombre_menu 	VARCHAR(50),
+    detalle_menu 	VARCHAR(60),
+    fecha_menu  	DATETIME DEFAULT CURRENT_TIMESTAMP,
+    stock_menu  	INT NOT NULL,
+    precio_menu 	DOUBLE  NOT NULL,
+    ruta_image      VARCHAR(255),
+					UNIQUE KEY `id_menu_uq` (pk_id_menu)
+);
+
+CREATE TABLE PEDIDO (
+	pk_id_pedido CHAR(8),
+    fecha_pedido DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fk_id_estado INT(1),
+				 UNIQUE KEY `id_pedido_uq`(pk_id_pedido),
+				 FOREIGN KEY`pedido_estado`(fk_id_estado) REFERENCES ESTADO(pk_id_estado)
+);
+
+
+CREATE TABLE DETALLE_PEDIDO
+(
+	fk_id_pedido CHAR(8),
+    fk_id_menu 	 CHAR(8),
+    cantidad 	 INT  UNSIGNED NOT NULL,
+  				 PRIMARY KEY (fk_id_pedido,fk_id_menu,cantidad),
+				 FOREIGN KEY`detalle_pedido`(fk_id_pedido) REFERENCES PEDIDO(pk_id_pedido) ON DELETE CASCADE,
+                 FOREIGN KEY`detalle_menu`(fk_id_menu) REFERENCES MENU(pk_id_menu)ON DELETE CASCADE
+);
+
+CREATE TABLE BOLETA(
+	pk_id_boleta   CHAR(8),
+    fecha_boleta   DATETIME NOT NULL DEFAULT  CURRENT_TIMESTAMP,
+    igv			   DOUBLE ,
+    fk_id_cliente  CHAR(8) NOT NULL,
+    fk_id_empleado CHAR(6) NOT NULL,
+    fk_id_pedido   CHAR(8)  NOT NULL,
+    pago_consumo   DOUBLE NOT NULL,
+    
+					UNIQUE KEY `id_boleta_uq`(pk_id_boleta),
+                    FOREIGN KEY`boleta_cliente`(fk_id_cliente) REFERENCES CLIENTE(pk_id_cliente),
+					FOREIGN KEY`boleta_empleado`(fk_id_empleado) REFERENCES EMPLEADO(pk_id_empleado),
+					FOREIGN KEY`boleta_pedido`(fk_id_pedido) REFERENCES PEDIDO(pk_id_pedido)
+);
+
+CREATE TABLE CONSUMO(
+	fk_id_pedido   CHAR(8),
+    fk_id_adelanto CHAR(8),
+    fecha_consumo  DATETIME NOT NULL DEFAULT  CURRENT_TIMESTAMP,
+    monto_adelanto DOUBLE,
+				   PRIMARY KEY(fk_id_pedido,fk_id_adelanto,fecha_consumo),
+                   FOREIGN KEY`consumo_de_adelanto`(fk_id_adelanto) REFERENCES ADELANTO(pk_id_adelanto),
+                   FOREIGN KEY`consumo_de__pedido`(fk_id_pedido) REFERENCES PEDIDO(pk_id_pedido)
+);
+
+CREATE TABLE DETALLE_USUARIO(
+	fk_id_empleado CHAR(6),
+    fecha_entrada  DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL,
+    fecha_salida   DATETIME  NULL,
+				   PRIMARY KEY (fk_id_empleado,fecha_entrada),
+                   FOREIGN KEY`detalle_empleado`(fk_id_empleado) REFERENCES EMPLEADO(pk_id_empleado)
+);
+
+#################################### DISTRITO #####################################
+DELIMITER $$
+CREATE PROCEDURE SP_NEW_DISTRITO()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_distrito),3) FROM DISTRITO;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_DISTRITO(
+	IN vin_id CHAR(8),
+	IN vin_distrito VARCHAR(50)
+)
+BEGIN
+INSERT INTO DISTRITO(pk_id_distrito,nombre_distrito) VALUES(vin_id,vin_distrito);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_DISTRITO(
+	IN vin_id CHAR(8),
+	IN vin_distrito VARCHAR(50)
+)
+BEGIN
+UPDATE DISTRITO SET 
+ 	   nombre_distrit = vin_distrito
+ WHERE pk_id_distrito = vin_id; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_DISTRITO(
+	IN vin_id CHAR(8)
+)
+BEGIN
+DELETE FROM DISTRITO  
+ 	    WHERE pk_id_distrito = vin_id; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_DISTRITO()
+BEGIN
+	SELECT pk_id_distrito,nombre_distrito FROM DISTRITO;
+END$$
+DELIMITER ;
+
+CALL SP_INSERTAR_DISTRITO('DI000001','Comas');
+CALL SP_INSERTAR_DISTRITO('DI000002','Breña');
+CALL SP_INSERTAR_DISTRITO('DI000003','Surco');
+CALL SP_INSERTAR_DISTRITO('DI000004','San Martin de Porres');
+
+CALL SP_LISTAR_DISTRITO();
+
+##################################### CLIENTE ######################################
+##### INSERTAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_CLIENTE(
+	IN vin_id CHAR(8),
+    IN vin_nombre	  VARCHAR(50),
+    IN vin_apellido   VARCHAR(50),
+    IN vin_distrito   CHAR(8),
+    IN vin_telefono   VARCHAR(12),
+    IN vin_email      VARCHAR(80)
+)
+BEGIN
+	INSERT INTO CLIENTE(pk_id_cliente,nombre_cliente,apellido_cliente,fk_id_distrito,telefono_cliente,email_cliente)
+				 VALUES(vin_id,vin_nombre,vin_apellido,vin_distrito,vin_telefono,vin_email);
+END$$
+DELIMITER ;
+
+##### ACTUALIZAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_CLIENTE(
+	IN vin_id CHAR(8),
+    IN vin_nombre	  VARCHAR(50),
+    IN vin_apellido   VARCHAR(50),
+    IN vin_distrito   CHAR(8),
+    IN vin_telefono   VARCHAR(12),
+    IN vin_email      VARCHAR(80)
+)
+BEGIN
+	UPDATE CLIENTE 
+	SET nombre_cliente    = vin_nombre,
+		apellido_cliente  = vin_apellido,
+        fk_id_distrito    = vin_distrito,
+        telefono_cliente  = vin_telefono,
+        email_cliente     = vin_email
+  WHERE pk_id_cliente     = vin_id;
+END$$
+DELIMITER ;
+
+##### ELIMINAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_CLIENTE(
+	IN vin_id CHAR(8)
+)
+BEGIN
+DELETE FROM CLIENTE WHERE pk_id_cliente=vin_id;
+END$$
+DELIMITER ;
+
+##### LISTAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_CLIENTE()
+BEGIN
+	SELECT C.pk_id_cliente,C.nombre_cliente,C.apellido_cliente,D.nombre_distrito,C.telefono_cliente,C.email_cliente 
+    FROM CLIENTE AS C INNER JOIN DISTRITO AS D ON C.fk_id_distrito=D.pk_id_distrito ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+#### BUSCAR_ULTIMO_CODIGO ####
+DROP PROCEDURE IF EXISTS SP_NUEVO_CODIGO_C;
+DELIMITER $$
+CREATE PROCEDURE SP_NUEVO_CODIGO_C()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_cliente),3) FROM CLIENTE;
+END$$
+DELIMITER ;
+
+################################################################################
+################################################################################
+######################### METODOS DE BUSQUEDA ##################################
+######################### ######################################################
+##### GRUPO_IDS #####
+DROP PROCEDURE  IF EXISTS SP_BUSCAR_IDS_CLIENTE;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_IDS_CLIENTE(
+		IN id CHAR(8)
+    )
+BEGIN
+	SELECT C.pk_id_cliente,C.nombre_cliente,C.apellido_cliente,D.nombre_distrito,C.telefono_cliente,C.email_cliente 
+    FROM CLIENTE AS C INNER JOIN DISTRITO AS D ON C.fk_id_distrito=D.pk_id_distrito
+    HAVING C.pk_id_cliente LIKE CONCAT('%',id,'%') 
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_ONE ####
+DROP PROCEDURE  IF EXISTS SP_BUSCAR_ID_CLIENTE;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ID_CLIENTE(
+		IN id CHAR(8)
+    )
+BEGIN
+	SELECT C.pk_id_cliente,C.nombre_cliente,C.apellido_cliente,D.nombre_distrito,C.telefono_cliente,C.email_cliente 
+    FROM CLIENTE AS C INNER JOIN DISTRITO AS D ON C.fk_id_distrito=D.pk_id_distrito
+    HAVING C.pk_id_cliente = id 
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_NOMBRE_APELLIDO #####
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_NOMBRE_APELLIDO_CLIENTE(
+		IN vin_valor VARCHAR(50)
+    )
+BEGIN
+	SELECT C.pk_id_cliente,C.nombre_cliente,C.apellido_cliente,D.nombre_distrito,C.telefono_cliente,C.email_cliente 
+    FROM CLIENTE AS C INNER JOIN DISTRITO AS D ON C.fk_id_distrito=D.pk_id_distrito
+    HAVING C.nombre_cliente LIKE CONCAT('%',vin_valor,'%') OR C.apellido_cliente LIKE CONCAT('%',vin_valor,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_DISTRITO #####
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_DISTRITO_CLIENTE(
+		IN vin_valor VARCHAR(100)
+    )
+BEGIN
+	SELECT C.pk_id_cliente,C.nombre_cliente,C.apellido_cliente,D.nombre_distrito,C.telefono_cliente,C.email_cliente 
+    FROM CLIENTE AS C INNER JOIN DISTRITO AS D ON C.fk_id_distrito=D.pk_id_distrito
+    HAVING D.nombre_distrito LIKE CONCAT('%',vin_valor,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+	
+
+CALL SP_INSERTAR_CLIENTE('CL000001','Ezequiel','Zambrano Aguírre','DI000001','981212345','ezequiel@gmail.com');
+CALL SP_INSERTAR_CLIENTE('CL000002','Marcos','Zapata Maldonado','DI000002','901267364','zapata@gmail.com');
+CALL SP_INSERTAR_CLIENTE('CL000003','Camila','Campos Espiral','DI000003','912365785','camila@gmail.com');
+CALL SP_INSERTAR_CLIENTE('CL000004','Sergio','Burga Amador','DI000004','901254765','burga@gmail.com');
+CALL SP_INSERTAR_CLIENTE('CL000005','Obed','Fransua Palacios','DI000003','973652645','palacios@gmail.com');
+CALL SP_INSERTAR_CLIENTE('CL000006','Gonzalo','Xavi Malvi','DI000004','983654787','mandez@gmail.com');
+
+CALL SP_LISTAR_CLIENTE();
+
+
+##################################### ROL ######################################
+##### INSERTAR ######
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_ROL(
+	IN vin_id CHAR(4),
+	IN vin_nombre VARCHAR(30),
+	IN vin_ruta VARCHAR(80)
+)
+BEGIN
+	INSERT INTO ROL(pk_id_rol,nombre_rol,ruta_image) VALUES(vin_id,vin_nombre,vin_ruta);
+END$$
+DELIMITER ;
+
+##### ACTUALIZAR ######
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_ROL(
+	IN vin_id CHAR(4),
+	IN vin_nombre VARCHAR(30),
+	IN vin_ruta VARCHAR(80)
+)
+BEGIN
+	UPDATE ROL SET 
+		   nombre_rol = vin_nombre,
+		   ruta_image = vin_ruta
+     WHERE pk_id_rol  = vin_id;
+END$$
+DELIMITER ;
+
+
+##### ELIMINAR ######
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_ROL(
+	IN vin_id CHAR(4)
+)
+BEGIN
+	DELETE FROM ROL
+		 WHERE pk_id_rol  = vin_id;
+END$$
+DELIMITER ;
+
+
+##### LISTAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_ROL()
+BEGIN
+SELECT pk_id_rol,nombre_rol,ruta_image FROM ROL;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ROL(
+	IN vin_dato VARCHAR(20)
+)
+BEGIN
+SELECT pk_id_rol,nombre_rol,ruta_image FROM ROL WHERE pk_id_rol = vin_dato OR nombre_rol = vin_dato;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_NEW_ROL()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_rol),3) FROM ROL;
+END$$
+DELIMITER ;
+
+CALL SP_INSERTAR_ROL('R001','Cocinero','src/pkg_utilidades/images/icons/chef.png');
+CALL SP_INSERTAR_ROL('R002','Cajera','src/pkg_utilidades/images/icons/cajera.png');
+CALL SP_INSERTAR_ROL('R003','Contadora','src/pkg_utilidades/images/icons/contadora.png');
+CALL SP_INSERTAR_ROL('R004','Administrador','src/pkg_utilidades/images/icons/admin.png');
+
+###################################################################################
+##################################### ESTADO ######################################
+##################################################################################
+
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_ESTADO_E()
+BEGIN
+	SELECT pk_id_estado,nombre_estado FROM ESTADO WHERE pk_id_estado <=1;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_ESTADO_P()
+BEGIN
+	SELECT pk_id_estado,nombre_estado FROM ESTADO WHERE pk_id_estado >1;
+END$$
+DELIMITER ;
+
+INSERT INTO ESTADO(pk_id_estado,nombre_estado) VALUES('0','ACTIVO');
+INSERT INTO ESTADO(pk_id_estado,nombre_estado) VALUES('1','INACTIVO');
+INSERT INTO ESTADO(pk_id_estado,nombre_estado) VALUES('2','PROCESO');
+INSERT INTO ESTADO(pk_id_estado,nombre_estado) VALUES('3','ENTREGADO');
+
+##################################### EMPLEADO ####################################
+##### INSERTAR #####
+DROP PROCEDURE IF EXISTS SP_INSERTAR_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_EMPLEADO(
+	IN vin_id 		  CHAR(8),
+    IN vin_nombre	  VARCHAR(50),
+    IN vin_apellido   VARCHAR(50),
+    IN vin_distrito   CHAR(8),
+    IN vin_direccion  VARCHAR(50),
+    IN vin_telefono   VARCHAR(12),
+    IN vin_email      VARCHAR(80),
+    IN vin_ingreso	  DATE,
+    IN vin_usuario	  VARCHAR(50),
+    IN vin_contra	  VARCHAR(150),
+    IN vin_estado	  INT(1),
+    IN vin_rol 		  CHAR(4)
+    
+)
+BEGIN
+	INSERT INTO EMPLEADO(pk_id_empleado,nombre_empleado,apellido_empleado,fk_id_distrito,direccion_empleado,telefono_empleado,email_empleado,fecha_ingreso,usuario_empleado,contrasenia,fk_id_estado,fk_id_rol)
+				  VALUES(vin_id,vin_nombre,vin_apellido,vin_distrito,vin_direccion,vin_telefono,vin_email,vin_ingreso,vin_usuario,vin_contra,vin_estado,vin_rol);
+END$$
+DELIMITER ;
+
+##### ACTUALIZAR #####
+DROP PROCEDURE IF EXISTS SP_ACTUALIZAR_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_EMPLEADO(
+	IN vin_id 		  CHAR(8),
+    IN vin_nombre	  VARCHAR(50),
+    IN vin_apellido   VARCHAR(50),
+    IN vin_distrito   CHAR(8),
+    IN vin_direccion  VARCHAR(50),
+    IN vin_telefono   VARCHAR(12),
+    IN vin_email      VARCHAR(80),
+    IN vin_ingreso	  DATE,
+    IN vin_usuario	  VARCHAR(50),
+    IN vin_contra	  VARCHAR(150),
+    IN vin_estado	  INT(1),
+    IN vin_rol 		  CHAR(4)
+)
+BEGIN
+	UPDATE EMPLEADO 
+	SET nombre_empleado    = vin_nombre,
+		apellido_empleado  = vin_apellido,
+        fk_id_distrito     = vin_distrito,
+        direccion_empleado = vin_direccion,
+        telefono_empleado  = vin_telefono,
+        email_empleado     = vin_email,
+        fecha_ingreso      = vin_ingreso,
+        usuario_empleado   = vin_usuario,
+        contrasenia        = vin_contra,
+        fk_id_estado	   = vin_estado,
+        fk_id_rol		   = vin_rol
+  WHERE pk_id_empleado     = vin_id;
+END$$
+DELIMITER ;
+
+##### ELIMINAR #####
+DROP PROCEDURE IF EXISTS SP_ELIMINAR_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_EMPLEADO(
+	IN vin_id CHAR(8)
+)
+BEGIN
+DELETE FROM EMPLEADO WHERE pk_id_empleado=vin_id;
+END$$
+DELIMITER ;
+
+###### CAMBIAR ESTADO_ELIMINAR #######
+DROP PROCEDURE IF EXISTS SP_ELIMINAR_ES_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_ES_EMPLEADO(
+	IN vin_id CHAR(8)	
+)
+BEGIN
+	UPDATE EMPLEADO SET fk_id_estado = '0' WHERE pk_id_empleado = vin_id; 
+END$$
+DELIMITER ;
+
+##### LISTAR #####
+DROP PROCEDURE IF EXISTS SP_LISTAR_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_EMPLEADO()
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+######### LISTAR EMPLEADO TABLE #######
+DROP PROCEDURE IF EXISTS SP_LISTAR_EMPLEADO_T;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_EMPLEADO_T()
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+#### BUSCAR_ULTIMO_CODIGO ####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_NUEVO_CODIGO_E;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_NUEVO_CODIGO_E()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_empleado),3) FROM EMPLEADO;
+END$$
+DELIMITER ;
+
+
+##### BUSCAR_IDS #####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_IDS_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_IDS_EMPLEADO(
+		IN id CHAR(8)
+    )
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING E.pk_id_empleado LIKE CONCAT('%',id,'%')
+    ORDER BY 1 ASC;
+    
+END$$
+DELIMITER ;
+
+##### BUSCAR_NOMBRE_APELLIDO #####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_NOMBRE_APELLIDO_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_NOMBRE_APELLIDO_EMPLEADO(
+		IN vin_valor VARCHAR(100)
+    )
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING E.nombre_empleado LIKE CONCAT('%',vin_valor,'%') OR E.apellido_empleado LIKE CONCAT('%',vin_valor,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_DIRECCION #####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_DISTRITO_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_DISTRITO_EMPLEADO(
+		IN vin_valor VARCHAR(100)
+    )
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING D.nombre_distrito LIKE CONCAT('%',vin_valor,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR EMPLEADO MODIFICADO POR COD ####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_ID_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ID_EMPLEADO(
+		IN vin_valor VARCHAR(100)
+    )
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING E.pk_id_empleado = vin_valor 
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS SP_OBTENER_USER_EMPLEADO;
+DELIMITER $$
+CREATE PROCEDURE SP_OBTENER_USER_EMPLEADO(
+		IN vin_valor VARCHAR(100)
+    )
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING usuario  = vin_valor AND estado = 'ACTIVO'
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+
+########## BUSCAR EMPLEADOS ACTIVOS ####################
+
+DROP PROCEDURE IF EXISTS SP_OBTENER_EMPLEADO_ACTIVO;
+DELIMITER $$
+CREATE PROCEDURE SP_OBTENER_EMPLEADO_ACTIVO()
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING estado = 'ACTIVO' 
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+
+########## BUSCAR EMPLEADOS INACTIVOS ####################
+
+DROP PROCEDURE IF EXISTS SP_OBTENER_EMPLEADO_INACTIVO;
+DELIMITER $$
+CREATE PROCEDURE SP_OBTENER_EMPLEADO_INACTIVO()
+BEGIN
+	SELECT E.pk_id_empleado AS id,E.nombre_empleado AS nombre,E.apellido_empleado AS apellidos,D.nombre_distrito AS distrito,E.direccion_empleado AS direccion,E.telefono_empleado AS telefono,E.email_empleado AS email,E.fecha_ingreso AS Ingreso,E.usuario_empleado AS usuario,E.contrasenia AS contra,ES.nombre_estado AS estado,R.nombre_rol AS rol ,R.ruta_image AS ruta
+    FROM EMPLEADO AS E INNER JOIN DISTRITO AS D ON E.fk_id_distrito=D.pk_id_distrito
+    INNER JOIN ROL AS R ON E.fk_id_rol=R.pk_id_rol INNER JOIN ESTADO AS ES ON ES.pk_id_estado = E.fk_id_estado
+    HAVING estado = 'INACTIVO' 
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+CALL SP_INSERTAR_EMPLEADO('EM0001','Daniel','Basilio Amador','DI000001','Av.Universitaria #125','981243567','deadpo22003elinmortal@gmail.com','2021-01-12','Master','master','0','R001');
+CALL SP_INSERTAR_EMPLEADO('EM0002','Erick','Castilla Fernandez','DI000001','Av.Universitaria #111','9186533567','castilladi@gmail.com','2022-02-22','Master1','1234567','0','R001');
+CALL SP_INSERTAR_EMPLEADO('EM0003','Maria','Grande Palomino','DI000002','Jr.Orbegozo #389','912316127','grandepalomino@gmail.com','2020-02-21','Master2','1234567','0','R003');
+CALL SP_INSERTAR_EMPLEADO('EM0004','Margarita','Castillo Trinidad','DI000002','Jr.Pilcomallo #231','909812127','margarita@gmail.com','2021-12-02','Master3','1234567','0','R003');
+CALL SP_INSERTAR_EMPLEADO('EM0005','Francisco','Pizarro Alcantara','DI000003','Av.Camiones del Inca #234','924353245','pizarroalcantara@gmail.com','2021-11-11','Master4','1234567','0','R002');
+CALL SP_INSERTAR_EMPLEADO('EM0006','Eladio','Ballesteros Palacios','DI000002','Av.Arica #125','999923443','ballesteros@gmail.com','2021-09-11','Master5','1234567','0','R003');
+CALL SP_INSERTAR_EMPLEADO('EM0007','Magnolia','Soto Machaco','DI000003','','981243567','machaco@gmail.com','2021-08-04','Master6','1234567','0','R002');
+CALL SP_INSERTAR_EMPLEADO('EM0008','Diego','Quispe Huertas','DI000002','Av.Huaraz #421','981243567','quispehuertas@gmail.com','2021-01-07','Master7','1234567','0','R002');
+CALL SP_INSERTAR_EMPLEADO('EM0009','Bryan','Sandobal Custodia','DI000003','C.La Chira #123','981243567','sandobal@gmail.com','2020-01-12','Master8','1234567','0','R002');
+CALL SP_INSERTAR_EMPLEADO('EM0010','Anderson','Quito Calderon','DI000002','Av.Huaraz #221','981243567','quito@gmail.com','2023-05-14','Master9','1234567','0','R003');
+CALL SP_INSERTAR_EMPLEADO('EM0011','Dante','Damian Salcedo','DI000002','Av.Huaraz #311','997635123','salcedo@gmail.com','2023-02-13','Admin','admin','0','R004');
+
+
+##################################### ADELANTO ####################################
+##### INSERTAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_ADELANTO(
+	IN id 	  		CHAR(8),
+    IN monto		DOUBLE,
+    IN id_cliente   CHAR(8),
+    IN id_empleado  CHAR(6)
+)
+BEGIN
+ INSERT INTO ADELANTO(pk_id_adelanto,monto_adelanto,fk_id_cliente,fk_id_empleado)
+			   VALUES(id,monto,id_cliente,id_empleado);
+END$$
+DELIMITER ;
+
+##### ACTUALIZAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_ADELANTO(
+	IN id 	  		CHAR(8),
+    IN monto		DOUBLE,
+    IN id_cliente   CHAR(8),
+    IN id_empleado  CHAR(6)
+)
+BEGIN
+	UPDATE ADELANTO 
+    SET    monto_adelanto = monto,
+           fk_id_cliente  = id_cliente,
+           fk_id_empleado = id_empleado
+	WHERE  pk_id_adelanto=id;
+END$$
+DELIMITER ;
+
+##### ELIMINAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_ADELANTO(
+	IN id 	  		CHAR(8)
+)
+BEGIN
+	DELETE FROM ADELANTO WHERE  pk_id_adelanto=id;
+END$$
+DELIMITER ;
+
+##### LISTAR #####
+DROP PROCEDURE IF EXISTS SP_LISTAR_ADELANTO;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_ADELANTO()
+BEGIN
+	SELECT A.pk_id_adelanto,A.monto_adelanto,A.fecha_adelanto,CONCAT(C.nombre_cliente,' ',C.apellido_cliente) AS cliente,CONCAT(E.nombre_empleado,' ',E.apellido_empleado) AS atencion  FROM ADELANTO AS A
+    INNER JOIN CLIENTE AS C ON A.fk_id_cliente = C.pk_id_cliente
+    INNER JOIN EMPLEADO AS E ON A.fk_id_empleado = E.pk_id_empleado
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+CALL SP_LISTAR_ADELANTO();
+
+
+############### NUEVO ADELANTO ##################
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_NUEVO_CODIGO_A()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_adelanto),3) FROM ADELANTO;
+END$$
+DELIMITER ;
+
+####### LISTA DE NO ADELANTOS ###
+DELIMITER $$
+CREATE PROCEDURE SP_LISTA_DE_NO_ADELANTOS()
+BEGIN
+	SELECT  C.pk_id_cliente,C.nombre_cliente,C.apellido_cliente,D.nombre_distrito,C.telefono_cliente,C.email_cliente 
+		FROM CLIENTE AS C LEFT JOIN ADELANTO AS A ON C.pk_id_cliente =A.fk_id_cliente
+		INNER JOIN DISTRITO AS D ON C.fk_id_distrito =D.pk_id_distrito
+		WHERE A.fk_id_cliente IS NULL
+		ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_ #####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_ADELANTO_XC;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ADELANTO_XC(
+	IN vin_dato VARCHAR(30)
+)
+BEGIN
+	SELECT A.pk_id_adelanto,A.monto_adelanto,A.fecha_adelanto,CONCAT(C.nombre_cliente,' ',C.apellido_cliente) AS cliente,CONCAT(E.nombre_empleado,' ',E.apellido_empleado) AS atencion  FROM ADELANTO AS A
+    INNER JOIN CLIENTE AS C ON A.fk_id_cliente = C.pk_id_cliente
+    INNER JOIN EMPLEADO AS E ON A.fk_id_empleado = E.pk_id_empleado
+    HAVING cliente LIKE CONCAT('%',vin_dato,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_ #####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_ADELANTO_XE;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ADELANTO_XE(
+	IN vin_dato VARCHAR(30)
+)
+BEGIN
+	SELECT A.pk_id_adelanto,A.monto_adelanto,A.fecha_adelanto,CONCAT(C.nombre_cliente,' ',C.apellido_cliente) AS cliente,CONCAT(E.nombre_empleado,' ',E.apellido_empleado) AS atencion  FROM ADELANTO AS A
+    INNER JOIN CLIENTE AS C ON A.fk_id_cliente = C.pk_id_cliente
+    INNER JOIN EMPLEADO AS E ON A.fk_id_empleado = E.pk_id_empleado
+    HAVING atencion LIKE CONCAT('%',vin_dato,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+##### BUSCAR_ #####
+DROP PROCEDURE IF EXISTS SP_BUSCAR_ADELANTO_IDS;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ADELANTO_IDS(
+	IN vin_dato VARCHAR(30)
+)
+BEGIN
+	SELECT A.pk_id_adelanto,A.monto_adelanto,A.fecha_adelanto,CONCAT(C.nombre_cliente,' ',C.apellido_cliente) AS cliente,CONCAT(E.nombre_empleado,' ',E.apellido_empleado) AS atencion  FROM ADELANTO AS A
+    INNER JOIN CLIENTE AS C ON A.fk_id_cliente = C.pk_id_cliente
+    INNER JOIN EMPLEADO AS E ON A.fk_id_empleado = E.pk_id_empleado
+    HAVING A.pk_id_adelanto LIKE CONCAT('%',vin_dato,'%')
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+############# BUSCAR ID ################
+DROP PROCEDURE IF EXISTS SP_BUSCAR_ADELANTO_ID;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ADELANTO_ID(
+	IN vin_dato VARCHAR(30)
+)
+BEGIN
+	SELECT A.pk_id_adelanto,A.monto_adelanto,A.fecha_adelanto,CONCAT(C.nombre_cliente,' ',C.apellido_cliente) AS cliente,CONCAT(E.nombre_empleado,' ',E.apellido_empleado) AS atencion  FROM ADELANTO AS A
+    INNER JOIN CLIENTE AS C ON A.fk_id_cliente = C.pk_id_cliente
+    INNER JOIN EMPLEADO AS E ON A.fk_id_empleado = E.pk_id_empleado
+    HAVING A.pk_id_adelanto =vin_dato
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+############# BUSCAR FECHA ################
+DROP PROCEDURE IF EXISTS SP_BUSCAR_ADELANTO_FECHA;
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ADELANTO_FECHA(
+	IN vin_dato DATETIME,
+    IN vin_dato2 DATETIME
+)
+BEGIN
+	SELECT A.pk_id_adelanto,A.monto_adelanto,A.fecha_adelanto,CONCAT(C.nombre_cliente,' ',C.apellido_cliente) AS cliente,CONCAT(E.nombre_empleado,' ',E.apellido_empleado) AS atencion  FROM ADELANTO AS A
+    INNER JOIN CLIENTE AS C ON A.fk_id_cliente = C.pk_id_cliente
+    INNER JOIN EMPLEADO AS E ON A.fk_id_empleado = E.pk_id_empleado
+    HAVING A.fecha_adelanto BETWEEN vin_dato AND vin_dato2
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+CALL SP_INSERTAR_ADELANTO('AD000001','120','CL000001','EM0001');
+CALL SP_INSERTAR_ADELANTO('AD000002','160','CL000003','EM0001');
+CALL SP_INSERTAR_ADELANTO('AD000003','150','CL000004','EM0001');
+CALL SP_INSERTAR_ADELANTO('AD000004','220','CL000005','EM0001');
+
+#################################### MENU #################################3
+########## INSERTAR ############
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_MENU(
+	IN vin_id 		  CHAR(8),
+    IN vin_nombre     VARCHAR(50),
+    IN vin_detalle    VARCHAR(60),
+    IN vin_stock	  INT,
+    IN vin_precio	  DOUBLE,
+    IN vin_ruta_image VARCHAR(50)
+)
+BEGIN
+	INSERT INTO MENU(pk_id_menu,nombre_menu,detalle_menu,stock_menu,precio_menu,ruta_image)
+			  VALUES(vin_id,vin_nombre,vin_detalle,vin_stock,vin_precio,vin_ruta_image);
+END$$
+DELIMITER ;
+
+######### ACTUALIZAR ########
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_MENU(
+	IN vin_id 		  CHAR(8),
+    IN vin_nombre     VARCHAR(50),
+    IN vin_detalle    VARCHAR(60),
+    IN vin_stock	  INT,
+    IN vin_precio	  DOUBLE,
+    IN vin_ruta_image VARCHAR(50)
+)
+BEGIN 
+	UPDATE MENU
+	   SET nombre_menu  = vin_nombre,
+		   detalle_menu = vin_detalle,
+           stock_menu   = vin_stock,
+           precio_menu  = vin_precio,
+           ruta_image   = vin_ruta_image
+	WHERE  pk_id_menu = vin_id;  
+END$$
+DELIMITER ;
+
+##### ELIMINAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_MENU(
+  IN vin_valor CHAR(8)
+)
+BEGIN
+DELETE FROM MENU WHERE pk_id_menu=vin_valor;
+END$$
+DELIMITER ;
+
+SELECT * FROM MENU;
+
+####### LISTAR TODO MENU #######
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_MENU()
+BEGIN
+		SELECT pk_id_menu AS id,nombre_menu AS nombre,detalle_menu AS detalle,fecha_menu AS fecha,stock_menu AS stock,precio_menu AS precio,ruta_image AS ruta FROM MENU;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_NUEVO_CODIGO_ME()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_menu),3) FROM MENU;
+END$$
+DELIMITER ;
+
+###### BUSCAR MENU ONE ########
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_ONE_MENU(
+	IN vin_valor CHAR(100)
+)
+BEGIN
+	SELECT pk_id_menu AS id,nombre_menu AS nombre,detalle_menu AS detalle,fecha_menu AS fecha,stock_menu AS stock,precio_menu AS precio,ruta_image AS ruta FROM MENU
+    WHERE pk_id_menu = vin_valor;
+END$$
+DELIMITER ;
+
+###### BUSCAR MENU IDS ########
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_IDS_MENU(
+	IN vin_valor CHAR(100)
+)
+BEGIN
+	SELECT pk_id_menu AS id,nombre_menu AS nombre,detalle_menu AS detalle,fecha_menu AS fecha,stock_menu AS stock,precio_menu AS precio,ruta_image AS ruta FROM MENU
+    WHERE pk_id_menu LIKE CONCAT('%',vin_valor,'%');
+END$$
+DELIMITER ;
+
+###### BUSCAR MENU NOMBRE ########
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_NOMBRE_MENU(
+	IN vin_valor CHAR(100)
+)
+BEGIN
+	SELECT pk_id_menu AS id,nombre_menu AS nombre,detalle_menu AS detalle,fecha_menu AS fecha,stock_menu AS stock,precio_menu AS precio,ruta_image AS ruta FROM MENU
+    WHERE nombre_menu LIKE CONCAT('%',vin_valor,'%') ;
+END$$
+DELIMITER ;
+
+###################### ACTUALIZAR CANTIDAD MENU #################
+DELIMITER $$
+CREATE PROCEDURE SP_RESTAR_CANTIDAD_MENU(
+	IN vin_valor INT,
+    IN vin_valor2 CHAR(8)
+)
+BEGIN
+UPDATE MENU 
+	SET stock_menu = stock_menu - vin_valor
+  WHERE pk_id_menu = vin_valor2;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_AUMENTAR_CANTIDAD_MENU(
+	IN vin_valor INT,
+    IN vin_valor2 CHAR(8)
+)
+BEGIN
+UPDATE MENU 
+	SET stock_menu = stock_menu + vin_valor
+  WHERE pk_id_menu = vin_valor2;
+END$$
+DELIMITER ;
+
+CALL SP_LISTAR_MENU();
+
+###### BUSCAR MENU IDS ########
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_STOCK_MAYORES_MENU(
+	IN vin_valor INT
+)
+BEGIN
+	SELECT pk_id_menu AS id,nombre_menu AS nombre,detalle_menu AS detalle,fecha_menu AS fecha,stock_menu AS stock,precio_menu AS precio,ruta_image AS ruta FROM MENU
+    WHERE stock<= vin_valor;
+END$$
+DELIMITER ;
+
+###### BUSCAR MENU IDS ########
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_STOCK_MENORES_MENU(
+	IN vin_valor INT
+)
+BEGIN
+	SELECT pk_id_menu AS id,nombre_menu AS nombre,detalle_menu AS detalle,fecha_menu AS fecha,stock_menu AS stock,precio_menu AS precio,ruta_image AS ruta FROM MENU
+    WHERE stock>= vin_valor;
+END$$
+DELIMITER ;
+
+###############################################################################
+#################################### PEDIDO ###################################
+###############################################################################
+###############################################################################
+
+##### INSERTAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_PEDIDO(
+	IN vin_id 		CHAR(8),
+    IN vin_estado   INT(1)
+)
+BEGIN
+INSERT INTO PEDIDO(pk_id_pedido,fk_id_estado) VALUES(vin_id,vin_estado);
+END$$
+DELIMITER ;
+
+##### ACTUALIZAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_PEDIDO(
+	IN vin_id 		CHAR(8),
+    IN vin_estado   INT(1)
+)
+BEGIN
+UPDATE PEDIDO
+	SET fk_id_estado = vin_estado
+  WHERE pk_id_pedido=vin_id;
+END$$
+DELIMITER ;
+
+
+##### ELIMINAR #####
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_PEDIDO(
+	IN vin_id 		CHAR(8)
+)
+BEGIN
+DELETE FROM PEDIDO
+	WHERE pk_id_pedido=vin_id;
+END$$
+DELIMITER ;
+
+######## LISTAR PEDIDO ##########
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_PEDIDO()
+BEGIN 
+	SELECT P.pk_id_pedido AS id, P.fecha_pedido AS fecha,E.nombre_estado AS estado 
+    FROM PEDIDO AS P INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+######## LISTAR PEDIDO ##########
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCARONE_PEDIDO(
+	IN vin_valor CHAR(8)
+)
+BEGIN 
+	SELECT P.pk_id_pedido AS id, P.fecha_pedido AS fecha,E.nombre_estado AS estado 
+    FROM PEDIDO AS P INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+    HAVING id = vin_valor
+    ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_NUEVO_CODIGO_PE()
+BEGIN
+	SELECT SUBSTRING(MAX(pk_id_pedido),3) FROM PEDIDO;
+END$$
+DELIMITER ;
+
+
+
+############################# DETALLE PEDIDO
+DELIMITER $$
+CREATE PROCEDURE SP_INSERTAR_DETALLE_P(
+	IN vin_id_pedido CHAR(8),
+    IN vin_id_menu   CHAR(8),
+    IN vin_cantidad		 INT
+)
+BEGIN
+	INSERT INTO DETALLE_PEDIDO(fk_id_pedido,fk_id_menu,cantidad) VALUES (vin_id_pedido,vin_id_menu,vin_cantidad);
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_DETALLE_P(
+	IN vin_id_pedido CHAR(8),
+    IN vin_id_menu   CHAR(8),
+    IN vin_cantidad	 INT
+)
+BEGIN
+	UPDATE DETALLE_PEDIDO 
+	SET	   cantidad = vin_cantidad
+	WHERE  fk_id_pedido = vin_id_pedido AND fk_id_menu = vin_id_menu ;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_DETALLE_P(
+	IN vin_id_pedido CHAR(8),
+    IN vin_id_menu   CHAR(8),
+    IN vin_cantidad	 INT
+)
+BEGIN
+	DELETE FROM DETALLE_PEDIDO 
+	WHERE  fk_id_pedido = vin_id_pedido AND fk_id_menu = vin_id_menu AND cantidad = vin_cantidad;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS SP_LISTAR_DETALLE_PEDIDO;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_DETALLE_PEDIDO()
+BEGIN
+		SELECT P.pk_id_pedido AS id_pedido , P.fecha_pedido AS fecha,E.nombre_estado AS estado,M.pk_id_menu AS id_menu,M.nombre_menu AS menu,M.detalle_menu AS detalle,M.stock_menu AS stock ,M.precio_menu AS precio,M.ruta_image AS ruta , DE.cantidad AS cantidad
+		FROM DETALLE_PEDIDO AS DE INNER JOIN PEDIDO AS P ON DE.fk_id_pedido=P.pk_id_pedido INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+        INNER JOIN MENU AS M ON DE.fk_id_menu = M.pk_id_menu
+        ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS SP_LISTAR_DETALLE_PEDIDO_GENERAR;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_DETALLE_PEDIDO_GENERAR(
+	IN vin_id CHAR(8)
+)
+BEGIN
+		SELECT DE.cantidad AS cantidad,M.pk_id_menu AS id_menu,M.nombre_menu AS menu,M.precio_menu AS precio,(DE.cantidad * M.precio_menu) AS importe 
+		FROM DETALLE_PEDIDO AS DE INNER JOIN PEDIDO AS P ON DE.fk_id_pedido=P.pk_id_pedido INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+        INNER JOIN MENU AS M ON DE.fk_id_menu = M.pk_id_menu
+        WHERE P.pk_id_pedido = vin_id; 
+        
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_DETALLE_PEDIDO_SUMA(
+	IN vin_id CHAR(8)
+)
+BEGIN
+		SELECT SUM(DE.cantidad * M.precio_menu) AS suma 
+		FROM DETALLE_PEDIDO AS DE INNER JOIN PEDIDO AS P ON DE.fk_id_pedido=P.pk_id_pedido INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+        INNER JOIN MENU AS M ON DE.fk_id_menu = M.pk_id_menu
+        WHERE P.pk_id_pedido = vin_id;        
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_LISTARONE_DETALLE_P(
+ IN vin_id     CHAR(8),
+ IN vin_id_menu CHAR(8)
+)
+BEGIN
+	SELECT fk_id_pedido AS id,fk_id_menu AS menu, cantidad AS cantidad FROM DETALLE_PEDIDO
+	WHERE fk_id_pedido= vin_id AND fk_id_menu = vin_id_menu
+	LIMIT 1;
+END$$
+DELIMITER ;
+
+
+
+SELECT * FROM MENU;
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_ESTADO_PEDIDO(
+	IN vin_dato VARCHAR(20)
+)
+BEGIN
+	SELECT P.pk_id_pedido AS id, P.fecha_pedido AS fecha,E.nombre_estado AS estado,M.nombre_menu AS menu,M.detalle_menu AS detalle,M.stock_menu AS stock ,M.precio_menu AS precio,M.ruta_image AS ruta , DE.cantidad AS cantidad
+		FROM DETALLE_PEDIDO AS DE INNER JOIN PEDIDO AS P ON DE.fk_id_pedido=P.pk_id_pedido INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+        INNER JOIN MENU AS M ON DE.fk_id_menu = M.pk_id_menu
+        HAVING estado = vin_dato
+        ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_PEDIDO_PEDIDO(
+	IN vin_dato VARCHAR(20)
+)
+BEGIN
+	SELECT P.pk_id_pedido AS id, P.fecha_pedido AS fecha,E.nombre_estado AS estado,M.nombre_menu AS menu,M.detalle_menu AS detalle,M.stock_menu AS stock ,M.precio_menu AS precio,M.ruta AS ruta , DE.cantidad AS cantidad
+		FROM DETALLE_PEDIDO AS DE INNER JOIN PEDIDO AS P ON DE.fk_id_pedido=P.pk_id_pedido INNER JOIN ESTADO AS E ON P.fk_id_estado=E.pk_id_estado
+        INNER JOIN MENU AS M ON DE.fk_id_menu = M.pk_id_menu
+        HAVING id = vin_dato
+        ORDER BY 1 ASC;
+END$$
+DELIMITER ;
+
+
+
+CALL SP_LISTAR_DISTRITO() ;
+CALL SP_LISTAR_CLIENTE() ;
+CALL SP_LISTAR_ESTADO_E();
+CALL SP_LISTAR_ESTADO_P();
+CALL SP_LISTAR_EMPLEADO();
+CALL SP_LISTAR_MENU();
+CALL SP_LISTAR_PEDIDO();
+
+
+CALL SP_INSERTAR_MENU('ME000001','Arroz con pollo' ,'','12','12.5','src/pkg_utilidades/images/icons/menu/Arroz.png'); 
+CALL SP_INSERTAR_MENU('ME000002','Papa a la huancahina' ,'','12','9.5', 'src/pkg_utilidades/images/icons/menu/papa.png') ;
+CALL SP_INSERTAR_MENU('ME000003','Ceviche' ,'','12','7.5', 'src/pkg_utilidades/images/icons/menu/Peru.png') ;
+
+CALL SP_INSERTAR_PEDIDO('PE000001','2');
+CALL SP_INSERTAR_PEDIDO('PE000002','2');
+
+CALL SP_LISTAR_DETALLE_PEDIDO();
+CALL SP_INSERTAR_DETALLE_P('PE000001', 'ME000001', '5');
+CALL SP_INSERTAR_DETALLE_P('PE000001', 'ME000002', '4');
+-- CALL SP_ACTUALIZAR_DETALLE_P('PE000001','ME000003', '6', 'ME000002', '4') ;
+CALL SP_INSERTAR_DETALLE_P('PE000002', 'ME000001', '4');
+CALL SP_INSERTAR_DETALLE_P('PE000002', 'ME000002', '3');
+CALL SP_INSERTAR_DETALLE_P('PE000002', 'ME000003', '3');
+
+
+CALL SP_LISTAR_DETALLE_PEDIDO_GENERAR('') ;
+CALL SP_LISTAR_CLIENTE(); 
+CALL SP_LISTAR_EMPLEADO(); 
+CALL SP_LISTAR_DETALLE_PEDIDO();
+
+
+
+DELIMITER $$ 
+CREATE PROCEDURE SP_INSERTAR_DETALLE_USUARIO(
+	IN vin_id_empleado CHAR(6)
+)
+BEGIN 
+	INSERT INTO DETALLE_USUARIO(fk_id_empleado) VALUES(vin_id_empleado); 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ACTUALIZAR_DETALLE_USUARIO(
+	IN vin_id_empleado CHAR(6),
+	IN vin_fecha_entrada DATETIME,
+	IN vin_fecha_salida DATETIME
+)
+BEGIN
+	UPDATE DETALLE_USUARIO 
+	   SET fecha_salida = vin_fecha_salida
+	   WHERE fecha_entrada = vin_fecha_entrada AND fk_id_empleado = vin_id_empleado; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_ELIMINAR_DETALLE_USUARIO(
+	IN vin_id_empleado CHAR(6),
+	IN vin_fecha_entrada DATETIME
+)
+BEGIN
+	DELETE FROM DETALLE_USUARIO 
+	WHERE  fecha_entrada = vin_fecha_entrada AND fk_id_empleado = vin_id_empleado;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_LISTAR_DETALLE_USUARIO()
+BEGIN
+	SELECT E.nombre_empleado AS empleado, E.usuario_empleado AS Usuario, D.fecha_entrada AS Entrada, D.fecha_salida AS Salida
+	FROM DETALLE_USUARIO AS D INNER JOIN EMPLEADO AS E ON D.fk_id_empleado =E.pk_id_empleado;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SP_BUSCAR_DETALLE_USUARIO(
+ 	IN vin_dato VARCHAR(30)
+)
+BEGIN
+	SELECT E.nombre_empleado AS empleado, E.usuario_empleado AS Usuario, D.fecha_entrada AS Entrada, D.fecha_salida AS Salida
+	FROM DETALLE_USUARIO AS D INNER JOIN EMPLEADO AS E ON D.fk_id_empleado =E.pk_id_empleado
+	WHERE D.fk_id_empleado = vin_dato;
+END$$
+DELIMITER ;
+
+
+
+
+
+CALL SP_LISTAR_DETALLE_USUARIO(); 
+
+
+
+
+SELECT * FROM MENU;
+INSERT INTO BOLETA(pk_id_boleta,fk_id_cliente,fk_id_empleado,fk_id_pedido,pago_consumo) VALUES('BO-00002','CL000002','EM0011','PE000002','100');
+INSERT INTO BOLETA(pk_id_boleta,fk_id_cliente,fk_id_empleado,fk_id_pedido,pago_consumo) VALUES('BO-00001','CL000002','EM0011','PE000001','150');
+SELECT pk_id_boleta,fecha_boleta ,igv ,fk_id_cliente,fk_id_empleado,fk_id_pedido,pago_consumo FROM BOLETA; 
+
+SELECT B.pk_id_boleta,B.fecha_boleta ,B.igv ,CONCAT(C.nombre_cliente,' ',C.apellido_cliente),E.nombre_empleado,D.fk_id_pedido ,M.nombre_menu,M.precio_menu,pago_consumo FROM BOLETA AS B   
+INNER JOIN CLIENTE AS C ON C.pk_id_cliente = B.fk_id_cliente 
+INNER JOIN EMPLEADO AS E ON E.pk_id_empleado = B.fk_id_empleado  
+INNER JOIN DETALLE_PEDIDO AS D ON B.fk_id_pedido = D.fk_id_pedido 
+INNER JOIN MENU AS M ON M.pk_id_menu = D.fk_id_menu 
+ORDER BY 1 ASC;
+
+
+SELECT B.pk_id_boleta,B.fecha_boleta,CONCAT(C.nombre_cliente,' ',C.apellido_cliente),E.nombre_empleado,D.pk_id_pedido,pago_consumo FROM BOLETA AS B   
+INNER JOIN CLIENTE AS C ON C.pk_id_cliente = B.fk_id_cliente 
+INNER JOIN EMPLEADO AS E ON E.pk_id_empleado = B.fk_id_empleado  
+INNER JOIN PEDIDO AS D ON B.fk_id_pedido = D.pk_id_pedido 
+ORDER BY 1 ASC;
+
+
+SELECT B.pk_id_boleta,B.fecha_boleta,CONCAT(C.nombre_cliente,' ',C.apellido_cliente),E.nombre_empleado,D.pk_id_pedido,pago_consumo FROM BOLETA AS B   
+INNER JOIN CLIENTE AS C ON C.pk_id_cliente = B.fk_id_cliente 
+INNER JOIN EMPLEADO AS E ON E.pk_id_empleado = B.fk_id_empleado  
+INNER JOIN PEDIDO AS D ON B.fk_id_pedido = D.pk_id_pedido
+WHERE B.pk_id_boleta ='BO-00001'
+ORDER BY 1 ASC;
+
+
+SELECT D.cantidad,M.nombre_menu,CONCAT('S/ ',M.precio_menu),CONCAT('S/ ',(M.precio_menu*D.cantidad)) AS importe FROM BOLETA AS B   
+INNER JOIN CLIENTE AS C ON C.pk_id_cliente = B.fk_id_cliente 
+INNER JOIN EMPLEADO AS E ON E.pk_id_empleado = B.fk_id_empleado  
+INNER JOIN DETALLE_PEDIDO AS D ON B.fk_id_pedido = D.fk_id_pedido 
+INNER JOIN MENU AS M ON M.pk_id_menu = D.fk_id_menu 
+WHERE B.pk_id_boleta ='BO-00001'
+ORDER BY 1 ASC;
+
+
+/*BEGIN; 
+INSERT INTO EMPLEADO(NOMBRE_EMPLEADO,APELLIDO_EMPLEADO,DIRECCION_EMPLEADO,TELEFONO_EMPLEADO,FK_ID_ROL,FECHA_INGRESO) VALUES ('Dante','Jr.Humbolt 353','+51984564','1','2023-12-12');
+INSERT INTO USUARIO(NOMBRE_USUARIO,CONTRASENIA,CORREO) VALUES('MASTER','1231','ASDAD');  
+COMMIT;   */
+
+
+
+
+ 
+

@@ -50,7 +50,9 @@ private ClienteComboModel model_combo_cli;
         this.empleado = empleado;
     }
 
-
+public String ClienteSelec(){
+return cm_Cliente.getSelectedItem().toString();
+}
     public Pedido getPedido() {
         return pedido;
     }

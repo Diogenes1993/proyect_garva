@@ -3,6 +3,8 @@ package pkg_Formulario.Menu.subMenu.Pedido;
 
 import com.lowagie.text.DocumentException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pkg_MYSQL.Interfaces.IException;
@@ -468,7 +470,14 @@ Calculos calculo;
     private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
         try {
             calculo=new Calculos();
-            calculo.BoletaPdf(tbl_Detalle,txt_total.getText(),"boleta0001 ");
+            LocalDate fechaActual = LocalDate.now();
+            String fech=""+ fechaActual;
+            
+            try {
+                calculo.BoletaPdf(tbl_Detalle,txt_total.getText(),"boleta0001",panel_Detalle_Pedido.ClienteSelec(),fech,masterI.getIPedido().NewCod());
+            } catch (IException ex) {
+                Logger.getLogger(frmDetallePedido.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(frmDetallePedido.class.getName()).log(Level.SEVERE, null, ex);
         }
